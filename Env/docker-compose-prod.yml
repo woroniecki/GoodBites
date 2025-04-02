@@ -29,6 +29,7 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - ASPNETCORE_ENVIRONMENT=Production
       - Npqsql__ConnectionString=Host=postgresql-db;Port=5432;Username=user;Password=password;
+      - Cors__Origin=${Cors__Origin}
     ports:
       - "5000:80"
       - "5001:443"
