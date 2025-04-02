@@ -1,22 +1,24 @@
-﻿services:
-  postgresql-db:
-    image: postgres:latest
-    container_name: prod-postgres-container
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./database-init:/docker-entrypoint-initdb.d
-    networks:
-      - app-network-prod
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+﻿varsion: '3.9'
+
+services:
+  # postgresql-db:
+  #   image: postgres:latest
+  #   container_name: prod-postgres-container
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #     - ./database-init:/docker-entrypoint-initdb.d
+  #   networks:
+  #     - app-network-prod
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
 
   bootstrapper:
     container_name: prod-bootstrapper
@@ -38,9 +40,9 @@
         delay: 10s
         max_attempts: 3
         window: 120s
-    depends_on:
-      postgresql-db:
-        condition: service_healthy
+    # depends_on:
+    #   postgresql-db:
+    #     condition: service_healthy
 
   # background-tasks:
   #   container_name: prod-background-tasks
@@ -83,5 +85,4 @@ networks:
     driver: bridge
 
 volumes:
-  mysql_data:
   postgres_data:

@@ -1,4 +1,6 @@
-﻿services:
+﻿varsion: '3.9'
+
+services:
   postgresql-db:
     image: postgres:latest
     container_name: postgres-container
@@ -77,5 +79,4 @@ networks:
     driver: bridge
 
 volumes:
-  mysql_data:
   postgres_data:
