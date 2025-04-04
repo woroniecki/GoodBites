@@ -26,7 +26,7 @@ services:
       context: ../Backend/
       dockerfile: Bootstrapper.Dockerfile
     environment:
-      - ASPNETCORE_URLS=http://+:82
+      - ASPNETCORE_URLS=http://+:80;https://+:443
       - ASPNETCORE_ENVIRONMENT=Development
       - Npqsql__ConnectionString=${Npqsql__ConnectionString}
       - Cors__Origin=${Cors__Origin}
