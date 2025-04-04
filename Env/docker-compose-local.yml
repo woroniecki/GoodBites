@@ -63,16 +63,22 @@ services:
       postgresql-db:
         condition: service_healthy
 
-  nginx-angular-app:
+  caddy-angular-app:
+    container_name: dev-caddy-angular-app
     build:
       context: ../Frontend/frontend-spa-app
       dockerfile: Frontend.Dockerfile
-    container_name: angular-container
-    ports:
-      - "4200:80"
+      args:
+        CONFIG: production
     environment:
       APP_BASE_URL: "http://localhost:5000"
       APP_NAME: "Frontend App Docker - local"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
 
 networks:
   app-network:
@@ -80,3 +86,5 @@ networks:
 
 volumes:
   postgres_data:
+  caddy_data:
+  caddy_config:  
