@@ -8,4 +8,8 @@ goodbitesapp.com {
   header @configFile {
     Content-Type application/json
   }
+
+  # Proxy API requests to ASP.NET Core (Bootstrapper)
+  @api path /api/*
+  reverse_proxy @api bootstrapper:80
 }
