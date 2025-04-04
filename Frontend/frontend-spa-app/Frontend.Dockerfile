@@ -1,19 +1,13 @@
 FROM node:lts-slim AS build
 WORKDIR /src
 ARG CONFIG
-RUN npm install -g @angular/cli
-
 COPY package*.json ./
 RUN npm ci
+COPY . .
+RUN npm install -g @angular/cli && ng build --configuration=${CONFIG}
 
-COPY . ./
-RUN ng build --configuration=${CONFIG}
+FROM caddy:alpine
+COPY --from=build /src/dist/frontend-spa-app/browser /usr/share/caddy
+COPY Caddyfile /etc/caddy/Caddyfile
 
-ENV APP_BASE_URL=${APP_BASE_URL}
-ENV APP_NAME=${APP_NAME}
-
-FROM nginx:stable AS final
-EXPOSE 443
-
-COPY --from=build src/dist/frontend-spa-app/browser  /usr/share/nginx/html
-CMD ["/bin/sh",  "-c",  "envsubst < /usr/share/nginx/html/assets/config.template.json > /usr/share/nginx/html/assets/config.json && exec nginx -g 'daemon off;'"]
+CMD ["/bin/sh",  "-c",  "envsubst < /usr/share/caddy/assets/config.template.json > /usr/share/caddy/assets/config.json && exec nginx -g 'daemon off;'"]
