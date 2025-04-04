@@ -1,4 +1,5 @@
-localhost {
+goodbitesapp.com {
+  reverse_proxy web:80
   root * /usr/share/caddy
   file_server
   try_files {path} /index.html
@@ -7,4 +8,7 @@ localhost {
   header @configFile {
     Content-Type application/json
   }
+
+  @api path /api/*
+  reverse_proxy @api bootstrapper:80
 }
