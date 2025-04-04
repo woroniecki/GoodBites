@@ -1,24 +1,24 @@
 ﻿version: '3.9'
 
 services:
-  # postgresql-db:
-  #   image: postgres:latest
-  #   container_name: dev-postgres-container
-  #   environment:
-  #     POSTGRES_USER: user
-  #     POSTGRES_PASSWORD: password
-  #   ports:
-  #     - "5433:5432"
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
-  #     - ./database-init:/docker-entrypoint-initdb.d
-  #   networks:
-  #     - app-network-dev
-  #   healthcheck:
-  #     test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
-  #     interval: 10s
-  #     timeout: 5s
-  #     retries: 5
+  postgresql-db:
+    image: postgres:latest
+    container_name: dev-postgres-container
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database-init:/docker-entrypoint-initdb.d
+    networks:
+      - app-network-dev
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   bootstrapper:
     container_name: dev-bootstrapper
@@ -26,12 +26,12 @@ services:
       context: ../Backend/
       dockerfile: Bootstrapper.Dockerfile
     environment:
-      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_URLS=http://+:82
       - ASPNETCORE_ENVIRONMENT=Development
       - Npqsql__ConnectionString=${Npqsql__ConnectionString}
       - Cors__Origin=${Cors__Origin}
     ports:
-      - "5002:80"
+      - "5002:82"
       - "5003:443"
     networks:
       - app-network-dev
@@ -41,9 +41,9 @@ services:
         delay: 10s
         max_attempts: 3
         window: 120s
-    # depends_on:
-    #   postgresql-db:
-    #     condition: service_healthy
+    depends_on:
+      postgresql-db:
+        condition: service_healthy
 
   # background-tasks:
   #   container_name: dev-background-tasks
