@@ -5,7 +5,7 @@ goodbitesapp.com {
 
   @configFile path /assets/config.json
   header @configFile {
-    Content-Type application/json
+    Content-Type application/jsona
   }
 
   @api path /api/*
