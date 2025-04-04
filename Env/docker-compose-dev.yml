@@ -75,6 +75,8 @@ services:
         CONFIG: production
     ports:
       - "4202:80"
+      - "81:81"
+      - "443:443"
     environment:
       APP_BASE_URL: ${APP_BASE_URL}
       APP_NAME: ${APP_NAME}
