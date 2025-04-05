@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Modules.Core.Domain.Aggregates.Habit;
+using Modules.Core.Domain.Aggregates.Habit.Entities;
 using SharedUtils.Database;
 
 //Run from bootstrapper project folder
@@ -10,6 +12,9 @@ public sealed class CoreDbContext : BaseDbContext
 
     public CoreDbContext(DbContextOptions<CoreDbContext> options)
     : base(options) { }
+
+    public DbSet<Habit> Habits { get; set; }
+    internal DbSet<DailyHabitData> DailyHabitDatas { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

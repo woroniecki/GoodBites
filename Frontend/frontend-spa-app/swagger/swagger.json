@@ -10,6 +10,50 @@
     }
   ],
   "paths": {
+    "/api/core/Habit/add-habit": {
+      "post": {
+        "tags": [
+          "Habit"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddHabitCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddHabitCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddHabitCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/core/Habit/get-habits": {
+      "get": {
+        "tags": [
+          "Habit"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/core/HealthCheck/health-check": {
       "get": {
         "tags": [
@@ -135,6 +179,25 @@
   },
   "components": {
     "schemas": {
+      "AddHabitCommand": {
+        "required": [
+          "name",
+          "positive",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "positive": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
       "LoginCommand": {
         "required": [
           "username",
@@ -172,6 +235,9 @@
     }
   },
   "tags": [
+    {
+      "name": "Habit"
+    },
     {
       "name": "HealthCheck"
     },
