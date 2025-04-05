@@ -54,7 +54,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundTasks", "Backgrou
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Env", "Env", "{104314AB-D802-405F-9F36-6C424E24E77F}"
 	ProjectSection(SolutionItems) = preProject
-		..\Env\docker-compose-dev.yml = ..\Env\docker-compose-dev.yml
 		..\Env\docker-compose-local.yml = ..\Env\docker-compose-local.yml
 		..\Env\docker-compose-prod.yml = ..\Env\docker-compose-prod.yml
 		..\Env\RunLocalDockerEnv.cmd = ..\Env\RunLocalDockerEnv.cmd

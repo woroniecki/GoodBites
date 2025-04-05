@@ -1,13 +1,15 @@
-goodbitesapp.com {
-  root * /usr/share/caddy
-  file_server
-  try_files {path} /index.html
-
-  @configFile path /assets/config.json
-  header @configFile {
-    Content-Type application/json
+localhost {
+  route /api/* {
+    reverse_proxy bootstrapper:80
   }
+  route * {
+    root * /usr/share/caddy
+    file_server
+    try_files {path} /index.html
 
-  @api path /api/*
-  reverse_proxy @api bootstrapper:80
+    @configFile path /assets/config.json
+    header @configFile {
+      Content-Type application/json
+    }
+  }
 }

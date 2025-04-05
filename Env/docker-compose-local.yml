@@ -3,22 +3,22 @@
 services:
   postgresql-db:
     image: postgres:latest
-    container_name: postgres-container
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./database-init:/docker-entrypoint-initdb.d
     networks:
-      - app-network
+      - backend-network
+    ports:
+      - "5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U user -d postgres"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 3
+      start_period: 5s
 
   bootstrapper:
     build:
@@ -28,11 +28,12 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - ASPNETCORE_ENVIRONMENT=Development
       - Npqsql__ConnectionString=Host=postgresql-db;Port=5432;Username=user;Password=password;
+      - Cors__Origin=*
+    networks:
+      - backend-network
+      - proxy-network
     ports:
       - "5000:80"
-      - "5001:443"
-    networks:
-      - app-network
     deploy:
       restart_policy:
         condition: on-failure
@@ -52,7 +53,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - Npqsql__ConnectionString=Host=postgresql-db;Port=5432;Username=user;Password=password;
     networks:
-      - app-network
+      - backend-network
     deploy:
       restart_policy:
         condition: on-failure
@@ -64,27 +65,30 @@ services:
         condition: service_healthy
 
   caddy-angular-app:
-    container_name: dev-caddy-angular-app
     build:
       context: ../Frontend/frontend-spa-app
       dockerfile: Frontend.Dockerfile
       args:
         CONFIG: production
     environment:
-      APP_BASE_URL: "http://localhost:5000"
-      APP_NAME: "Frontend App Docker - local"
+      APP_BASE_URL: https://localhost
+      APP_NAME: LOCAL APP
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - caddy_data:/data
       - caddy_config:/config
+    networks:
+      - proxy-network
 
 networks:
-  app-network:
+  proxy-network:
+    driver: bridge
+  backend-network:
     driver: bridge
 
 volumes:
   postgres_data:
   caddy_data:
-  caddy_config:  
+  caddy_config:
