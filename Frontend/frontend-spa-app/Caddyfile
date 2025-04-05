@@ -1,4 +1,4 @@
-localhost {
+goodbitesapp.com {
   route /api/* {
     reverse_proxy bootstrapper:80
   }
