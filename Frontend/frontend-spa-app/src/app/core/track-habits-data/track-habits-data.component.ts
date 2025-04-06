@@ -36,8 +36,6 @@ export class TrackHabitsDataComponent implements OnInit {
   clickHabit(habitId: string) {
     const date = new Date().toISOString().split('T')[0];
 
-    console.log('Habit clicked:', habitId, this.items.find(item => item.id === habitId)?.dailyDatas);
-
     if (this.items.find(item => item.id === habitId)?.dailyDatas?.length === 0){
       this.habitsDataApi
       .apiCoreHabitDataAddHabitDataPost({ body: { date, habitId } })
@@ -46,6 +44,11 @@ export class TrackHabitsDataComponent implements OnInit {
           date: date,
           count: 1
         });
+      });
+    } else {
+      this.habitsDataApi.apiCoreHabitDataClearHabitDataPost({ body: { date, habitId } })
+      .subscribe(() => {
+        this.items.find(item => item.id === habitId)!.dailyDatas = [];
       });
     }
 

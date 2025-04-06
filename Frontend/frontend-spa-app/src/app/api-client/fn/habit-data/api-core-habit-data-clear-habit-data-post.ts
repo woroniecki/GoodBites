@@ -8,10 +8,10 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { AddHabitCommand } from '../../models/add-habit-command';
+import { RemoveDailyHabitDataCommand } from '../../models/remove-daily-habit-data-command';
 
 export interface ApiCoreHabitDataClearHabitDataPost$Params {
-      body: AddHabitCommand
+      body: RemoveDailyHabitDataCommand
 }
 
 export function apiCoreHabitDataClearHabitDataPost(http: HttpClient, rootUrl: string, params: ApiCoreHabitDataClearHabitDataPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {

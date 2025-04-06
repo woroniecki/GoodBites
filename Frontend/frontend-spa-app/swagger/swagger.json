@@ -121,17 +121,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddHabitCommand"
+                "$ref": "#/components/schemas/RemoveDailyHabitDataCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddHabitCommand"
+                "$ref": "#/components/schemas/RemoveDailyHabitDataCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddHabitCommand"
+                "$ref": "#/components/schemas/RemoveDailyHabitDataCommand"
               }
             }
           },
@@ -464,6 +464,23 @@
           },
           "password": {
             "type": "string"
+          }
+        }
+      },
+      "RemoveDailyHabitDataCommand": {
+        "required": [
+          "habitId",
+          "date"
+        ],
+        "type": "object",
+        "properties": {
+          "habitId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
           }
         }
       }

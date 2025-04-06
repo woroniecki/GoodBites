@@ -9,3 +9,4 @@ export { GetHabitsDataQueryResponse } from './models/get-habits-data-query-respo
 export { GetHabitsListQueryResponse } from './models/get-habits-list-query-response';
 export { LoginCommand } from './models/login-command';
 export { RegisterCommand } from './models/register-command';
+export { RemoveDailyHabitDataCommand } from './models/remove-daily-habit-data-command';

@@ -1,8 +1,7 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Core.App.Commands.AddDailyHabitData;
-using Modules.Core.App.Commands.AddHabit;
+using Modules.Core.App.Commands.RemoveDailyHabitData;
 using Modules.Core.App.Queries.GetHabitsData;
 
 namespace Modules.Core.API.Controllers;
@@ -21,8 +20,7 @@ public class HabitDataController(IMediator mediator)
 
     [HttpPost]
     [Route("clear-habit-data")]
-    [AllowAnonymous]
-    public async Task<IActionResult> ClearHabitData([FromBody] AddHabitCommand cmd)
+    public async Task<IActionResult> ClearHabitData([FromBody] RemoveDailyHabitDataCommand cmd)
     {
         return Ok(await mediator.Send(cmd));
     }
