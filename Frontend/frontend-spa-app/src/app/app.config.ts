@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import {
@@ -12,6 +12,8 @@ import {
 } from '@angular/common/http';
 import { credentialsInterceptor } from './credential.interceptor';
 import { AuthService } from './services/auth.service';
+import { ConfigService } from './services/config.service';
+import { ApiConfiguration } from './api-client/api-configuration';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,5 +28,14 @@ export const appConfig: ApplicationConfig = {
         };
       })(inject(AuthService));
       return initAuth();
+    }),
+    provideAppInitializer(() => {
+      const initBaseUrlSetting = ((config: ConfigService, apiConfig: ApiConfiguration) => {
+        return () => {
+          apiConfig.rootUrl = config.apiUrl;
+          return Promise.resolve();
+        };
+      })(inject(ConfigService), inject(ApiConfiguration));
+      return initBaseUrlSetting();
     })]
 };
