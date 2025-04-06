@@ -80,6 +80,118 @@
         }
       }
     },
+    "/api/core/HabitData/add-habit-data": {
+      "post": {
+        "tags": [
+          "HabitData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDailyHabitDataCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDailyHabitDataCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddDailyHabitDataCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/core/HabitData/clear-habit-data": {
+      "post": {
+        "tags": [
+          "HabitData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddHabitCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddHabitCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddHabitCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/core/HabitData/get-habits-data": {
+      "get": {
+        "tags": [
+          "HabitData"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetHabitsDataQueryResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetHabitsDataQueryResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetHabitsDataQueryResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/core/HealthCheck/health-check": {
       "get": {
         "tags": [
@@ -205,6 +317,23 @@
   },
   "components": {
     "schemas": {
+      "AddDailyHabitDataCommand": {
+        "required": [
+          "habitId",
+          "date"
+        ],
+        "type": "object",
+        "properties": {
+          "habitId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
       "AddHabitCommand": {
         "required": [
           "name",
@@ -221,6 +350,58 @@
           },
           "description": {
             "type": "string"
+          }
+        }
+      },
+      "DailyHabitsDataDto": {
+        "required": [
+          "date",
+          "count"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "GetHabitsDataQueryResponse": {
+        "required": [
+          "id",
+          "positive",
+          "name",
+          "active",
+          "description",
+          "dailyDatas"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "positive": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "dailyDatas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DailyHabitsDataDto"
+            }
           }
         }
       },
@@ -291,6 +472,9 @@
   "tags": [
     {
       "name": "Habit"
+    },
+    {
+      "name": "HabitData"
     },
     {
       "name": "HealthCheck"

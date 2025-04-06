@@ -23,6 +23,7 @@ internal sealed class GetHabitsDataQueryHandler : IRequestHandler<GetHabitsDataQ
             .ToListAsync(ct))
             .Select(x => new GetHabitsDataQueryResponse
             (
+                x.Id,
                 x.Positive,
                 x.Name,
                 x.Active,

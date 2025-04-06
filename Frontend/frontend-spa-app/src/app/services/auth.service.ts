@@ -32,7 +32,6 @@ export class AuthService {
     return new Promise((resolve) => {
       this.apiAccountService.apiUsermanagementAccountRefreshLoginPost$Json().subscribe({
         next: (token) => {
-          console.log('Token received:', token);
           this.setUser(token);
           resolve();
         },

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { HabitService } from '../../api-client/services';
-import { MatDialog } from '@angular/material/dialog';
-import { GetHabitsListQueryResponse } from '../../api-client/models/get-habits-list-query-response';
+import { HabitDataService } from '../../api-client/services';
 import { CommonModule } from '@angular/common';
+import { GetHabitsDataQueryResponse } from '../../api-client/models/get-habits-data-query-response';
 
 @Component({
   selector: 'app-track-habits-data',
@@ -13,26 +11,43 @@ import { CommonModule } from '@angular/common';
   standalone: true,
 })
 export class TrackHabitsDataComponent implements OnInit {
-  items: Array<GetHabitsListQueryResponse> = [];
+  items: Array<GetHabitsDataQueryResponse> = [];
 
-  constructor(
-    private dialog: MatDialog,
-    private router: Router,
-    private habitApi: HabitService,
-  ) {}
+  constructor(private habitsDataApi: HabitDataService) {}
 
   ngOnInit(): void {
-    this.habitApi.apiCoreHabitGetHabitsGet$Json().subscribe({
-          next: (data) => {
-            this.items = data;
-          },
-          error: (err) => {
-            console.log('Error loading habits:', err);
-          },
-        });
+    const today = new Date().toISOString().split('T')[0];
+
+    this.habitsDataApi
+      .apiCoreHabitDataGetHabitsDataGet$Json({
+        date: today,
+      })
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          this.items = data; // Assign the response to the items array
+        },
+        error: (err) => {
+          console.log('Error loading habits daily data:', err);
+        },
+      });
   }
 
-  onAddHabit() {
-    this.router.navigate(['/habits/add']);
+  clickHabit(habitId: string) {
+    const date = new Date().toISOString().split('T')[0];
+
+    console.log('Habit clicked:', habitId, this.items.find(item => item.id === habitId)?.dailyDatas);
+
+    if (this.items.find(item => item.id === habitId)?.dailyDatas?.length === 0){
+      this.habitsDataApi
+      .apiCoreHabitDataAddHabitDataPost({ body: { date, habitId } })
+      .subscribe(() => {
+        this.items.find(item => item.id === habitId)?.dailyDatas.push({
+          date: date,
+          count: 1
+        });
+      });
+    }
+
   }
 }
