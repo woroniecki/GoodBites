@@ -1,16 +1,39 @@
-<mat-toolbar
-  color="primary"
-  class="bg-blue-600 w-full flex justify-between px-4 py-2"
->
-  <span class="text-xl font-bold">{{ title }}</span>
-  <ng-container *ngIf="authService.username; else loginButton">
-    {{ authService.username }}
-    <button mat-button class="hidden md:block" (click)="onLogout()">
-      Logout
-    </button>
-  </ng-container>
-</mat-toolbar>
-
-<ng-template #loginButton>
-  <button mat-button class="hidden md:block" (click)="onLogin()">Login</button>
-</ng-template>
+<nav class="bg-teal-900 shadow shadow-teal-950 w-full flex justify-between px-4 py-2">
+  <div class="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap relative">
+    <!-- Logo -->
+    <div class="text-lime-500 md:order-1">
+      <!-- Heroicon - Chip Outline -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+      </svg>
+    </div>
+    <div class="text-gray-400 order-2 w-full md:w-auto md:order-2 absolute left-1/2 transform -translate-x-1/2">
+      <ul class="flex font-semibold justify-center gap-4">
+        <li class="md:px-4 md:py-2 text-lime-500"><a href="/">Home</a></li>
+        <li class="md:px-4 md:py-2 hover:text-lime-600"><a href="/add-habit">Add Habit</a></li>
+        <li class="md:px-4 md:py-2 hover:text-lime-600"><a href="/habits">Habits</a></li>
+      </ul>
+    </div>
+    <div class="order-2 md:order-4">
+      <ng-container *ngIf="authService.username; else loginButton">
+        <button class="px-4 py-2 bg-lime-500 hover:bg-lime-600 text-gray-50 rounded-xl flex items-center gap-2"
+          (click)="onLogout()">
+          <span>Logout</span>
+        </button>
+      </ng-container>
+      <ng-template #loginButton>
+        <div class="flex gap-2">
+          <button class="px-4 py-2 bg-lime-500 hover:bg-lime-600 text-gray-50 rounded-xl flex items-center gap-2"
+            (click)="onLogin()">
+            <span>Login</span>
+          </button>
+            <button class="px-4 py-2 border-2 border-lime-500 text-lime-500 hover:bg-lime-500 hover:text-gray-50 rounded-xl flex items-center gap-2"
+            (click)="onRegister()">
+            <span>Register</span>
+          </button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</nav>

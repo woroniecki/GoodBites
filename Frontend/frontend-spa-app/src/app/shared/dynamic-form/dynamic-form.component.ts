@@ -28,6 +28,7 @@ export class DynamicFormComponent {
     name: string;
     type: string;
     required: boolean;
+    defaultValue?: any; // Add defaultValue property
   }[] = [];
   @Input() submitButtonLabel: string = 'Submit';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -41,8 +42,8 @@ export class DynamicFormComponent {
     const formControls = this.formConfig.reduce(
       (controls: { [key: string]: unknown }, field) => {
         controls[field.name] = field.required
-          ? [null, Validators.required]
-          : [null];
+          ? [field.defaultValue || null, Validators.required]
+          : [field.defaultValue || null]; // Use defaultValue if provided
         return controls;
       },
       {},

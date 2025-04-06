@@ -29,6 +29,10 @@ export class NavBarComponent {
     this.router.navigate(['/login']);
   }
 
+  onRegister() {
+    this.router.navigate(['/register']);
+  }
+
   onLogout() {
     this.authService.logout();
     this.router.navigate(['/']);
