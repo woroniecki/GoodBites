@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HabitService } from '../../api-client/services';
 import { MatDialog } from '@angular/material/dialog';
-import { ErrorModalComponent } from '../../shared/error-modal/error-modal.component';
-import { CommonModule } from '@angular/common';
 import { GetHabitsListQueryResponse } from '../../api-client/models/get-habits-list-query-response';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-habits-list',
+  selector: 'app-track-habits-data',
   imports: [CommonModule],
-  templateUrl: './habits-list.component.html',
-  styleUrl: './habits-list.component.css',
+  templateUrl: './track-habits-data.component.html',
+  styleUrl: './track-habits-data.component.css',
   standalone: true,
 })
-export class HabitsListComponent implements OnInit {
+export class TrackHabitsDataComponent implements OnInit {
   items: Array<GetHabitsListQueryResponse> = [];
 
   constructor(

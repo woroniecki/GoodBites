@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Core.App.Commands.AddHabit;
 using Modules.Core.App.Queries.GetHabitsList;
@@ -13,7 +12,6 @@ public class HabitController(IMediator mediator)
 {
     [HttpPost]
     [Route("add-habit")]
-    [AllowAnonymous]
     public async Task<IActionResult> AddHabit([FromBody] AddHabitCommand cmd)
     {
         return Ok(await mediator.Send(cmd));
@@ -21,7 +19,6 @@ public class HabitController(IMediator mediator)
 
     [HttpGet]
     [Route("get-habits")]
-    [AllowAnonymous]
     public async Task<ActionResult<IEnumerable<GetHabitsListQueryResponse>>> GetHabitsList()
     {
         return Ok(await mediator.Send(new GetHabitsListQuery()));

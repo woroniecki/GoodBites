@@ -13,7 +13,7 @@ public class HabitRepository : IHabitRepository
 
     public async Task<List<Habit>> GetListAsync(Guid userId, CancellationToken ct)
     {
-        return await _context.Habits.Where(x => x.UserId == userId).ToListAsync(ct);
+        return await _context.Habits.Where(x => x.UserId == userId && x.Active).ToListAsync(ct);
     }
 
     public async Task AddAsync(Habit habit, CancellationToken ct)

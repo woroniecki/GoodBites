@@ -1,11 +1,39 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Modules.Core.Infrastructure.DataAccessLayer.UoT;
+using SharedUtils.Jwt.CurrentUser;
 
 namespace Modules.Core.App.Queries.GetHabitsData;
-internal sealed class GetHabitsDataQueryHandler : IRequestHandler<GetHabitsDataQuery, GetHabitsDataQueryResponse>
+internal sealed class GetHabitsDataQueryHandler : IRequestHandler<GetHabitsDataQuery, IEnumerable<GetHabitsDataQueryResponse>>
 {
-    public Task<GetHabitsDataQueryResponse> Handle(GetHabitsDataQuery request, CancellationToken cancellationToken)
+    private IUnitOfWork _unitOfWork;
+    private ICurrentUserService _userService;
+
+    public GetHabitsDataQueryHandler(IUnitOfWork unitOfWork, ICurrentUserService userService)
     {
-        // Implement your logic here
-        throw new NotImplementedException();
+        _unitOfWork = unitOfWork;
+        _userService = userService;
+    }
+
+    public async Task<IEnumerable<GetHabitsDataQueryResponse>> Handle(GetHabitsDataQuery request, CancellationToken ct)
+    {
+        return (await _unitOfWork.DbContext.Habits
+            .Where(x => x.UserId == _userService.UserId && x.Active)
+            .Include(x => x.DailyHabitDatas.Where(d => d.Date == request.Date))
+            .ToListAsync(ct))
+            .Select(x => new GetHabitsDataQueryResponse
+            (
+                x.Positive,
+                x.Name,
+                x.Active,
+                x.Description,
+                x.DailyHabitDatas
+                    .Select(d => new DailyHabitsDataDto
+                    (
+                        d.Date,
+                        d.Count
+                    ))
+                    .ToList()
+            ));
     }
 }

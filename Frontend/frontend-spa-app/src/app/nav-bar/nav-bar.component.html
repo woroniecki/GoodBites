@@ -16,10 +16,11 @@
           <a routerLink="/">Home</a>
         </li>
         <li class="md:px-4 md:py-2"
-          [ngClass]="{'text-lime-500': router.url === '/add-habit', 'hover:text-lime-600': router.url !== '/'}"><a
-          routerLink="/add-habit">Add Habit</a></li>
+          [ngClass]="{'text-lime-500': router.url.startsWith('/calendar'), 'hover:text-lime-600': !router.url.startsWith('/calendar')}">
+          <a routerLink="/calendar">Calendar</a>
+        </li>
         <li class="md:px-4 md:py-2"
-          [ngClass]="{'text-lime-500': router.url === '/habits', 'hover:text-lime-600': router.url !== '/'}"><a
+            [ngClass]="{'text-lime-500': router.url.startsWith('/habits'), 'hover:text-lime-600': !router.url.startsWith('/habits')}"><a
           routerLink="/habits">Habits</a></li>
       </ul>
     </div>

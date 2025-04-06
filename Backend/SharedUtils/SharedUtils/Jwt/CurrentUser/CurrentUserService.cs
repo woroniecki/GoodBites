@@ -19,7 +19,7 @@ public class CurrentUserService : ICurrentUserService
             var userIdString = _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimType.UserId);
             return Guid.TryParse(userIdString, out var guid)
                 ? guid
-                : throw new InvalidOperationException("User ID cannot be null."); ;
+                : throw new InvalidOperationException("User ID cannot be null.");
         }
     }
 }

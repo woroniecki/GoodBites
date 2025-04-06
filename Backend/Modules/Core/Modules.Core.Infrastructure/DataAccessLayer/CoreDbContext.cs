@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.ComponentModel;
+using Microsoft.EntityFrameworkCore;
 using Modules.Core.Domain.Aggregates.Habit;
 using Modules.Core.Domain.Aggregates.Habit.Entities;
 using SharedUtils.Database;
@@ -15,6 +16,13 @@ public sealed class CoreDbContext : BaseDbContext
 
     public DbSet<Habit> Habits { get; set; }
     internal DbSet<DailyHabitData> DailyHabitDatas { get; set; }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        configurationBuilder.Properties<DateOnly>()
+            .HaveConversion<DateOnlyConverter>()
+            .HaveColumnType("date");
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

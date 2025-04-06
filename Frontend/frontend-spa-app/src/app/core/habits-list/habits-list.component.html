@@ -2,7 +2,7 @@
     <div class="habit-cell" *ngFor="let item of items">
         <button 
         *ngIf="item.positive"
-            class="px-4 py-2 border-2 bg-gradient-to-r from-emerald-100 to-lime-200 border-lime-500 text-lime-500 hover:border-lime-700 hover:text-lime-700 rounded-xl flex items-center gap-2"
+            class="px-4 py-2 bg-gradient-to-r from-emerald-100 to-lime-200 text-lime-500 hover:bg-gradient-to-r hover:to-lime-300 hover:text-lime-700 rounded-xl flex items-center gap-2"
             style="width: 100px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -16,7 +16,7 @@
         </button>
         <button 
             *ngIf="!item.positive"
-            class="px-4 py-2 border-2 bg-gradient-to-r from-orange-100 to-red-200 border-red-500 text-red-500 hover:border-red-900 hover:text-red-900 rounded-xl flex items-center gap-2"
+            class="px-4 py-2 bg-gradient-to-r from-orange-100 to-red-200 text-red-500 hover:to-red-300 hover:text-red-900 rounded-xl flex items-center gap-2"
             style="width: 100px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor">
@@ -27,6 +27,18 @@
                 style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; font-size: calc(16px - ({{ item.name.length > 20 ? 2 : 0 }}px));">
                 {{ item.name }}
             </span>
+        </button>
+    </div>
+    <div class="habit-cell">
+        <button 
+            class="px-4 py-2 bg-gradient-to-r bg-gray-200 text-gray-400 rounded-xl hover:to-gray-300 hover:text-gray-500"
+            style="width: 100px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center;"
+            (click)="onAddHabit()">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 3v18m9-9H3" />
+            </svg>
         </button>
     </div>
 </div>
