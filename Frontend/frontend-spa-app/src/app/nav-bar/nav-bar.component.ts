@@ -20,7 +20,7 @@ export class NavBarComponent {
   constructor(
     public authService: AuthService,
     private configService: ConfigService,
-    private router: Router,
+    protected router: Router,
   ) {
     this.title = configService.appName;
   }
