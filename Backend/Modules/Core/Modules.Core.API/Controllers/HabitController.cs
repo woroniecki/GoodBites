@@ -22,7 +22,7 @@ public class HabitController(IMediator mediator)
     [HttpGet]
     [Route("get-habits")]
     [AllowAnonymous]
-    public async Task<IActionResult> GetHabitsList()
+    public async Task<ActionResult<IEnumerable<GetHabitsListQueryResponse>>> GetHabitsList()
     {
         return Ok(await mediator.Send(new GetHabitsListQuery()));
     }

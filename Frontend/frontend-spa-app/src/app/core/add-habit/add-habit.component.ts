@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from '../../services/auth.service';
 import { ErrorModalComponent } from '../../shared/error-modal/error-modal.component';
 import { Router } from '@angular/router';
 import { DynamicFormComponent } from '../../shared/dynamic-form/dynamic-form.component';
+import { HabitService } from '../../api-client/services';
 
 @Component({
   selector: 'app-add-habit',
@@ -15,18 +15,24 @@ import { DynamicFormComponent } from '../../shared/dynamic-form/dynamic-form.com
 export class AddHabitComponent {
   loginFormConfig = [
     { label: 'Name', name: 'Name', type: 'text', required: true },
-    { label: 'Positive', name: 'Positive', type: 'checkbox', required: true, defaultValue: true },
+    {
+      label: 'Positive',
+      name: 'Positive',
+      type: 'checkbox',
+      required: true,
+      defaultValue: true,
+    },
     { label: 'Description', name: 'Description', type: 'text', required: true },
   ];
 
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private auth: AuthService,
+    private habitApi: HabitService,
   ) {}
 
-  onSubmit(formData: { username: string; password: string }) {
-    this.auth.loginWithCredentials(formData).subscribe({
+  onSubmit(formData: { description: string; name: string; positive: boolean }) {
+    this.habitApi.apiCoreHabitAddHabitPost({ body: formData }).subscribe({
       next: () => {
         this.router.navigate(['/habits']);
       },

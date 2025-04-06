@@ -16,6 +16,5 @@ export class AppComponent {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.tryToLoginWithRefreshToken();
   }
 }

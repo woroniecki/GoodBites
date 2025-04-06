@@ -28,12 +28,19 @@ export class AuthService {
       );
   }
 
-  tryToLoginWithRefreshToken(): void {
-    this.apiAccountService
-      .apiUsermanagementAccountRefreshLoginPost$Json()
-      .subscribe((token) => {
-        this.setUser(token);
+  tryToLoginWithRefreshToken(): Promise<void> {
+    return new Promise((resolve) => {
+      this.apiAccountService.apiUsermanagementAccountRefreshLoginPost$Json().subscribe({
+        next: (token) => {
+          console.log('Token received:', token);
+          this.setUser(token);
+          resolve();
+        },
+        error: () => {
+          resolve();
+        }
       });
+    });
   }
 
   logout(): void {
