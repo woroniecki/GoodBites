@@ -1,0 +1,14 @@
+<div class="dropdown dropdown-end">
+    <div tabindex="0" role="button" class="btn m-1 flex items-center gap-1">
+        {{ selectedOption }}
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"
+                stroke-linejoin="round"></path>
+        </svg>
+    </div>
+    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+        <li *ngFor="let option of dropdownOptions">
+            <a (click)="onOptionChange(option)">{{ option }}</a>
+        </li>
+    </ul>
+</div>
