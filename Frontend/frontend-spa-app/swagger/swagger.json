@@ -151,7 +151,15 @@
         ],
         "parameters": [
           {
-            "name": "date",
+            "name": "dateFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "dateTo",
             "in": "query",
             "schema": {
               "type": "string",

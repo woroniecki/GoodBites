@@ -33,12 +33,13 @@
   </ng-container>
 
   <ng-template #dailyHabitsTemplate>
-    <app-daily-view-habits-data [items]="items" [date]="date" (onClickHabit)="clickHabit($event)">
+    <app-daily-view-habits-data [items]="items" [date]="dateFrom" (onClickHabit)="clickHabit($event)">
     </app-daily-view-habits-data>
   </ng-template>
 
   <ng-template #weeklyHabitsTemplate>
-    <app-weekly-view-habits-data></app-weekly-view-habits-data>
+    <app-weekly-view-habits-data [items]="items" [dateFrom]="dateFrom" [dateTo]="dateTo" (onClickHabit)="clickHabit($event)">
+    </app-weekly-view-habits-data>
   </ng-template>
 
   <ng-template #monthlyHabitsTemplate>

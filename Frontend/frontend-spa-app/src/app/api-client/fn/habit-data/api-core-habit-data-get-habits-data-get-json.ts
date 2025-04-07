@@ -11,13 +11,15 @@ import { RequestBuilder } from '../../request-builder';
 import { GetHabitsDataQueryResponse } from '../../models/get-habits-data-query-response';
 
 export interface ApiCoreHabitDataGetHabitsDataGet$Json$Params {
-  date?: string;
+  dateFrom?: string;
+  dateTo?: string;
 }
 
 export function apiCoreHabitDataGetHabitsDataGet$Json(http: HttpClient, rootUrl: string, params?: ApiCoreHabitDataGetHabitsDataGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetHabitsDataQueryResponse>>> {
   const rb = new RequestBuilder(rootUrl, apiCoreHabitDataGetHabitsDataGet$Json.PATH, 'get');
   if (params) {
-    rb.query('date', params.date, {});
+    rb.query('dateFrom', params.dateFrom, {});
+    rb.query('dateTo', params.dateTo, {});
   }
 
   return http.request(

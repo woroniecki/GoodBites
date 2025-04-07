@@ -11,8 +11,8 @@ import { CommonModule } from '@angular/common';
 })
 export class DailyViewHabitsDataComponent {
   @Input() items: Array<GetHabitsDataQueryResponse> = [];
-  @Input() date: string = ''; // Date in YYYY-MM-DD format
-  @Output() onClickHabit = new EventEmitter<{ habitId: string; date: string }>();
+  @Input() date: Date = new Date();
+  @Output() onClickHabit = new EventEmitter<{ habitId: string; date: Date }>();
 
   clickHabit(habitId: string) {
     this.onClickHabit.emit({habitId: habitId, date: this.date});

@@ -1,1 +1,27 @@
-<p>weekly-view-habits-data works!</p>
+<div *ngFor="let date of getDays()" 
+[ngClass]="(date | date:'yyyy-MM-dd') === (today | date:'yyyy-MM-dd') ? 'rounded-xl bg-lime-200' : ''">
+    <div>
+        {{ date | date:'EEEE' }} {{ date | date:'yyyy-MM-dd' }}
+    </div>
+    <ng-content *ngFor="let item of items">
+        <button
+            [ngClass]="!isDateInDailyData(item, date)
+            ? 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-500 hover:to-gray-300 hover:text-gray-700'
+            : (item.positive
+            ? 'bg-gradient-to-r from-emerald-100 to-lime-200 text-lime-500 hover:to-lime-300 hover:text-lime-700'
+            : 'bg-gradient-to-r from-orange-100 to-red-200 text-red-500 hover:to-red-300 hover:text-red-900')"
+            class="rounded-xl flex items-center justify-center gap-2"
+            style="width: 50px; height: 50px; display: inline-block;"
+            (click)="clickHabit(item.id, date)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+            </svg>
+
+            <span class="habit-name block overflow-hidden text-ellipsis whitespace-nowrap" style="max-width: 100%; font-size: 12px;">
+                {{ item.name }}
+            </span>
+        </button>
+    </ng-content>
+</div>

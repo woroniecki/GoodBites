@@ -29,17 +29,21 @@ export class TrackHabitsDataComponent implements OnInit {
   TimeViewOption = TimeViewOption;
 
   items: Array<GetHabitsDataQueryResponse> = [];
-  date: string = new Date().toISOString().split('T')[0];
+  dateFrom: Date = new Date();
+  dateTo: Date = new Date();
   selectedViewType: TimeViewOption = TimeViewOption.Daily;
 
   constructor(private habitsDataApi: HabitDataService) {}
 
   ngOnInit(): void {
-    const today = new Date().toISOString().split('T')[0];
+    this.getHabitData();
+  }
 
+  private getHabitData() {
     this.habitsDataApi
       .apiCoreHabitDataGetHabitsDataGet$Json({
-        date: today,
+        dateFrom: this.dateFrom.toISOString().split('T')[0],
+        dateTo: this.dateTo.toISOString().split('T')[0],
       })
       .subscribe({
         next: (data) => {
@@ -53,27 +57,65 @@ export class TrackHabitsDataComponent implements OnInit {
 
   onViewOptionChanged(event: TimeViewOption): void {
     this.selectedViewType = event;
+    this.items = [];
+
+    switch (this.selectedViewType) {
+      case TimeViewOption.Daily:
+        this.dateFrom = new Date();
+        this.dateTo = this.dateFrom;
+      break;
+      case TimeViewOption.Weekly:
+        let today = new Date();
+        this.dateFrom = new Date(today.setDate(today.getDate() - today.getDay() + 1));
+        this.dateTo = new Date(today.setDate(this.dateFrom.getDate() + 6));
+      break;
+      case TimeViewOption.Monthly:
+      // const currentMonth = new Date();
+      // const firstDayOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
+      // const lastDayOfMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0);
+      // this.date = firstDayOfMonth.toISOString().split('T')[0];
+      // this.dateTo = lastDayOfMonth.toISOString().split('T')[0];
+      break;
+      case TimeViewOption.Yearly:
+      // const currentYear = new Date();
+      // const firstDayOfYear = new Date(currentYear.getFullYear(), 0, 1);
+      // const lastDayOfYear = new Date(currentYear.getFullYear(), 11, 31);
+      // this.date = firstDayOfYear.toISOString().split('T')[0];
+      // this.dateTo = lastDayOfYear.toISOString().split('T')[0];
+      break;
+    }
+
+    this.getHabitData();
   }
 
-  clickHabit({ habitId, date }: { habitId: string; date: string }): void {
+  clickHabit({ habitId, date }: { habitId: string; date: Date }): void {
+    const dateValue = date.toISOString().split('T')[0];
+
     if (
-      this.items.find((item) => item.id === habitId)?.dailyDatas?.length === 0
+      !this.items.find((item) => item.id === habitId)?.dailyDatas?.some((d) => {
+        const dDate = new Date(d.date);
+        return dDate.toDateString() === date.toDateString();
+      })
     ) {
       this.habitsDataApi
-        .apiCoreHabitDataAddHabitDataPost({ body: { date, habitId } })
+        .apiCoreHabitDataAddHabitDataPost({ body: { date: dateValue, habitId } })
         .subscribe(() => {
           this.items
             .find((item) => item.id === habitId)
             ?.dailyDatas.push({
-              date: date,
+              date: dateValue,
               count: 1,
             });
         });
     } else {
       this.habitsDataApi
-        .apiCoreHabitDataClearHabitDataPost({ body: { date, habitId } })
+        .apiCoreHabitDataClearHabitDataPost({ body: { date: dateValue, habitId } })
         .subscribe(() => {
-          this.items.find((item) => item.id === habitId)!.dailyDatas = [];
+          const item = this.items.find((item) => item.id === habitId)
+          item!.dailyDatas = item!.dailyDatas.filter((d) => {
+            const dDate = new Date(d.date);
+            return dDate.toDateString() !== date.toDateString();
+          });
         });
     }
   }

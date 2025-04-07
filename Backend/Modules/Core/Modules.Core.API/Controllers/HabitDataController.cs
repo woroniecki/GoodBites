@@ -27,8 +27,8 @@ public class HabitDataController(IMediator mediator)
 
     [HttpGet]
     [Route("get-habits-data")]
-    public async Task<ActionResult<IEnumerable<GetHabitsDataQueryResponse>>> GetHabitsList([FromQuery] DateOnly date)
+    public async Task<ActionResult<IEnumerable<GetHabitsDataQueryResponse>>> GetHabitsList([FromQuery] DateOnly dateFrom, [FromQuery] DateOnly dateTo)
     {
-        return Ok(await mediator.Send(new GetHabitsDataQuery(date)));
+        return Ok(await mediator.Send(new GetHabitsDataQuery(dateFrom, dateTo)));
     }
 }
