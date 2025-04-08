@@ -23,7 +23,8 @@ internal sealed class EditHabitCommandHandler : IRequestHandler<EditHabitCommand
         habit.First().Update(
             request.Name,
             request.Positive,
-            request.Description
+            request.Description,
+            request.Icon
         );
 
         await _unitOfWork.SaveAsync(ct);

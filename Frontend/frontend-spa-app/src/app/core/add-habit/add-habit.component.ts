@@ -22,6 +22,7 @@ export class AddHabitComponent {
       required: true,
       defaultValue: true,
     },
+    { label: 'Icon', name: 'Icon', type: 'icon-picker', required: true },
     { label: 'Description', name: 'Description', type: 'text', required: true },
   ];
 

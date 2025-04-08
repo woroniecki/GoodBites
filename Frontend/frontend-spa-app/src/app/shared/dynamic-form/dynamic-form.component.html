@@ -2,7 +2,7 @@
   <ng-container *ngFor="let field of formConfig">
     <label class="text-sm font-medium ">{{ field.label }}</label>
     <!-- Text -->
-    <input *ngIf="field.type !== 'checkbox'" class="mb-3 px-2 py-1.5
+    <input *ngIf="field.type === 'text' || field.type === 'password'" class="mb-3 px-2 py-1.5
           mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
           focus:outline-none
           focus:border-sky-500
@@ -11,7 +11,11 @@
           focus:invalid:border-red-500 focus:invalid:ring-red-500" [type]="field.type" [formControlName]="field.name"
       [required]="field.required" placeholder="{{ field.label }}">
     <!-- Checkbox -->
-    <input *ngIf="field.type === 'checkbox'" type="checkbox" class="checkbox checkbox-xl mb-3 px-2 py-1.5 mt-1 block px-2 py-1.5"  [formControlName]="field.name"/>
+    <input *ngIf="field.type === 'checkbox'" type="checkbox"
+      class="checkbox checkbox-xl mb-3 px-2 py-1.5 mt-1 block px-2 py-1.5" [formControlName]="field.name" />
+    <app-icon-picker *ngIf="field.type === 'icon-picker'" [icons]="allIcons"
+      [selectedIcon]="form.get(field.name)?.value"
+      (iconChange)="form.get(field.name)?.setValue($event)"></app-icon-picker>
   </ng-container>
   <button
     class="w-full px-4 py-1.5 rounded-md shadow-lg bg-gradient-to-r from-emerald-600 to-lime-600 font-medium text-gray-100 block transition duration-300"

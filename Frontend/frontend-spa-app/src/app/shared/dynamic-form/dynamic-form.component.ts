@@ -6,6 +6,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { IconPickerComponent } from './icon-picker/icon-picker.component';
+import { Icons } from '../icons.enum';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -14,9 +16,11 @@ import { CommonModule } from '@angular/common';
   imports: [
     ReactiveFormsModule,
     CommonModule,
+    IconPickerComponent
   ],
 })
 export class DynamicFormComponent {
+  allIcons = Object.values(Icons);
   @Input() formConfig: {
     label: string;
     name: string;

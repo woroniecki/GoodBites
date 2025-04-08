@@ -1,0 +1,10 @@
+<div class="icon-grid max-h-32 overflow-y-auto border rounded">
+  <div
+    *ngFor="let icon of icons"
+    (click)="selectIcon(icon)"
+    class="icon-item flex flex-col items-center justify-center cursor-pointer rounded hover:bg-gray-100 border"
+    [class.selected]="icon === selectedIcon"
+  >
+  <svg-icon [src]="'/icons/'+ icon" [svgStyle]="{ width: '32px', height: '32px' }"></svg-icon>
+  </div>
+</div>

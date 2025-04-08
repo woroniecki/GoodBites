@@ -18,7 +18,7 @@ internal sealed class AddHabitCommandHandler : IRequestHandler<AddHabitCommand, 
     public async Task<Unit> Handle(AddHabitCommand request, CancellationToken cancellationToken)
     {
         var newHabit = new Habit(
-            _userService.UserId, request.Positive, request.Name, request.Description
+            _userService.UserId, request.Positive, request.Name, request.Description, request.Icon
         );
 
         await _unitOfWork.Habits.AddAsync(newHabit, cancellationToken);
