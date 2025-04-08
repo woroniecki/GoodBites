@@ -13,6 +13,8 @@ import { StrictHttpResponse } from '../strict-http-response';
 
 import { apiCoreHabitAddHabitPost } from '../fn/habit/api-core-habit-add-habit-post';
 import { ApiCoreHabitAddHabitPost$Params } from '../fn/habit/api-core-habit-add-habit-post';
+import { apiCoreHabitEditHabitPost } from '../fn/habit/api-core-habit-edit-habit-post';
+import { ApiCoreHabitEditHabitPost$Params } from '../fn/habit/api-core-habit-edit-habit-post';
 import { apiCoreHabitGetHabitsGet$Json } from '../fn/habit/api-core-habit-get-habits-get-json';
 import { ApiCoreHabitGetHabitsGet$Json$Params } from '../fn/habit/api-core-habit-get-habits-get-json';
 import { apiCoreHabitGetHabitsGet$Plain } from '../fn/habit/api-core-habit-get-habits-get-plain';
@@ -46,6 +48,31 @@ export class HabitService extends BaseService {
    */
   apiCoreHabitAddHabitPost(params: ApiCoreHabitAddHabitPost$Params, context?: HttpContext): Observable<void> {
     return this.apiCoreHabitAddHabitPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
+  /** Path part for operation `apiCoreHabitEditHabitPost()` */
+  static readonly ApiCoreHabitEditHabitPostPath = '/api/core/Habit/edit-habit';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiCoreHabitEditHabitPost()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiCoreHabitEditHabitPost$Response(params: ApiCoreHabitEditHabitPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiCoreHabitEditHabitPost(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiCoreHabitEditHabitPost$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiCoreHabitEditHabitPost(params: ApiCoreHabitEditHabitPost$Params, context?: HttpContext): Observable<void> {
+    return this.apiCoreHabitEditHabitPost$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
   }

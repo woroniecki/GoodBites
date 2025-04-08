@@ -19,7 +19,7 @@ internal sealed class GetHabitsListQueryHandler : IRequestHandler<GetHabitsListQ
         return
             (await _unitOfWork.Habits.GetListAsync(_userService.UserId, cancellationToken))
             .Select(x => new GetHabitsListQueryResponse(
-                x.Positive, x.Name, x.Active, x.Description, x.CreatedAt
+                x.Id, x.Positive, x.Name, x.Active, x.Description, x.Icon, x.CreatedAt
                 ));
     }
 }

@@ -7,6 +7,7 @@ export interface GetHabitsDataQueryResponse {
   active: boolean;
   dailyDatas: Array<DailyHabitsDataDto>;
   description: string;
+  icon: string;
   id: string;
   name: string;
   positive: boolean;

@@ -1,0 +1,10 @@
+<app-dynamic-form
+  [formConfig]="loginFormConfig"
+  [submitButtonLabel]="'Add'"
+  (formSubmit)="onSubmit($event)"
+></app-dynamic-form>
+<button 
+    class="btn btn-danger" 
+    (click)="onDelete()">
+    Delete
+</button>

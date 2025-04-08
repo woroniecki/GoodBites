@@ -28,6 +28,7 @@ internal sealed class GetHabitsDataQueryHandler : IRequestHandler<GetHabitsDataQ
                 x.Name,
                 x.Active,
                 x.Description,
+                x.Icon,
                 x.DailyHabitDatas
                     .Select(d => new DailyHabitsDataDto
                     (

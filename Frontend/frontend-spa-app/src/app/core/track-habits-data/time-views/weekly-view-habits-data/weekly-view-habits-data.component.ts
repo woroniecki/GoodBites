@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GetHabitsDataQueryResponse } from '../../../../api-client/models/get-habits-data-query-response';
 import { CommonModule } from '@angular/common';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @Component({
   selector: 'app-weekly-view-habits-data',
-  imports: [CommonModule],
+  imports: [CommonModule, AngularSvgIconModule],
   templateUrl: './weekly-view-habits-data.component.html',
   styleUrl: './weekly-view-habits-data.component.css',
   standalone: true,
@@ -31,7 +32,7 @@ export class WeeklyViewHabitsDataComponent {
       return dates;
     }
 
-    let currentDate = new Date(this.dateFrom);
+    const currentDate = new Date(this.dateFrom);
 
     while (currentDate <= this.dateTo) {
       dates.push(new Date(currentDate.getTime())); // Ensure a new Date instance is created

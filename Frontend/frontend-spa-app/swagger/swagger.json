@@ -42,6 +42,38 @@
         }
       }
     },
+    "/api/core/Habit/edit-habit": {
+      "post": {
+        "tags": [
+          "Habit"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditHabitCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditHabitCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditHabitCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/core/Habit/get-habits": {
       "get": {
         "tags": [
@@ -346,7 +378,8 @@
         "required": [
           "name",
           "positive",
-          "description"
+          "description",
+          "icon"
         ],
         "type": "object",
         "properties": {
@@ -357,6 +390,9 @@
             "type": "boolean"
           },
           "description": {
+            "type": "string"
+          },
+          "icon": {
             "type": "string"
           }
         }
@@ -378,6 +414,34 @@
           }
         }
       },
+      "EditHabitCommand": {
+        "required": [
+          "id",
+          "name",
+          "positive",
+          "description",
+          "icon"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "positive": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          }
+        }
+      },
       "GetHabitsDataQueryResponse": {
         "required": [
           "id",
@@ -385,6 +449,7 @@
           "name",
           "active",
           "description",
+          "icon",
           "dailyDatas"
         ],
         "type": "object",
@@ -405,6 +470,9 @@
           "description": {
             "type": "string"
           },
+          "icon": {
+            "type": "string"
+          },
           "dailyDatas": {
             "type": "array",
             "items": {
@@ -415,14 +483,20 @@
       },
       "GetHabitsListQueryResponse": {
         "required": [
+          "id",
           "positive",
           "name",
           "active",
           "description",
+          "icon",
           "createdAt"
         ],
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
           "positive": {
             "type": "boolean"
           },
@@ -433,6 +507,9 @@
             "type": "boolean"
           },
           "description": {
+            "type": "string"
+          },
+          "icon": {
             "type": "string"
           },
           "createdAt": {

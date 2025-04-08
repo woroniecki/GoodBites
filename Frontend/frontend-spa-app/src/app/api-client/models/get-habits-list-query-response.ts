@@ -6,6 +6,8 @@ export interface GetHabitsListQueryResponse {
   active: boolean;
   createdAt: string;
   description: string;
+  icon: string;
+  id: string;
   name: string;
   positive: boolean;
 }

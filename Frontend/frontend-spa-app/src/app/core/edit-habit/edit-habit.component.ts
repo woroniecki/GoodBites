@@ -6,13 +6,12 @@ import { DynamicFormComponent } from '../../shared/dynamic-form/dynamic-form.com
 import { HabitService } from '../../api-client/services';
 
 @Component({
-  selector: 'app-add-habit',
+  selector: 'app-edit-habit',
   imports: [DynamicFormComponent],
-  templateUrl: './add-habit.component.html',
-  styleUrl: './add-habit.component.css',
-  standalone: true,
+  templateUrl: './edit-habit.component.html',
+  styleUrl: './edit-habit.component.css'
 })
-export class AddHabitComponent {
+export class EditHabitComponent {
   loginFormConfig = [
     { label: 'Name', name: 'Name', type: 'text', required: true },
     {
@@ -46,5 +45,9 @@ export class AddHabitComponent {
         });
       },
     });
+  }
+
+  onDelete(){
+    
   }
 }

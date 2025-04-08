@@ -6,6 +6,7 @@ public record GetHabitsDataQueryResponse(
     string name,
     bool active,
     string description,
+    string icon,
     IEnumerable<DailyHabitsDataDto> dailyDatas)
 { }
 
