@@ -18,4 +18,11 @@ export class DailyViewHabitsDataComponent {
   clickHabit(habitId: string) {
     this.onClickHabit.emit({habitId: habitId, date: this.date});
   }
+
+  calculateDaysSince(dateStr: string): number {
+    const lastDate = new Date(dateStr);
+    const today = new Date();
+    const timeDiff = today.getTime() - lastDate.getTime();
+    return Math.floor(timeDiff / (1000 * 3600 * 24));
+  }
 }

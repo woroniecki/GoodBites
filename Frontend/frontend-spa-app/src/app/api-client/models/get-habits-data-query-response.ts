@@ -9,6 +9,8 @@ export interface GetHabitsDataQueryResponse {
   description: string;
   icon: string;
   id: string;
+  lastCheckedDate: string | null;
   name: string;
   positive: boolean;
+  streak: number;
 }

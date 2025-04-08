@@ -1,21 +1,34 @@
-<div class="habits-grid mt-3">
-    <div class="habit-cell" *ngFor="let item of items">
-        <button
-            [ngClass]="item.dailyDatas.length === 0
-            ? 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-500 hover:to-gray-300 hover:text-gray-700'
-            : (item.positive
-            ? 'bg-gradient-to-r from-emerald-100 to-lime-200 text-lime-500 hover:to-lime-300 hover:text-lime-700'
-            : 'bg-gradient-to-r from-orange-100 to-red-200 text-red-500 hover:to-red-300 hover:text-red-900')"
-            class="px-4 py-2 rounded-xl flex items-center gap-2"
-            style="width: 100px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center;"
-            (click)="clickHabit(item.id)">
-            <svg-icon *ngIf="item.icon" [src]="'/icons/'+ item.icon" [svgStyle]="{ width: '56px', height: '56px' }"></svg-icon>
-            <span class="habit-name block overflow-hidden text-ellipsis whitespace-nowrap" style="max-width: 100%;"
-                [ngStyle]="{
-              'font-size': item.name.length > 20 ? '14px' : '16px'
-            }">
-                {{ item.name }}
-            </span>
-        </button>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mt-3 max-w-full">
+    <div *ngFor="let item of items">
+        <div class="relative">
+            <button (click)="clickHabit(item.id)" [ngClass]="item.dailyDatas.length === 0
+                  ? 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-500 hover:to-gray-300 hover:text-gray-700'
+                  : (item.positive
+                    ? 'bg-gradient-to-r from-emerald-100 to-lime-200 text-lime-500 hover:to-lime-300 hover:text-lime-700'
+                    : 'bg-gradient-to-r from-orange-100 to-red-200 text-red-500 hover:to-red-300 hover:text-red-900')"
+                class="w-full max-w-[100px] sm:max-w-full h-[100px] rounded-xl flex flex-col items-center justify-center px-2 py-2 text-center">
+
+                <div class="absolute top-1 left-2 text-xs font-semibold z-10">
+                    <ng-container *ngIf="item.positive; else notPositive">
+                        {{ item.streak }}
+                    </ng-container>
+                    <ng-template #notPositive>
+                        <ng-container *ngIf="item.lastCheckedDate">
+                            {{ calculateDaysSince(item.lastCheckedDate) }}
+                        </ng-container>
+                        <ng-container *ngIf="item.lastCheckedDate === null">
+                            ∞
+                        </ng-container>
+                    </ng-template>
+                </div>
+
+                <svg-icon *ngIf="item.icon" [src]="'/icons/' + item.icon"
+                    [svgStyle]="{ width: '56px', height: '56px' }"></svg-icon>
+
+                <span class="text-[13px] leading-tight mt-1 break-words line-clamp-2" style="word-break: break-word;">
+                    {{ item.name }}
+                </span>
+            </button>
+        </div>
     </div>
 </div>

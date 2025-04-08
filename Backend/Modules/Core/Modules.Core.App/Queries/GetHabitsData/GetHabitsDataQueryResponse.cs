@@ -7,6 +7,8 @@ public record GetHabitsDataQueryResponse(
     bool active,
     string description,
     string icon,
+    DateOnly? lastCheckedDate,
+    int streak,
     IEnumerable<DailyHabitsDataDto> dailyDatas)
 { }
 

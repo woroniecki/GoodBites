@@ -82,12 +82,7 @@ export class TrackHabitsDataComponent implements OnInit {
           body: { date: dateValue, habitId },
         })
         .subscribe(() => {
-          this.items
-            .find((item) => item.id === habitId)
-            ?.dailyDatas.push({
-              date: dateValue,
-              count: 1,
-            });
+          this.getHabitData();
         });
     } else {
       this.habitsDataApi
@@ -95,11 +90,7 @@ export class TrackHabitsDataComponent implements OnInit {
           body: { date: dateValue, habitId },
         })
         .subscribe(() => {
-          const item = this.items.find((item) => item.id === habitId);
-          item!.dailyDatas = item!.dailyDatas.filter((d) => {
-            const dDate = new Date(d.date);
-            return dDate.toDateString() !== date.toDateString();
-          });
+          this.getHabitData();
         });
     }
   }

@@ -29,6 +29,8 @@ internal sealed class GetHabitsDataQueryHandler : IRequestHandler<GetHabitsDataQ
                 x.Active,
                 x.Description,
                 x.Icon,
+                x.LastClickedDate,
+                x.StrikeCounter,
                 x.DailyHabitDatas
                     .Select(d => new DailyHabitsDataDto
                     (

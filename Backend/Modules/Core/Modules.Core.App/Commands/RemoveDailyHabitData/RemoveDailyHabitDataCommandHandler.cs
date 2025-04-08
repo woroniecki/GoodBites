@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Modules.Core.Domain.Aggregates.Habit.Entities;
 using Modules.Core.Infrastructure.DataAccessLayer.UoT;
 using SharedUtils.Jwt.CurrentUser;
 
@@ -20,21 +19,16 @@ internal sealed class RemoveDailyHabitDataCommandHandler : IRequestHandler<Remov
     {
         var habit = await _unitOfWork.DbContext.Habits
             .Where(x => x.UserId == _userService.UserId && x.Id == request.habitId)
-            .Include(x => x.DailyHabitDatas.Where(d => d.Date == request.Date))
+            .Include(x => x.DailyHabitDatas)
             .FirstOrDefaultAsync(ct);
 
         if (habit == null)
             throw new Exception("Habit not found");
 
-        if (habit.DailyHabitDatas?.Count == 0)
+        if (!habit.DailyHabitDatas.Any(d => d.Date == request.Date))
             throw new Exception("Habit doesn't have data to clean");
 
-        var newHabitData = new DailyHabitData(
-            request.Date,
-            1
-        );
-
-        habit.DailyHabitDatas.RemoveAt(0);
+        habit.RemoveDailyHabitData(request.Date);
 
         await _unitOfWork.SaveAsync(ct);
 

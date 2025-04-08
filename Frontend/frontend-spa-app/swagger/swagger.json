@@ -494,6 +494,8 @@
           "active",
           "description",
           "icon",
+          "lastCheckedDate",
+          "streak",
           "dailyDatas"
         ],
         "type": "object",
@@ -516,6 +518,15 @@
           },
           "icon": {
             "type": "string"
+          },
+          "lastCheckedDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "streak": {
+            "type": "integer",
+            "format": "int32"
           },
           "dailyDatas": {
             "type": "array",
