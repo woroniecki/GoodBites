@@ -1,19 +1,28 @@
 <!-- Days of week header -->
 <div class="calendar-header">
     <div class="calendar-cell" *ngFor="let day of weekDays">
-      {{ day }}
+        {{ day }}
     </div>
-  </div>
-  
-  <!-- Calendar grid -->
-  <div class="calendar-grid">
+</div>
+
+<!-- Calendar grid -->
+<div class="calendar-grid">
     <!-- Empty cells for padding at the start of the month -->
     <div class="calendar-cell empty" *ngFor="let _ of blankDays"></div>
-  
+
     <!-- Actual days with number and note -->
     <div class="calendar-cell" *ngFor="let day of daysInMonth">
-      <div class="date-number">{{ day.getDate() }}</div>
-      <div class="note">test</div>
+        <div class="date-number">{{ day.getDate() }}</div>
+        <div class="note">
+            <ng-container *ngIf="getNegativeDayCount(day) || getPositivesDayCount(day); else noData">
+                <span class="text-red-400">
+                    {{ getNegativeDayCount(day) }}
+                </span> |
+                <span class="text-lime-600">
+                    {{ getPositivesDayCount(day) }}
+                </span>
+            </ng-container>
+            <ng-template #noData>-</ng-template>
+        </div>
     </div>
-  </div>
-  
+</div>
