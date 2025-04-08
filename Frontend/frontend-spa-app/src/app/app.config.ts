@@ -14,6 +14,7 @@ import { credentialsInterceptor } from './credential.interceptor';
 import { AuthService } from './services/auth.service';
 import { ConfigService } from './services/config.service';
 import { ApiConfiguration } from './api-client/api-configuration';
+import { provideAngularSvgIcon } from 'angular-svg-icon';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch(), withInterceptors([credentialsInterceptor])),
+    provideAngularSvgIcon(),
     provideAppInitializer(() => {
       const initAuth = ((authService: AuthService) => {
         return () => {
@@ -37,5 +39,5 @@ export const appConfig: ApplicationConfig = {
         };
       })(inject(ConfigService), inject(ApiConfiguration));
       return initBaseUrlSetting();
-    })]
+    })],
 };

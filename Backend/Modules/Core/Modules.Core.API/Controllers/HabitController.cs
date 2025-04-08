@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Core.App.Commands.AddHabit;
+using Modules.Core.App.Commands.EditHabit;
 using Modules.Core.App.Queries.GetHabitsList;
 
 namespace Modules.Core.API.Controllers;
@@ -13,6 +14,20 @@ public class HabitController(IMediator mediator)
     [HttpPost]
     [Route("add-habit")]
     public async Task<IActionResult> AddHabit([FromBody] AddHabitCommand cmd)
+    {
+        return Ok(await mediator.Send(cmd));
+    }
+
+    [HttpPost]
+    [Route("edit-habit")]
+    public async Task<IActionResult> EditHabit([FromBody] EditHabitCommand cmd)
+    {
+        return Ok(await mediator.Send(cmd));
+    }
+
+    [HttpPost]
+    [Route("edit-habit")]
+    public async Task<IActionResult> RemoveHabit([FromBody] EditHabitCommand cmd)
     {
         return Ok(await mediator.Send(cmd));
     }

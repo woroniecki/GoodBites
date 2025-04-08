@@ -1,11 +1,35 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Modules.Core.Infrastructure.DataAccessLayer.UoT;
+using SharedUtils.Jwt.CurrentUser;
 
 namespace Modules.Core.App.Commands.DeactivateHabit;
-internal sealed class DeactivateHabitCommandHandler : IRequestHandler<DeactivateHabitCommand, DeactivateHabitCommandResponse>
+internal sealed class DeactivateHabitCommandHandler : IRequestHandler<DeactivateHabitCommand, Unit>
 {
-    public Task<DeactivateHabitCommandResponse> Handle(DeactivateHabitCommand request, CancellationToken cancellationToken)
+    private IUnitOfWork _unitOfWork;
+    private ICurrentUserService _userService;
+
+    public DeactivateHabitCommandHandler(IUnitOfWork unitOfWork, ICurrentUserService userService)
     {
-        // Implement your logic here
-        throw new NotImplementedException();
+        _unitOfWork = unitOfWork;
+        _userService = userService;
+    }
+
+    public async Task<Unit> Handle(DeactivateHabitCommand request, CancellationToken ct)
+    {
+        var habit = await _unitOfWork.DbContext.Habits
+            .Where(x => x.Id == request.Id && x.UserId == _userService.UserId)
+            .FirstOrDefaultAsync(ct);
+
+        if (habit == null)
+        {
+            throw new Exception("Habit not found");
+        }
+
+        habit.Deactivate();
+
+        await _unitOfWork.SaveAsync(ct);
+
+        return Unit.Value;
     }
 }

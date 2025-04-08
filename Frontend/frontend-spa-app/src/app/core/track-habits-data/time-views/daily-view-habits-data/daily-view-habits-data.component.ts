@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { GetHabitsDataQueryResponse } from '../../../../api-client/models/get-habits-data-query-response';
 import { CommonModule } from '@angular/common';
+import { IconComponent } from '../../../../shared/icon/icon.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
 
 @Component({
   selector: 'app-daily-view-habits-data',
-  imports: [CommonModule],
+  imports: [CommonModule, IconComponent, AngularSvgIconModule],
   templateUrl: './daily-view-habits-data.component.html',
   styleUrl: './daily-view-habits-data.component.css',
   standalone: true,
