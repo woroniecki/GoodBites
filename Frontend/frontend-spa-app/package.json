@@ -12,6 +12,7 @@
     "test": "ng test",
     "serve:ssr:frontend-spa-app": "node dist/frontend-spa-app/server/server.mjs",
     "gen:swagger": "ng-openapi-gen --config swagger/swagger-config.json",
+    "generate:icons": "node scripts/generate-icons-enum.js",
     "lint": "ng lint",
     "format": "prettier --write \"src/**/*.{ts,html,css}\""
   },
