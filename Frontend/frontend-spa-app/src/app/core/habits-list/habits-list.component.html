@@ -1,6 +1,6 @@
 <div class="habits-grid mt-3">
     <div class="habit-cell" *ngFor="let item of items">
-        <button *ngIf="item.positive" (click)="onAddHabit(item.id)"
+        <button *ngIf="item.positive" (click)="onClickHabit(item.id)"
             class="px-4 py-2 bg-gradient-to-r from-emerald-100 to-lime-200 text-lime-500 hover:bg-gradient-to-r hover:to-lime-300 hover:text-lime-700 rounded-xl flex items-center gap-2"
             style="width: 100px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <svg-icon *ngIf="item.icon" [src]="'/icons/'+ item.icon"
@@ -10,7 +10,7 @@
                 {{ item.name }}
             </span>
         </button>
-        <button *ngIf="!item.positive" (click)="onAddHabit(item.id)"
+        <button *ngIf="!item.positive" (click)="onClickHabit(item.id)"
             class="px-4 py-2 bg-gradient-to-r from-orange-100 to-red-200 text-red-500 hover:to-red-300 hover:text-red-900 rounded-xl flex items-center gap-2"
             style="width: 100px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
             <svg-icon *ngIf="item.icon" [src]="'/icons/'+ item.icon"

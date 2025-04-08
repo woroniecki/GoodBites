@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorModalComponent } from '../../shared/error-modal/error-modal.component';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DynamicFormComponent } from '../../shared/dynamic-form/dynamic-form.component';
 import { HabitService } from '../../api-client/services';
 
@@ -11,7 +11,7 @@ import { HabitService } from '../../api-client/services';
   templateUrl: './edit-habit.component.html',
   styleUrl: './edit-habit.component.css'
 })
-export class EditHabitComponent {
+export class EditHabitComponent implements OnInit {
   loginFormConfig = [
     { label: 'Name', name: 'Name', type: 'text', required: true },
     {
@@ -25,14 +25,22 @@ export class EditHabitComponent {
     { label: 'Description', name: 'Description', type: 'text', required: true },
   ];
 
+  habitId: string = '';
+
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private habitApi: HabitService,
+    private route: ActivatedRoute
   ) {}
 
-  onSubmit(formData: { description: string; name: string; positive: boolean, icon: string }) {
-    this.habitApi.apiCoreHabitAddHabitPost({ body: formData }).subscribe({
+  ngOnInit(): void {
+    this.habitId = this.route.snapshot.paramMap.get('id')!;
+  }
+
+  onSubmit(formData: { description: string; name: string; positive: boolean, icon: string, id: string }) {
+    formData['id'] = this.habitId;
+    this.habitApi.apiCoreHabitEditHabitPost({ body: formData }).subscribe({
       next: () => {
         this.router.navigate(['/habits']);
       },

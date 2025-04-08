@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Modules.Core.App.Commands.AddHabit;
+using Modules.Core.App.Commands.DeactivateHabit;
 using Modules.Core.App.Commands.EditHabit;
 using Modules.Core.App.Queries.GetHabitsList;
 
@@ -25,9 +26,9 @@ public class HabitController(IMediator mediator)
         return Ok(await mediator.Send(cmd));
     }
 
-    [HttpPost]
-    [Route("edit-habit")]
-    public async Task<IActionResult> RemoveHabit([FromBody] EditHabitCommand cmd)
+    [HttpDelete]
+    [Route("remove-habit")]
+    public async Task<IActionResult> RemoveHabit([FromBody] DeactivateHabitCommand cmd)
     {
         return Ok(await mediator.Send(cmd));
     }

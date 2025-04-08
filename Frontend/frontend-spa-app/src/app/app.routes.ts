@@ -13,6 +13,6 @@ export const routes: Routes = [
   { path: 'calendar', component: TrackHabitsDataComponent },
   { path: 'habits', component: HabitsListComponent },
   { path: 'habits/add', component: AddHabitComponent },
-  { path: 'habits/edit:id', component: EditHabitComponent },
+  { path: 'habits/edit/:id', component: EditHabitComponent },
   { path: '', component: LandingPageComponent } // Default route
 ];
