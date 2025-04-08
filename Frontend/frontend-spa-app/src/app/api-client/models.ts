@@ -5,6 +5,7 @@
 export { AddDailyHabitDataCommand } from './models/add-daily-habit-data-command';
 export { AddHabitCommand } from './models/add-habit-command';
 export { DailyHabitsDataDto } from './models/daily-habits-data-dto';
+export { DeactivateHabitCommand } from './models/deactivate-habit-command';
 export { EditHabitCommand } from './models/edit-habit-command';
 export { GetHabitsDataQueryResponse } from './models/get-habits-data-query-response';
 export { GetHabitsListQueryResponse } from './models/get-habits-list-query-response';

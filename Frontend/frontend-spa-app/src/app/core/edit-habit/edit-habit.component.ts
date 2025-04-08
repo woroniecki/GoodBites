@@ -4,6 +4,7 @@ import { ErrorModalComponent } from '../../shared/error-modal/error-modal.compon
 import { ActivatedRoute, Router } from '@angular/router';
 import { DynamicFormComponent } from '../../shared/dynamic-form/dynamic-form.component';
 import { HabitService } from '../../api-client/services';
+import { GetHabitsListQueryResponse } from '../../api-client/models/get-habits-list-query-response';
 
 @Component({
   selector: 'app-edit-habit',
@@ -13,19 +14,20 @@ import { HabitService } from '../../api-client/services';
 })
 export class EditHabitComponent implements OnInit {
   loginFormConfig = [
-    { label: 'Name', name: 'Name', type: 'text', required: true },
+    { label: 'Name', name: 'name', type: 'text', required: true },
     {
       label: 'Positive',
-      name: 'Positive',
+      name: 'positive',
       type: 'checkbox',
       required: true,
       defaultValue: true,
     },
-    { label: 'Icon', name: 'Icon', type: 'icon-picker', required: true },
-    { label: 'Description', name: 'Description', type: 'text', required: true },
+    { label: 'Icon', name: 'icon', type: 'icon-picker', required: true },
+    { label: 'Description', name: 'description', type: 'text', required: true },
   ];
 
   habitId: string = '';
+  habit: GetHabitsListQueryResponse = {} as GetHabitsListQueryResponse;
 
   constructor(
     private dialog: MatDialog,
@@ -36,6 +38,15 @@ export class EditHabitComponent implements OnInit {
 
   ngOnInit(): void {
     this.habitId = this.route.snapshot.paramMap.get('id')!;
+
+    this.habitApi.apiCoreHabitGetHabitsGet$Json().subscribe({
+      next: (data) => {
+        this.habit = data.find((habit) => habit.id === this.habitId) as GetHabitsListQueryResponse;
+      },
+      error: (err) => {
+        console.log('Error loading habits:', err);
+      },
+    });
   }
 
   onSubmit(formData: { description: string; name: string; positive: boolean, icon: string, id: string }) {
@@ -47,7 +58,7 @@ export class EditHabitComponent implements OnInit {
       error: (err) => {
         this.dialog.open(ErrorModalComponent, {
           data: {
-            message: `Adding Failed.\n${err.message}`,
+            message: `Editing Failed.\n${err.message}`,
           },
           width: '400px',
         });
@@ -56,6 +67,18 @@ export class EditHabitComponent implements OnInit {
   }
 
   onDelete(){
-    
+    this.habitApi.apiCoreHabitRemoveHabitDelete({ body: { id: this.habitId} }).subscribe({
+      next: () => {
+        this.router.navigate(['/habits']);
+      },
+      error: (err) => {
+        this.dialog.open(ErrorModalComponent, {
+          data: {
+            message: `Deleting Failed.\n${err.message}`,
+          },
+          width: '400px',
+        });
+      },
+    });
   }
 }

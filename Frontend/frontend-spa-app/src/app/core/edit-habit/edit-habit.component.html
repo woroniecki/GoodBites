@@ -1,10 +1,15 @@
 <app-dynamic-form
   [formConfig]="loginFormConfig"
-  [submitButtonLabel]="'Add'"
+  [submitButtonLabel]="'Edit'"
+  [initialData]="habit"
   (formSubmit)="onSubmit($event)"
-></app-dynamic-form>
-<button 
-    class="btn btn-danger" 
-    (click)="onDelete()">
-    Delete
-</button>
+>
+  <div class="flex justify-end mt-2">
+    <button
+      class="px-4 py-1.5 rounded-md shadow-lg bg-gradient-to-r from-red-600 to-red-700 font-medium text-gray-100 transition duration-300"
+      (click)="onDelete()"
+    >
+      Delete
+    </button>
+  </div>
+</app-dynamic-form>

@@ -74,6 +74,38 @@
         }
       }
     },
+    "/api/core/Habit/remove-habit": {
+      "delete": {
+        "tags": [
+          "Habit"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeactivateHabitCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeactivateHabitCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeactivateHabitCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/core/Habit/get-habits": {
       "get": {
         "tags": [
@@ -411,6 +443,18 @@
           "count": {
             "type": "integer",
             "format": "int32"
+          }
+        }
+      },
+      "DeactivateHabitCommand": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       },

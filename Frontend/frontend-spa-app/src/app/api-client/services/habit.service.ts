@@ -19,6 +19,8 @@ import { apiCoreHabitGetHabitsGet$Json } from '../fn/habit/api-core-habit-get-ha
 import { ApiCoreHabitGetHabitsGet$Json$Params } from '../fn/habit/api-core-habit-get-habits-get-json';
 import { apiCoreHabitGetHabitsGet$Plain } from '../fn/habit/api-core-habit-get-habits-get-plain';
 import { ApiCoreHabitGetHabitsGet$Plain$Params } from '../fn/habit/api-core-habit-get-habits-get-plain';
+import { apiCoreHabitRemoveHabitDelete } from '../fn/habit/api-core-habit-remove-habit-delete';
+import { ApiCoreHabitRemoveHabitDelete$Params } from '../fn/habit/api-core-habit-remove-habit-delete';
 import { GetHabitsListQueryResponse } from '../models/get-habits-list-query-response';
 
 @Injectable({ providedIn: 'root' })
@@ -73,6 +75,31 @@ export class HabitService extends BaseService {
    */
   apiCoreHabitEditHabitPost(params: ApiCoreHabitEditHabitPost$Params, context?: HttpContext): Observable<void> {
     return this.apiCoreHabitEditHabitPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
+  /** Path part for operation `apiCoreHabitRemoveHabitDelete()` */
+  static readonly ApiCoreHabitRemoveHabitDeletePath = '/api/core/Habit/remove-habit';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiCoreHabitRemoveHabitDelete()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiCoreHabitRemoveHabitDelete$Response(params: ApiCoreHabitRemoveHabitDelete$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiCoreHabitRemoveHabitDelete(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiCoreHabitRemoveHabitDelete$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiCoreHabitRemoveHabitDelete(params: ApiCoreHabitRemoveHabitDelete$Params, context?: HttpContext): Observable<void> {
+    return this.apiCoreHabitRemoveHabitDelete$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
   }

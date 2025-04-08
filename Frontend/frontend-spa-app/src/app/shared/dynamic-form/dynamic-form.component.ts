@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -19,7 +19,7 @@ import { Icons } from '../icons.enum';
     IconPickerComponent
   ],
 })
-export class DynamicFormComponent {
+export class DynamicFormComponent implements OnChanges {
   allIcons = Object.values(Icons);
   @Input() formConfig: {
     label: string;
@@ -28,6 +28,7 @@ export class DynamicFormComponent {
     required: boolean;
     defaultValue?: any; // Add defaultValue property
   }[] = [];
+  @Input() initialData: Record<string, any> = {};
   @Input() submitButtonLabel: string = 'Submit';
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Output() formSubmit = new EventEmitter<any>();
@@ -47,6 +48,13 @@ export class DynamicFormComponent {
       {},
     );
     this.form = this.fb.group(formControls);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['initialData'] && this.form) {
+      console.log(this.initialData, this.form);
+      this.form.patchValue(this.initialData);
+    }
   }
 
   onSubmit() {
