@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { HabitSettingsButtonComponent } from './habit-settings-button/habit-settings-button.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AddHabitComponent } from '../../../add-habit/add-habit.component';
+import { DialogResult } from '../../../../shared/dialog-result.enum';
 
 interface HabitViewData {
   showMenu?: boolean;
@@ -38,6 +39,7 @@ export class DailyViewHabitsDataComponent {
   @Input() items: Array<HabitData> = [];
   @Input() date: Date = new Date();
   @Output() onClickHabit = new EventEmitter<{ habitId: string; date: Date }>();
+  @Output() onHabitsChange = new EventEmitter<void>();
 
   constructor(
     private router: Router,
@@ -46,6 +48,10 @@ export class DailyViewHabitsDataComponent {
 
   clickHabit(habitId: string) {
     this.onClickHabit.emit({ habitId: habitId, date: this.date });
+  }
+
+  emitDataChange() {
+    this.onHabitsChange.emit();
   }
 
   calculateDaysSince(dateStr: string): string {
@@ -57,8 +63,14 @@ export class DailyViewHabitsDataComponent {
   }
 
   onAddHabit() {
-    this.dialog.open(AddHabitComponent, {
-          width: '350px'
-        });
+    const dialogRef = this.dialog.open(AddHabitComponent, {
+      width: '350px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === DialogResult.SUCCESS) {
+        this.onHabitsChange.emit();
+      }
+    });
   }
 }

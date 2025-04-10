@@ -4,6 +4,7 @@ import { ErrorModalComponent } from '../../shared/error-modal/error-modal.compon
 import { DynamicFormComponent } from '../../shared/dynamic-form/dynamic-form.component';
 import { HabitService } from '../../api-client/services';
 import { GetHabitsListQueryResponse } from '../../api-client/models/get-habits-list-query-response';
+import { DialogResult } from '../../shared/dialog-result.enum';
 
 @Component({
   selector: 'app-edit-habit',
@@ -56,7 +57,7 @@ export class EditHabitComponent implements OnInit {
     formData['id'] = this.habitId;
     this.habitApi.apiCoreHabitEditHabitPost({ body: formData }).subscribe({
       next: () => {
-        this.close();
+        this.dialogRef.close(DialogResult.SUCCESS);
       },
       error: (err) => {
         this.dialog.open(ErrorModalComponent, {

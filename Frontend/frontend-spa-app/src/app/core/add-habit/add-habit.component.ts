@@ -4,6 +4,7 @@ import { ErrorModalComponent } from '../../shared/error-modal/error-modal.compon
 import { Router } from '@angular/router';
 import { DynamicFormComponent } from '../../shared/dynamic-form/dynamic-form.component';
 import { HabitService } from '../../api-client/services';
+import { DialogResult } from '../../shared/dialog-result.enum';
 
 @Component({
   selector: 'app-add-habit',
@@ -41,7 +42,7 @@ export class AddHabitComponent {
   onSubmit(formData: { description: string; name: string; positive: boolean, icon: string }) {
     this.habitApi.apiCoreHabitAddHabitPost({ body: formData }).subscribe({
       next: () => {
-        this.router.navigate(['/habits']);
+        this.dialogRef.close(DialogResult.SUCCESS);
       },
       error: (err) => {
         this.dialog.open(ErrorModalComponent, {

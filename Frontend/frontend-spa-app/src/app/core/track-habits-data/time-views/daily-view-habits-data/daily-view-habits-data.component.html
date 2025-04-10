@@ -9,7 +9,7 @@
         ? 'text-gray-400 '
         : (item.positive ? 'text-lime-500 ' : 'text-red-500 '))
         + (item.positive ? 'bg-lime-100'  : 'bg-red-100')">
-      <app-habit-settings-button [habitId]="item.id" [habitName]="item.name"></app-habit-settings-button>
+      <app-habit-settings-button [habitId]="item.id" [habitName]="item.name" (onDataChange)="emitDataChange()"></app-habit-settings-button>
       <div class="item-name">{{ item.name }}</div>
       <div>
         <svg-icon *ngIf="item.icon" [src]="'/icons/' + item.icon"

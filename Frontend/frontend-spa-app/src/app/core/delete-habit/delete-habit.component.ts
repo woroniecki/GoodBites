@@ -6,6 +6,7 @@ import {
 } from '@angular/material/dialog';
 import { HabitService } from '../../api-client/services';
 import { ErrorModalComponent } from '../../shared/error-modal/error-modal.component';
+import { DialogResult } from '../../shared/dialog-result.enum';
 
 @Component({
   selector: 'app-delete-habit',
@@ -31,7 +32,7 @@ export class DeleteHabitComponent {
       .apiCoreHabitRemoveHabitDelete({ body: { id: this.data.habitId } })
       .subscribe({
         next: () => {
-          this.close();
+          this.dialogRef.close(DialogResult.SUCCESS);
         },
         error: (err) => {
           this.dialog.open(ErrorModalComponent, {

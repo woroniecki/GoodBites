@@ -6,7 +6,7 @@
 
   <ng-container [ngSwitch]="selectedViewType">
     <ng-container *ngSwitchCase="TimeViewOption.Daily">
-      <app-daily-view-habits-data [items]="items" [date]="dateFrom" (onClickHabit)="clickHabit($event)">
+      <app-daily-view-habits-data [items]="items" [date]="dateFrom" (onHabitsChange)="refreshDate()" (onClickHabit)="clickHabit($event)">
       </app-daily-view-habits-data>
     </ng-container>
     <ng-container *ngSwitchCase="TimeViewOption.Weekly">

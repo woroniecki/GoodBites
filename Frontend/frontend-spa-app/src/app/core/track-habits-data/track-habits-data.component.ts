@@ -66,6 +66,10 @@ export class TrackHabitsDataComponent implements OnInit {
     this.getHabitData();
   }
 
+  refreshDate(){
+    this.getHabitData();
+  }
+
   clickHabit({ habitId, date }: { habitId: string; date: Date }): void {
     const dateValue = date.toISOString().split('T')[0];
 

@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-4xl mx-auto mt-3 p-6 bg-white rounded-lg shadow-md">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-4xl mx-auto mt-3 p-6 rounded-lg shadow-md">
   <ng-container *ngFor="let field of formConfig">
     <label class="text-sm font-medium ">{{ field.label }}</label>
     <!-- Text -->
