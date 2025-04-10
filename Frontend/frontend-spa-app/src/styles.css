@@ -6,3 +6,20 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+  /* Primary color */
+  --color-primary: #709F41;
+  /* Secondary color */
+  --color-secondary: #6A994E;
+  /* Primary dark color */
+  --color-primary-dark: #386641;
+  /* Negative color */
+  --color-negative: #FF413D;
+  /* Negative color */
+  --color-negative-secondary: #F97316;
+  /* Neutral color */
+  --color-neutral: #FCF0D7;
+  /* Background color */
+  --color-background: #F8FBF5;
+}
