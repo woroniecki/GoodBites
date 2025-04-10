@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { AddHabitComponent } from '../../../../add-habit/add-habit.component';
 import { EditHabitComponent } from '../../../../edit-habit/edit-habit.component';
+import { DeleteHabitComponent } from '../../../../delete-habit/delete-habit.component';
 
 @Component({
   selector: 'app-habit-settings-button',
@@ -16,6 +16,7 @@ export class HabitSettingsButtonComponent {
   constructor(private dialog: MatDialog) {}
 
   @Input() habitId: string = "";
+  @Input() habitName: string = "";
 
   edit() {
     if (document.activeElement instanceof HTMLElement) {
@@ -31,5 +32,9 @@ export class HabitSettingsButtonComponent {
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
     }
+    this.dialog.open(DeleteHabitComponent, {
+      width: '350px',
+      data: { habitId: this.habitId, habitName: this.habitName }
+    });
   }
 }

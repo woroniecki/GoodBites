@@ -29,7 +29,7 @@ export class EditHabitComponent implements OnInit {
   habit: GetHabitsListQueryResponse = {} as GetHabitsListQueryResponse;
 
   constructor(
-    public dialogRef: MatDialogRef<ErrorModalComponent>,
+    public dialogRef: MatDialogRef<EditHabitComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { habitId: string },
     private dialog: MatDialog,
     private habitApi: HabitService
@@ -62,22 +62,6 @@ export class EditHabitComponent implements OnInit {
         this.dialog.open(ErrorModalComponent, {
           data: {
             message: `Editing Failed.\n${err.message}`,
-          },
-          width: '400px',
-        });
-      },
-    });
-  }
-
-  onDelete(){
-    this.habitApi.apiCoreHabitRemoveHabitDelete({ body: { id: this.habitId} }).subscribe({
-      next: () => {
-        this.close();
-      },
-      error: (err) => {
-        this.dialog.open(ErrorModalComponent, {
-          data: {
-            message: `Deleting Failed.\n${err.message}`,
           },
           width: '400px',
         });

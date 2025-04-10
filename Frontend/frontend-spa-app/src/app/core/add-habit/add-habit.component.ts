@@ -27,7 +27,7 @@ export class AddHabitComponent {
   ];
 
   constructor(
-    public dialogRef: MatDialogRef<ErrorModalComponent>,
+    public dialogRef: MatDialogRef<AddHabitComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { message: string },
     private dialog: MatDialog,
     private router: Router,
