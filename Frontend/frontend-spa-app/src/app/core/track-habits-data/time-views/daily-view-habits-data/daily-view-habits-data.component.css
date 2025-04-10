@@ -1,14 +1,11 @@
 .example-list {
   display: flex;
   flex-wrap: wrap;
-  width: 505px;
+  width: 490px;
   max-width: 100%;
   gap: 5px;
   padding: 5px;
-  border: solid 1px #ccc;
-  background-color: var(--color-background);
   min-height: 60px;
-  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -18,6 +15,7 @@
   text-align: center;
   font-size: 14px;
   min-width: 115px;
+  max-width: 115px;
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -37,6 +35,7 @@
 
 .box-top {
   padding-top: 2px;
+  position: relative;
   padding-bottom: 4px;
   border-radius: 18px;
   margin: 6px 6px 0px 6px;
@@ -94,10 +93,6 @@
   box-shadow: 1px 1px 1px 1px var(--color-lime-100);
 }
 
-.green-button:hover {
-  transform: scale(1.1);
-}
-
 .red-button {
   margin-bottom: 6px;
   border: none;
@@ -113,10 +108,6 @@
   );
   background-size: 400% 400%;
   box-shadow: 1px 1px 1px 1px var(--color-red-100);
-}
-
-.red-button:hover {
-  transform: scale(1.1);
 }
 
 .gray-button {
@@ -136,31 +127,8 @@
   box-shadow: 1px 1px 1px 1px var(--color-gray-100);
 }
 
+.green-button:hover,
+.red-button:hover,
 .gray-button:hover {
   transform: scale(1.1);
 }
-
-/* .habits-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-}
-
-.habit-cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.habit-name {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.filter-green{
-    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
-}
-
-.shadow-solid {
-    box-shadow: 2px 2px 3px var(--color-lime-400);;
-  } */

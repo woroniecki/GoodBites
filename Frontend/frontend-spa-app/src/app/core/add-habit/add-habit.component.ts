@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ErrorModalComponent } from '../../shared/error-modal/error-modal.component';
 import { Router } from '@angular/router';
 import { DynamicFormComponent } from '../../shared/dynamic-form/dynamic-form.component';
@@ -27,10 +27,16 @@ export class AddHabitComponent {
   ];
 
   constructor(
+    public dialogRef: MatDialogRef<ErrorModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { message: string },
     private dialog: MatDialog,
     private router: Router,
     private habitApi: HabitService,
   ) {}
+
+  close(): void {
+    this.dialogRef.close();
+  }
 
   onSubmit(formData: { description: string; name: string; positive: boolean, icon: string }) {
     this.habitApi.apiCoreHabitAddHabitPost({ body: formData }).subscribe({
