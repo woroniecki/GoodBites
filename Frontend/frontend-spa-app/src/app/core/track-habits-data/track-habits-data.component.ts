@@ -9,6 +9,7 @@ import { YearlyViewHabitsDataComponent } from './time-views/yearly-view-habits-d
 import { MonthlyViewHabitsDataComponent } from './time-views/monthly-view-habits-data/monthly-view-habits-data.component';
 import { TimeDateSelectionComponent } from './time-date-selection/time-date-selection.component';
 import { TimeViewOption } from './enums/time-view-option.enum';
+import { UserDropdownComponent } from '../../user-dropdown/user-dropdown.component';
 
 @Component({
   selector: 'app-track-habits-data',
@@ -20,6 +21,7 @@ import { TimeViewOption } from './enums/time-view-option.enum';
     WeeklyViewHabitsDataComponent,
     MonthlyViewHabitsDataComponent,
     YearlyViewHabitsDataComponent,
+    UserDropdownComponent,
   ],
   templateUrl: './track-habits-data.component.html',
   styleUrl: './track-habits-data.component.css',

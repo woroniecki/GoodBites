@@ -1,8 +1,21 @@
 <div>
-  <div class="flex items-center gap-2">
-    <app-time-date-selection (dateChanged)="onDateChanged($event)" [selectedOption]="selectedViewType"></app-time-date-selection>
-    <app-time-view-dropdown (optionChanged)="onViewOptionChanged($event)"></app-time-view-dropdown>
+  <div class="flex items-center justify-between w-full">
+    <!-- Left Side -->
+    <div class="flex items-center gap-2">
+      <app-time-date-selection
+        (dateChanged)="onDateChanged($event)"
+        [selectedOption]="selectedViewType">
+      </app-time-date-selection>
+  
+      <app-time-view-dropdown
+        (optionChanged)="onViewOptionChanged($event)">
+      </app-time-view-dropdown>
+    </div>
+  
+    <!-- Right Side (User Dropdown) -->
+    <app-user-dropdown></app-user-dropdown>
   </div>
+  
 
   <ng-container [ngSwitch]="selectedViewType">
     <ng-container *ngSwitchCase="TimeViewOption.Daily">

@@ -2,7 +2,7 @@
   <ng-container *ngFor="let field of formConfig">
     <label class="text-sm font-medium ">{{ field.label }}</label>
     <!-- Text -->
-    <input *ngIf="field.type === 'text' || field.type === 'password'" class="mb-3 px-2 py-1.5
+    <input *ngIf="field.type === 'text' || field.type === 'password' || field.type === 'email'" class="mb-3 px-2 py-1.5
           mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
           focus:outline-none
           focus:border-sky-500

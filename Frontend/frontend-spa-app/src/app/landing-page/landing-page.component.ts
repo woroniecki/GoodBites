@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -16,15 +18,19 @@ export class LandingPageComponent {
   title = 'frontend-spa-app';
 
   constructor(
-    private router: Router,
+    private dialog: MatDialog,
     public auth: AuthService,
   ) {}
 
   onRegister() {
-    this.router.navigate(['/register']);
+    this.dialog.open(RegisterComponent, {
+      width: '350px'
+    });
   }
 
   onLogin() {
-    this.router.navigate(['/login']);
+    this.dialog.open(LoginComponent, {
+      width: '350px'
+    });
   }
 }
