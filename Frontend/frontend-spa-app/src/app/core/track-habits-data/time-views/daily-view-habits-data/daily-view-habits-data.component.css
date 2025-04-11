@@ -1,12 +1,15 @@
 .example-list {
-  display: flex;
-  flex-wrap: wrap;
-  width: 490px;
-  max-width: 100%;
-  gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
   padding: 5px;
-  min-height: 60px;
-  overflow: hidden;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .example-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .example-box {
