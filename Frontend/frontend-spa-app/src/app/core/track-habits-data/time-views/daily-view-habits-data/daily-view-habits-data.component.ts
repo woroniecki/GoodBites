@@ -8,10 +8,11 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
-import { HabitSettingsButtonComponent } from './habit-settings-button/habit-settings-button.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AddHabitComponent } from '../../../add-habit/add-habit.component';
 import { DialogResult } from '../../../../shared/dialog-result.enum';
+import { EditHabitComponent } from '../../../edit-habit/edit-habit.component';
+import { DeleteHabitComponent } from '../../../delete-habit/delete-habit.component';
 
 interface HabitViewData {
   showMenu?: boolean;
@@ -24,8 +25,7 @@ type HabitData = GetHabitsDataQueryResponse & HabitViewData;
   imports: [
     CommonModule,
     AngularSvgIconModule,
-    DragDropModule,
-    HabitSettingsButtonComponent,
+    DragDropModule
   ],
   templateUrl: './daily-view-habits-data.component.html',
   styleUrl: './daily-view-habits-data.component.css',
@@ -73,4 +73,36 @@ export class DailyViewHabitsDataComponent {
       }
     });
   }
+
+  edit(habitId: string) {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+      const dialogRef = this.dialog.open(EditHabitComponent, {
+        width: '350px',
+        data: { habitId: habitId }
+      });
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        if(result === DialogResult.SUCCESS){
+          this.onHabitsChange.emit();
+        }
+      });
+    }
+    
+    remove(habitId: string, habitName: string) {
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
+      const dialogRef = this.dialog.open(DeleteHabitComponent, {
+        width: '350px',
+        data: { habitId: habitId, habitName: habitName }
+      });
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        if(result === DialogResult.SUCCESS){
+          this.onHabitsChange.emit();
+        }
+      });
+    }
 }

@@ -7,18 +7,21 @@
 html, body { height: 100%; }
 
 :root {
-  /* Primary color */
-  --color-primary: #709F41;
-  /* Secondary color */
-  --color-secondary: #6A994E;
-  /* Primary dark color */
-  --color-primary-dark: #386641;
-  /* Negative color */
-  --color-negative: #FF413D;
-  /* Negative color */
-  --color-negative-secondary: #F97316;
-  /* Neutral color */
-  --color-neutral: #FCF0D7;
-  /* Background color */
-  --color-background: #F8FBF5;
+  /* --color-primary: #33CA7F;
+  --color-primary-light: #7DCFB6;
+  --color-neutral: #A7A5C6;
+  --color-negative: #AB3428;
+  --color-negative-light: #FFE3E3; */
+
+  /* --color-primary: var(--color-green-500);
+  --color-primary-light: var(--color-lime-200);
+  --color-neutral: var(--color-gray-100);
+  --color-negative: var(--color-red-400);
+  --color-negative-light: var(--color-red-100); */
+
+  --color-primary: #5FD074;
+  --color-primary-light: #5FD074;
+  --color-neutral: #FCFBF9;
+  --color-negative: #FD6B44;
+  --color-negative-light: #FD6B44;
 }
