@@ -4,5 +4,4 @@
 
 export { HabitService } from './services/habit.service';
 export { HabitDataService } from './services/habit-data.service';
-export { HealthCheckService } from './services/health-check.service';
 export { AccountService } from './services/account.service';

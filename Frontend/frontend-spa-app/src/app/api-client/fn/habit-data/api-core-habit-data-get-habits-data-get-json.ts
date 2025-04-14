@@ -8,14 +8,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { GetHabitsDataQueryResponse } from '../../models/get-habits-data-query-response';
+import { HabitDto } from '../../models/habit-dto';
 
 export interface ApiCoreHabitDataGetHabitsDataGet$Json$Params {
   dateFrom?: string;
   dateTo?: string;
 }
 
-export function apiCoreHabitDataGetHabitsDataGet$Json(http: HttpClient, rootUrl: string, params?: ApiCoreHabitDataGetHabitsDataGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetHabitsDataQueryResponse>>> {
+export function apiCoreHabitDataGetHabitsDataGet$Json(http: HttpClient, rootUrl: string, params?: ApiCoreHabitDataGetHabitsDataGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<HabitDto>>> {
   const rb = new RequestBuilder(rootUrl, apiCoreHabitDataGetHabitsDataGet$Json.PATH, 'get');
   if (params) {
     rb.query('dateFrom', params.dateFrom, {});
@@ -27,7 +27,7 @@ export function apiCoreHabitDataGetHabitsDataGet$Json(http: HttpClient, rootUrl:
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<GetHabitsDataQueryResponse>>;
+      return r as StrictHttpResponse<Array<HabitDto>>;
     })
   );
 }

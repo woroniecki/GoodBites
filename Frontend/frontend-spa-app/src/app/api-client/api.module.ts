@@ -8,7 +8,6 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { HabitService } from './services/habit.service';
 import { HabitDataService } from './services/habit-data.service';
-import { HealthCheckService } from './services/health-check.service';
 import { AccountService } from './services/account.service';
 
 /**
@@ -21,7 +20,6 @@ import { AccountService } from './services/account.service';
   providers: [
     HabitService,
     HabitDataService,
-    HealthCheckService,
     AccountService,
     ApiConfiguration
   ],

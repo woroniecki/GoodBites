@@ -20,8 +20,8 @@ html, body { height: 100%; }
   --color-negative-light: var(--color-red-100); */
 
   --color-primary: #5FD074;
-  --color-primary-light: #5FD074;
+  --color-primary-light: #a8c9ae;
   --color-neutral: #FCFBF9;
   --color-negative: #FD6B44;
-  --color-negative-light: #FD6B44;
+  --color-negative-light: #ff9578;
 }

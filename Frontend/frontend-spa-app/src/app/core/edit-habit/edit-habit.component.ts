@@ -3,8 +3,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import { ErrorModalComponent } from '../../shared/error-modal/error-modal.component';
 import { DynamicFormComponent } from '../../shared/dynamic-form/dynamic-form.component';
 import { HabitService } from '../../api-client/services';
-import { GetHabitsListQueryResponse } from '../../api-client/models/get-habits-list-query-response';
 import { DialogResult } from '../../shared/dialog-result.enum';
+import { HabitDto } from '../../api-client/models/habit-dto';
 
 @Component({
   selector: 'app-edit-habit',
@@ -27,7 +27,7 @@ export class EditHabitComponent implements OnInit {
   ];
 
   habitId: string = '';
-  habit: GetHabitsListQueryResponse = {} as GetHabitsListQueryResponse;
+  habit: HabitDto = {} as HabitDto;
 
   constructor(
     public dialogRef: MatDialogRef<EditHabitComponent>,
@@ -39,9 +39,11 @@ export class EditHabitComponent implements OnInit {
   ngOnInit(): void {
     this.habitId = this.data.habitId;
 
-    this.habitApi.apiCoreHabitGetHabitsGet$Json().subscribe({
+    this.habitApi.apiCoreHabitGetHabitGet$Json({
+      habitId: this.habitId
+    }).subscribe({
       next: (data) => {
-        this.habit = data.find((habit) => habit.id === this.data.habitId) as GetHabitsListQueryResponse;
+        this.habit = data;
       },
       error: (err) => {
         console.log('Error loading habits:', err);

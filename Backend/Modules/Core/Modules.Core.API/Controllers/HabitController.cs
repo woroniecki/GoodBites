@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Modules.Core.API.Dtos;
+using Modules.Core.API.Dtos.Mappers;
 using Modules.Core.App.Commands.AddHabit;
 using Modules.Core.App.Commands.DeactivateHabit;
 using Modules.Core.App.Commands.EditHabit;
-using Modules.Core.App.Queries.GetHabitsList;
+using Modules.Core.App.Queries.GetHabit;
 
 namespace Modules.Core.API.Controllers;
 
@@ -12,6 +14,13 @@ namespace Modules.Core.API.Controllers;
 public class HabitController(IMediator mediator)
     : ControllerBase
 {
+    [HttpGet]
+    [Route("get-habit")]
+    public async Task<ActionResult<HabitDto>> GetHabit([FromQuery] Guid habitId)
+    {
+        return Ok((await mediator.Send(new GetHabitQuery(habitId))).Map());
+    }
+
     [HttpPost]
     [Route("add-habit")]
     public async Task<IActionResult> AddHabit([FromBody] AddHabitCommand cmd)
@@ -31,12 +40,5 @@ public class HabitController(IMediator mediator)
     public async Task<IActionResult> RemoveHabit([FromBody] DeactivateHabitCommand cmd)
     {
         return Ok(await mediator.Send(cmd));
-    }
-
-    [HttpGet]
-    [Route("get-habits")]
-    public async Task<ActionResult<IEnumerable<GetHabitsListQueryResponse>>> GetHabitsList()
-    {
-        return Ok(await mediator.Send(new GetHabitsListQuery()));
     }
 }

@@ -15,18 +15,65 @@ import { apiCoreHabitAddHabitPost } from '../fn/habit/api-core-habit-add-habit-p
 import { ApiCoreHabitAddHabitPost$Params } from '../fn/habit/api-core-habit-add-habit-post';
 import { apiCoreHabitEditHabitPost } from '../fn/habit/api-core-habit-edit-habit-post';
 import { ApiCoreHabitEditHabitPost$Params } from '../fn/habit/api-core-habit-edit-habit-post';
-import { apiCoreHabitGetHabitsGet$Json } from '../fn/habit/api-core-habit-get-habits-get-json';
-import { ApiCoreHabitGetHabitsGet$Json$Params } from '../fn/habit/api-core-habit-get-habits-get-json';
-import { apiCoreHabitGetHabitsGet$Plain } from '../fn/habit/api-core-habit-get-habits-get-plain';
-import { ApiCoreHabitGetHabitsGet$Plain$Params } from '../fn/habit/api-core-habit-get-habits-get-plain';
+import { apiCoreHabitGetHabitGet$Json } from '../fn/habit/api-core-habit-get-habit-get-json';
+import { ApiCoreHabitGetHabitGet$Json$Params } from '../fn/habit/api-core-habit-get-habit-get-json';
+import { apiCoreHabitGetHabitGet$Plain } from '../fn/habit/api-core-habit-get-habit-get-plain';
+import { ApiCoreHabitGetHabitGet$Plain$Params } from '../fn/habit/api-core-habit-get-habit-get-plain';
 import { apiCoreHabitRemoveHabitDelete } from '../fn/habit/api-core-habit-remove-habit-delete';
 import { ApiCoreHabitRemoveHabitDelete$Params } from '../fn/habit/api-core-habit-remove-habit-delete';
-import { GetHabitsListQueryResponse } from '../models/get-habits-list-query-response';
+import { HabitDto } from '../models/habit-dto';
 
 @Injectable({ providedIn: 'root' })
 export class HabitService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
+  }
+
+  /** Path part for operation `apiCoreHabitGetHabitGet()` */
+  static readonly ApiCoreHabitGetHabitGetPath = '/api/core/Habit/get-habit';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiCoreHabitGetHabitGet$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiCoreHabitGetHabitGet$Plain$Response(params?: ApiCoreHabitGetHabitGet$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<HabitDto>> {
+    return apiCoreHabitGetHabitGet$Plain(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiCoreHabitGetHabitGet$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiCoreHabitGetHabitGet$Plain(params?: ApiCoreHabitGetHabitGet$Plain$Params, context?: HttpContext): Observable<HabitDto> {
+    return this.apiCoreHabitGetHabitGet$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<HabitDto>): HabitDto => r.body)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiCoreHabitGetHabitGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiCoreHabitGetHabitGet$Json$Response(params?: ApiCoreHabitGetHabitGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<HabitDto>> {
+    return apiCoreHabitGetHabitGet$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiCoreHabitGetHabitGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiCoreHabitGetHabitGet$Json(params?: ApiCoreHabitGetHabitGet$Json$Params, context?: HttpContext): Observable<HabitDto> {
+    return this.apiCoreHabitGetHabitGet$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<HabitDto>): HabitDto => r.body)
+    );
   }
 
   /** Path part for operation `apiCoreHabitAddHabitPost()` */
@@ -101,53 +148,6 @@ export class HabitService extends BaseService {
   apiCoreHabitRemoveHabitDelete(params: ApiCoreHabitRemoveHabitDelete$Params, context?: HttpContext): Observable<void> {
     return this.apiCoreHabitRemoveHabitDelete$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
-    );
-  }
-
-  /** Path part for operation `apiCoreHabitGetHabitsGet()` */
-  static readonly ApiCoreHabitGetHabitsGetPath = '/api/core/Habit/get-habits';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiCoreHabitGetHabitsGet$Plain()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  apiCoreHabitGetHabitsGet$Plain$Response(params?: ApiCoreHabitGetHabitsGet$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetHabitsListQueryResponse>>> {
-    return apiCoreHabitGetHabitsGet$Plain(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiCoreHabitGetHabitsGet$Plain$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  apiCoreHabitGetHabitsGet$Plain(params?: ApiCoreHabitGetHabitsGet$Plain$Params, context?: HttpContext): Observable<Array<GetHabitsListQueryResponse>> {
-    return this.apiCoreHabitGetHabitsGet$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<GetHabitsListQueryResponse>>): Array<GetHabitsListQueryResponse> => r.body)
-    );
-  }
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiCoreHabitGetHabitsGet$Json()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  apiCoreHabitGetHabitsGet$Json$Response(params?: ApiCoreHabitGetHabitsGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetHabitsListQueryResponse>>> {
-    return apiCoreHabitGetHabitsGet$Json(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiCoreHabitGetHabitsGet$Json$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  apiCoreHabitGetHabitsGet$Json(params?: ApiCoreHabitGetHabitsGet$Json$Params, context?: HttpContext): Observable<Array<GetHabitsListQueryResponse>> {
-    return this.apiCoreHabitGetHabitsGet$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<GetHabitsListQueryResponse>>): Array<GetHabitsListQueryResponse> => r.body)
     );
   }
 

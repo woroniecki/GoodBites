@@ -28,11 +28,36 @@
   height: 90px;
   padding: 2px 0 4px;
   border-radius: 9999px;
-  transition: transform 0.2s ease-in-out;
 }
 
 .box-top:hover {
   transform: scale(1.1);
+}
+
+.box-top:active {
+  transform: translateY(4px);
+}
+
+.box-top-positive {
+  background-color: var(--color-neutral);
+  color: var(--color-primary);
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+.box-top-positive.clicked {
+  background-color: var(--color-primary);
+  color: var(--color-neutral);
+}
+
+.box-top-negative {
+  background-color: var(--color-neutral);
+  color: var(--color-negative);
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+.box-top-negative.clicked  {
+  background-color: var(--color-negative);
+  color: var(--color-neutral);
 }
 
 .streak-row {
@@ -68,11 +93,11 @@
 }
 
 .bg-positive {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-primary);
 }
 
 .bg-negative {
-  background-color: var(--color-negative-light);
+  background-color: var(--color-negative);
 }
 
 .bg-neutral {

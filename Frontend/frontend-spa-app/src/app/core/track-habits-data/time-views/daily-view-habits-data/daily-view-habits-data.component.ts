@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { GetHabitsDataQueryResponse } from '../../../../api-client/models/get-habits-data-query-response';
 import { CommonModule } from '@angular/common';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import {
@@ -13,12 +12,13 @@ import { AddHabitComponent } from '../../../add-habit/add-habit.component';
 import { DialogResult } from '../../../../shared/dialog-result.enum';
 import { EditHabitComponent } from '../../../edit-habit/edit-habit.component';
 import { DeleteHabitComponent } from '../../../delete-habit/delete-habit.component';
+import { HabitDto } from '../../../../api-client/models/habit-dto';
 
 interface HabitViewData {
   showMenu?: boolean;
 }
 
-type HabitData = GetHabitsDataQueryResponse & HabitViewData;
+type HabitData = HabitDto & HabitViewData;
 
 @Component({
   selector: 'app-daily-view-habits-data',

@@ -10,6 +10,45 @@
     }
   ],
   "paths": {
+    "/api/core/Habit/get-habit": {
+      "get": {
+        "tags": [
+          "Habit"
+        ],
+        "parameters": [
+          {
+            "name": "habitId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/core/Habit/add-habit": {
       "post": {
         "tags": [
@@ -106,44 +145,6 @@
         }
       }
     },
-    "/api/core/Habit/get-habits": {
-      "get": {
-        "tags": [
-          "Habit"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GetHabitsListQueryResponse"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GetHabitsListQueryResponse"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/GetHabitsListQueryResponse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/core/HabitData/add-habit-data": {
       "post": {
         "tags": [
@@ -171,7 +172,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              }
+            }
           }
         }
       }
@@ -203,7 +221,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HabitDto"
+                }
+              }
+            }
           }
         }
       }
@@ -239,7 +274,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/GetHabitsDataQueryResponse"
+                    "$ref": "#/components/schemas/HabitDto"
                   }
                 }
               },
@@ -247,7 +282,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/GetHabitsDataQueryResponse"
+                    "$ref": "#/components/schemas/HabitDto"
                   }
                 }
               },
@@ -255,23 +290,11 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/GetHabitsDataQueryResponse"
+                    "$ref": "#/components/schemas/HabitDto"
                   }
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/core/HealthCheck/health-check": {
-      "get": {
-        "tags": [
-          "HealthCheck"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -486,7 +509,7 @@
           }
         }
       },
-      "GetHabitsDataQueryResponse": {
+      "HabitDto": {
         "required": [
           "id",
           "positive",
@@ -533,43 +556,6 @@
             "items": {
               "$ref": "#/components/schemas/DailyHabitsDataDto"
             }
-          }
-        }
-      },
-      "GetHabitsListQueryResponse": {
-        "required": [
-          "id",
-          "positive",
-          "name",
-          "active",
-          "description",
-          "icon",
-          "createdAt"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "positive": {
-            "type": "boolean"
-          },
-          "name": {
-            "type": "string"
-          },
-          "active": {
-            "type": "boolean"
-          },
-          "description": {
-            "type": "string"
-          },
-          "icon": {
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
           }
         }
       },
@@ -632,9 +618,6 @@
     },
     {
       "name": "HabitData"
-    },
-    {
-      "name": "HealthCheck"
     },
     {
       "name": "Account"

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { GetHabitsDataQueryResponse } from '../../../../api-client/models/get-habits-data-query-response';
 import { CommonModule } from '@angular/common';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { HabitDto } from '../../../../api-client/models/habit-dto';
 
 @Component({
   selector: 'app-weekly-view-habits-data',
@@ -13,12 +13,12 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 export class WeeklyViewHabitsDataComponent {
   today: Date = new Date();
 
-  @Input()  items: Array<GetHabitsDataQueryResponse> = [];
+  @Input()  items: Array<HabitDto> = [];
   @Input() dateTo: Date = new Date();
   @Input() dateFrom: Date = new Date();
   @Output() onClickHabit = new EventEmitter<{ habitId: string; date: Date }>();
 
-  isDateInDailyData(item: GetHabitsDataQueryResponse, date: Date): boolean {
+  isDateInDailyData(item: HabitDto, date: Date): boolean {
     return item.dailyDatas?.some((d) => {
       const dDate = new Date(d.date);
       return dDate.toDateString() === date.toDateString();

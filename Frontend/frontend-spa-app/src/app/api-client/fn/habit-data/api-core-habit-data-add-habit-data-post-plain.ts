@@ -8,18 +8,17 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
+import { AddDailyHabitDataCommand } from '../../models/add-daily-habit-data-command';
 import { HabitDto } from '../../models/habit-dto';
 
-export interface ApiCoreHabitDataGetHabitsDataGet$Plain$Params {
-  dateFrom?: string;
-  dateTo?: string;
+export interface ApiCoreHabitDataAddHabitDataPost$Plain$Params {
+      body: AddDailyHabitDataCommand
 }
 
-export function apiCoreHabitDataGetHabitsDataGet$Plain(http: HttpClient, rootUrl: string, params?: ApiCoreHabitDataGetHabitsDataGet$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<HabitDto>>> {
-  const rb = new RequestBuilder(rootUrl, apiCoreHabitDataGetHabitsDataGet$Plain.PATH, 'get');
+export function apiCoreHabitDataAddHabitDataPost$Plain(http: HttpClient, rootUrl: string, params: ApiCoreHabitDataAddHabitDataPost$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<HabitDto>> {
+  const rb = new RequestBuilder(rootUrl, apiCoreHabitDataAddHabitDataPost$Plain.PATH, 'post');
   if (params) {
-    rb.query('dateFrom', params.dateFrom, {});
-    rb.query('dateTo', params.dateTo, {});
+    rb.body(params.body, 'application/*+json');
   }
 
   return http.request(
@@ -27,9 +26,9 @@ export function apiCoreHabitDataGetHabitsDataGet$Plain(http: HttpClient, rootUrl
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<HabitDto>>;
+      return r as StrictHttpResponse<HabitDto>;
     })
   );
 }
 
-apiCoreHabitDataGetHabitsDataGet$Plain.PATH = '/api/core/HabitData/get-habits-data';
+apiCoreHabitDataAddHabitDataPost$Plain.PATH = '/api/core/HabitData/add-habit-data';

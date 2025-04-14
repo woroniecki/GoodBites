@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GetHabitsDataQueryResponse } from '../../../../api-client/models/get-habits-data-query-response';
+import { HabitDto } from '../../../../api-client/models/habit-dto';
 
 @Component({
   selector: 'app-monthly-view-habits-data',
@@ -14,17 +14,17 @@ export class MonthlyViewHabitsDataComponent {
   daysInMonth: Date[] = [];
   blankDays: number[] = [];
 
-  private _items: Array<GetHabitsDataQueryResponse> = [];
+  private _items: Array<HabitDto> = [];
   private dayDataDict: {
     [key: string]: { positive: number; negative: number };
   } = {};
 
   @Input()
-  set items(value: Array<GetHabitsDataQueryResponse>) {
+  set items(value: Array<HabitDto>) {
     this._items = value;
     this.initializeDayData();
   }
-  get items(): Array<GetHabitsDataQueryResponse> {
+  get items(): Array<HabitDto> {
     return this._items;
   }
 

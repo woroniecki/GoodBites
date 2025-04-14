@@ -11,15 +11,19 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { apiCoreHabitDataAddHabitDataPost } from '../fn/habit-data/api-core-habit-data-add-habit-data-post';
-import { ApiCoreHabitDataAddHabitDataPost$Params } from '../fn/habit-data/api-core-habit-data-add-habit-data-post';
-import { apiCoreHabitDataClearHabitDataPost } from '../fn/habit-data/api-core-habit-data-clear-habit-data-post';
-import { ApiCoreHabitDataClearHabitDataPost$Params } from '../fn/habit-data/api-core-habit-data-clear-habit-data-post';
+import { apiCoreHabitDataAddHabitDataPost$Json } from '../fn/habit-data/api-core-habit-data-add-habit-data-post-json';
+import { ApiCoreHabitDataAddHabitDataPost$Json$Params } from '../fn/habit-data/api-core-habit-data-add-habit-data-post-json';
+import { apiCoreHabitDataAddHabitDataPost$Plain } from '../fn/habit-data/api-core-habit-data-add-habit-data-post-plain';
+import { ApiCoreHabitDataAddHabitDataPost$Plain$Params } from '../fn/habit-data/api-core-habit-data-add-habit-data-post-plain';
+import { apiCoreHabitDataClearHabitDataPost$Json } from '../fn/habit-data/api-core-habit-data-clear-habit-data-post-json';
+import { ApiCoreHabitDataClearHabitDataPost$Json$Params } from '../fn/habit-data/api-core-habit-data-clear-habit-data-post-json';
+import { apiCoreHabitDataClearHabitDataPost$Plain } from '../fn/habit-data/api-core-habit-data-clear-habit-data-post-plain';
+import { ApiCoreHabitDataClearHabitDataPost$Plain$Params } from '../fn/habit-data/api-core-habit-data-clear-habit-data-post-plain';
 import { apiCoreHabitDataGetHabitsDataGet$Json } from '../fn/habit-data/api-core-habit-data-get-habits-data-get-json';
 import { ApiCoreHabitDataGetHabitsDataGet$Json$Params } from '../fn/habit-data/api-core-habit-data-get-habits-data-get-json';
 import { apiCoreHabitDataGetHabitsDataGet$Plain } from '../fn/habit-data/api-core-habit-data-get-habits-data-get-plain';
 import { ApiCoreHabitDataGetHabitsDataGet$Plain$Params } from '../fn/habit-data/api-core-habit-data-get-habits-data-get-plain';
-import { GetHabitsDataQueryResponse } from '../models/get-habits-data-query-response';
+import { HabitDto } from '../models/habit-dto';
 
 @Injectable({ providedIn: 'root' })
 export class HabitDataService extends BaseService {
@@ -32,23 +36,45 @@ export class HabitDataService extends BaseService {
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiCoreHabitDataAddHabitDataPost()` instead.
+   * To access only the response body, use `apiCoreHabitDataAddHabitDataPost$Plain()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiCoreHabitDataAddHabitDataPost$Response(params: ApiCoreHabitDataAddHabitDataPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return apiCoreHabitDataAddHabitDataPost(this.http, this.rootUrl, params, context);
+  apiCoreHabitDataAddHabitDataPost$Plain$Response(params: ApiCoreHabitDataAddHabitDataPost$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<HabitDto>> {
+    return apiCoreHabitDataAddHabitDataPost$Plain(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiCoreHabitDataAddHabitDataPost$Response()` instead.
+   * To access the full response (for headers, for example), `apiCoreHabitDataAddHabitDataPost$Plain$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiCoreHabitDataAddHabitDataPost(params: ApiCoreHabitDataAddHabitDataPost$Params, context?: HttpContext): Observable<void> {
-    return this.apiCoreHabitDataAddHabitDataPost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+  apiCoreHabitDataAddHabitDataPost$Plain(params: ApiCoreHabitDataAddHabitDataPost$Plain$Params, context?: HttpContext): Observable<HabitDto> {
+    return this.apiCoreHabitDataAddHabitDataPost$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<HabitDto>): HabitDto => r.body)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiCoreHabitDataAddHabitDataPost$Json()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiCoreHabitDataAddHabitDataPost$Json$Response(params: ApiCoreHabitDataAddHabitDataPost$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<HabitDto>> {
+    return apiCoreHabitDataAddHabitDataPost$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiCoreHabitDataAddHabitDataPost$Json$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiCoreHabitDataAddHabitDataPost$Json(params: ApiCoreHabitDataAddHabitDataPost$Json$Params, context?: HttpContext): Observable<HabitDto> {
+    return this.apiCoreHabitDataAddHabitDataPost$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<HabitDto>): HabitDto => r.body)
     );
   }
 
@@ -57,23 +83,45 @@ export class HabitDataService extends BaseService {
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `apiCoreHabitDataClearHabitDataPost()` instead.
+   * To access only the response body, use `apiCoreHabitDataClearHabitDataPost$Plain()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiCoreHabitDataClearHabitDataPost$Response(params: ApiCoreHabitDataClearHabitDataPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-    return apiCoreHabitDataClearHabitDataPost(this.http, this.rootUrl, params, context);
+  apiCoreHabitDataClearHabitDataPost$Plain$Response(params: ApiCoreHabitDataClearHabitDataPost$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<HabitDto>> {
+    return apiCoreHabitDataClearHabitDataPost$Plain(this.http, this.rootUrl, params, context);
   }
 
   /**
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `apiCoreHabitDataClearHabitDataPost$Response()` instead.
+   * To access the full response (for headers, for example), `apiCoreHabitDataClearHabitDataPost$Plain$Response()` instead.
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  apiCoreHabitDataClearHabitDataPost(params: ApiCoreHabitDataClearHabitDataPost$Params, context?: HttpContext): Observable<void> {
-    return this.apiCoreHabitDataClearHabitDataPost$Response(params, context).pipe(
-      map((r: StrictHttpResponse<void>): void => r.body)
+  apiCoreHabitDataClearHabitDataPost$Plain(params: ApiCoreHabitDataClearHabitDataPost$Plain$Params, context?: HttpContext): Observable<HabitDto> {
+    return this.apiCoreHabitDataClearHabitDataPost$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<HabitDto>): HabitDto => r.body)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiCoreHabitDataClearHabitDataPost$Json()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiCoreHabitDataClearHabitDataPost$Json$Response(params: ApiCoreHabitDataClearHabitDataPost$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<HabitDto>> {
+    return apiCoreHabitDataClearHabitDataPost$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiCoreHabitDataClearHabitDataPost$Json$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiCoreHabitDataClearHabitDataPost$Json(params: ApiCoreHabitDataClearHabitDataPost$Json$Params, context?: HttpContext): Observable<HabitDto> {
+    return this.apiCoreHabitDataClearHabitDataPost$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<HabitDto>): HabitDto => r.body)
     );
   }
 
@@ -86,7 +134,7 @@ export class HabitDataService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiCoreHabitDataGetHabitsDataGet$Plain$Response(params?: ApiCoreHabitDataGetHabitsDataGet$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetHabitsDataQueryResponse>>> {
+  apiCoreHabitDataGetHabitsDataGet$Plain$Response(params?: ApiCoreHabitDataGetHabitsDataGet$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<HabitDto>>> {
     return apiCoreHabitDataGetHabitsDataGet$Plain(this.http, this.rootUrl, params, context);
   }
 
@@ -96,9 +144,9 @@ export class HabitDataService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiCoreHabitDataGetHabitsDataGet$Plain(params?: ApiCoreHabitDataGetHabitsDataGet$Plain$Params, context?: HttpContext): Observable<Array<GetHabitsDataQueryResponse>> {
+  apiCoreHabitDataGetHabitsDataGet$Plain(params?: ApiCoreHabitDataGetHabitsDataGet$Plain$Params, context?: HttpContext): Observable<Array<HabitDto>> {
     return this.apiCoreHabitDataGetHabitsDataGet$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<GetHabitsDataQueryResponse>>): Array<GetHabitsDataQueryResponse> => r.body)
+      map((r: StrictHttpResponse<Array<HabitDto>>): Array<HabitDto> => r.body)
     );
   }
 
@@ -108,7 +156,7 @@ export class HabitDataService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiCoreHabitDataGetHabitsDataGet$Json$Response(params?: ApiCoreHabitDataGetHabitsDataGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<GetHabitsDataQueryResponse>>> {
+  apiCoreHabitDataGetHabitsDataGet$Json$Response(params?: ApiCoreHabitDataGetHabitsDataGet$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<HabitDto>>> {
     return apiCoreHabitDataGetHabitsDataGet$Json(this.http, this.rootUrl, params, context);
   }
 
@@ -118,9 +166,9 @@ export class HabitDataService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  apiCoreHabitDataGetHabitsDataGet$Json(params?: ApiCoreHabitDataGetHabitsDataGet$Json$Params, context?: HttpContext): Observable<Array<GetHabitsDataQueryResponse>> {
+  apiCoreHabitDataGetHabitsDataGet$Json(params?: ApiCoreHabitDataGetHabitsDataGet$Json$Params, context?: HttpContext): Observable<Array<HabitDto>> {
     return this.apiCoreHabitDataGetHabitsDataGet$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<GetHabitsDataQueryResponse>>): Array<GetHabitsDataQueryResponse> => r.body)
+      map((r: StrictHttpResponse<Array<HabitDto>>): Array<HabitDto> => r.body)
     );
   }
 

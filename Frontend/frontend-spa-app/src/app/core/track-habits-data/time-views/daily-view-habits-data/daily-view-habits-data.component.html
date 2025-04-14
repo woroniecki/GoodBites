@@ -1,9 +1,11 @@
 <div cdkDropList cdkDropListOrientation="mixed" class="example-list" (cdkDropListDropped)="drop($event)">
   @for (item of items; track item) {
   <div cdkDrag [ngClass]="item.positive ? 'text-positive' : 'text-negative'" class="habit-item">
-    <div class="box-top" (click)="clickHabit(item.id)" [ngClass]="(item.dailyDatas.length === 0
-        ? 'bg-neutral'
-        : (item.positive ? 'bg-positive text-neutral'  : 'bg-negative text-neutral'))">
+    <div class="box-top" (click)="clickHabit(item.id)" [ngClass]="{
+    'box-top-positive': item.positive,
+    'box-top-negative': !item.positive,
+    'clicked': item.dailyDatas.length !== 0
+  }">
       <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '48px', height: '48px' }"
         [src]="'/icons/' + item.icon"></svg-icon>
       <div class="streak-row">

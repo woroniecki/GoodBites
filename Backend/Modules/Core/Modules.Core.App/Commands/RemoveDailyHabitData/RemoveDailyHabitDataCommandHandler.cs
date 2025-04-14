@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Modules.Core.Domain.Aggregates.Habit;
 using Modules.Core.Infrastructure.DataAccessLayer.UoT;
 using SharedUtils.Jwt.CurrentUser;
 
 namespace Modules.Core.App.Commands.RemoveDailyHabitData;
-internal sealed class RemoveDailyHabitDataCommandHandler : IRequestHandler<RemoveDailyHabitDataCommand, Unit>
+internal sealed class RemoveDailyHabitDataCommandHandler : IRequestHandler<RemoveDailyHabitDataCommand, Habit>
 {
     private IUnitOfWork _unitOfWork;
     private ICurrentUserService _userService;
@@ -15,7 +16,7 @@ internal sealed class RemoveDailyHabitDataCommandHandler : IRequestHandler<Remov
         _userService = userService;
     }
 
-    public async Task<Unit> Handle(RemoveDailyHabitDataCommand request, CancellationToken ct)
+    public async Task<Habit> Handle(RemoveDailyHabitDataCommand request, CancellationToken ct)
     {
         var habit = await _unitOfWork.DbContext.Habits
             .Where(x => x.UserId == _userService.UserId && x.Id == request.habitId)
@@ -32,6 +33,6 @@ internal sealed class RemoveDailyHabitDataCommandHandler : IRequestHandler<Remov
 
         await _unitOfWork.SaveAsync(ct);
 
-        return Unit.Value;
+        return habit;
     }
 }
