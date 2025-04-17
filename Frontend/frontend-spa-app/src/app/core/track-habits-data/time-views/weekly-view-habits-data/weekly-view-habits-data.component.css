@@ -21,7 +21,6 @@
 }
 
 .day-cell {
-  background-color: var(--color-neutral-transparent);
   font-size: 10px;
   border-radius: 50px;
 }
@@ -34,20 +33,24 @@
   transform: translateY(3px);
 }
 
-.day-cell.positive {
+.day-cell-positive {
   color: var(--color-primary-transparent);
+  background-color: var(--color-neutral-transparent);
+  transition: background-color 0.6s ease, color 0.6s ease;
 }
 
-.day-cell.negative {
+.day-cell-negative {
   color: var(--color-negative-transparent);
+  background-color: var(--color-neutral-transparent);
+  transition: background-color 0.6s ease, color 0.6s ease;
 }
 
-.day-cell.positive-clicked {
+.day-cell-positive.clicked {
   color: var(--color-neutral);
   background-color: var(--color-primary);
 }
 
-.day-cell.negative-clicked {
+.day-cell-negative.clicked {
   color: var(--color-neutral);
   background-color: var(--color-negative);
 }

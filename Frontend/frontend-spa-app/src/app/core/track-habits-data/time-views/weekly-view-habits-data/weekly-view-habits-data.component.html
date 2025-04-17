@@ -15,20 +15,12 @@
         [src]="'/icons/' + item.icon"></svg-icon>
     </div>
     <ng-container *ngFor="let day of weekDates">
-      <ng-container *ngIf="isDateInDailyData(item, day) else fallback">
         <button class="calendar-cell day-cell" [ngClass]="{
-        'positive-clicked': item.positive,
-        'negative-clicked': !item.positive}" (click)="clickHabit(item.id, day)">
+        'day-cell-positive': item.positive,
+        'day-cell-negative': !item.positive,
+        'clicked': isDateInDailyData(item, day)}" (click)="clickHabit(item.id, day)">
           {{ day | date: 'dd.MM' }}
         </button>
-      </ng-container>
-      <ng-template #fallback>
-        <button class="calendar-cell day-cell" [ngClass]="{
-               'positive': item.positive,
-               'negative': !item.positive}" (click)="clickHabit(item.id, day)">
-          {{ day | date: 'dd.MM' }}
-        </button>
-      </ng-template>
     </ng-container>
   </div>
 </div>
