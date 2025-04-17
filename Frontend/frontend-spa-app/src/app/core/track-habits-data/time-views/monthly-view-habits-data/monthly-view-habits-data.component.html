@@ -1,28 +1,36 @@
-<!-- Days of week header -->
-<div class="calendar-header">
-    <div class="calendar-cell" *ngFor="let day of weekDays">
-        {{ day }}
-    </div>
-</div>
+<div class="calendar-grid-wrapper">
+    <ng-container *ngFor="let item of items">
+        <div class="calendar-container" [ngClass]="{
+                'positive': item.positive,
+                'negative': !item.positive,
+                }">
+            <div class="calendar-grid">
+                <div class="calendar-cell header-cell" *ngFor="let day of weekDays">
+                    {{ day }}
+                </div>
+            </div>
 
-<!-- Calendar grid -->
-<div class="calendar-grid">
-    <!-- Empty cells for padding at the start of the month -->
-    <div class="calendar-cell empty" *ngFor="let _ of blankDays"></div>
+            <div class="calendar-grid">
+                <div class="calendar-cell empty" *ngFor="let _ of blankDays"></div>
+                <button class="calendar-cell day-cell" [ngClass]="{
+                    'day-cell-positive': item.positive,
+                    'day-cell-negative': !item.positive,
+                    'clicked': isDateInDailyData(item, day)}" 
+                    *ngFor="let day of daysInMonth" (click)="clickHabit(item.id, day)">
+                    <div class="date-number">{{ day.getDate() }}</div>
+                </button>
+            </div>
 
-    <!-- Actual days with number and note -->
-    <div class="calendar-cell" *ngFor="let day of daysInMonth">
-        <div class="date-number">{{ day.getDate() }}</div>
-        <div class="note">
-            <ng-container *ngIf="getNegativeDayCount(day) || getPositivesDayCount(day); else noData">
-                <span class="text-red-400">
-                    {{ getNegativeDayCount(day) }}
-                </span> |
-                <span class="text-lime-600">
-                    {{ getPositivesDayCount(day) }}
-                </span>
-            </ng-container>
-            <ng-template #noData>-</ng-template>
+            <div class="calendar-footer" [ngClass]="{
+                'positive': item.positive,
+                'negative': !item.positive,
+                }">
+                <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '32px', height: '32px' }"
+                    [src]="'/icons/' + item.icon"></svg-icon>
+                    <span class="calendar-footer-text">
+                        {{ item.dailyDatas.length }} {{ item.dailyDatas.length === 1 ? 'day' : 'days' }}
+                    </span>
+            </div>
         </div>
-    </div>
+    </ng-container>
 </div>

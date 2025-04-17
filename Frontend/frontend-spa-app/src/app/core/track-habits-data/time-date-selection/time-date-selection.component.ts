@@ -69,7 +69,7 @@ export class TimeDateSelectionComponent implements OnInit {
 
           this.printValue = `${firstDayOfWeek
             .toLocaleDateString('en-GB')
-            .replace(/\//g, '.')} to ${lastDayOfWeek
+            .replace(/\//g, '.')} - ${lastDayOfWeek
             .toLocaleDateString('en-GB')
             .replace(/\//g, '.')}`;
         }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HabitDataService } from '../../api-client/services';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { TimeViewDropdownComponent } from './time-view-dropdown/time-view-dropdown.component';
 import { DailyViewHabitsDataComponent } from './time-views/daily-view-habits-data/daily-view-habits-data.component';
 import { WeeklyViewHabitsDataComponent } from './time-views/weekly-view-habits-data/weekly-view-habits-data.component';
@@ -21,11 +21,12 @@ import { HabitDto } from '../../api-client/models/habit-dto';
     WeeklyViewHabitsDataComponent,
     MonthlyViewHabitsDataComponent,
     YearlyViewHabitsDataComponent,
-    UserDropdownComponent,
+    UserDropdownComponent
   ],
   templateUrl: './track-habits-data.component.html',
   styleUrl: './track-habits-data.component.css',
   standalone: true,
+  providers: [DatePipe]
 })
 export class TrackHabitsDataComponent implements OnInit {
   TimeViewOption = TimeViewOption;
@@ -35,7 +36,7 @@ export class TrackHabitsDataComponent implements OnInit {
   dateTo: Date = new Date();
   selectedViewType: TimeViewOption = TimeViewOption.Daily;
 
-  constructor(private habitsDataApi: HabitDataService) {}
+  constructor(private habitsDataApi: HabitDataService, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
     this.getHabitData();
@@ -73,7 +74,7 @@ export class TrackHabitsDataComponent implements OnInit {
   }
 
   clickHabit({ habitId, date }: { habitId: string; date: Date }): void {
-    const dateValue = date.toISOString().split('T')[0];
+    const dateValue = this.datePipe.transform(date, 'yyyy-MM-dd') as string;
 
     if (
       !this.items
