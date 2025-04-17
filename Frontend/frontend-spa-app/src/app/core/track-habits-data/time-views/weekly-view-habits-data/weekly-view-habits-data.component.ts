@@ -11,10 +11,20 @@ import { HabitDto } from '../../../../api-client/models/habit-dto';
   standalone: true,
 })
 export class WeeklyViewHabitsDataComponent {
+  weekDays: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  weekDates: Date[] = [];
   today: Date = new Date();
+  private _dateTo: Date = new Date();
 
   @Input()  items: Array<HabitDto> = [];
-  @Input() dateTo: Date = new Date();
+  @Input() 
+  set dateTo(value: Date) {
+    this._dateTo = value;
+    this.generateWeekDates(); // Recalculate week when dateTo changes
+  }
+  get dateTo(): Date {
+    return this._dateTo;
+  }
   @Input() dateFrom: Date = new Date();
   @Output() onClickHabit = new EventEmitter<{ habitId: string; date: Date }>();
 
@@ -24,22 +34,17 @@ export class WeeklyViewHabitsDataComponent {
       return dDate.toDateString() === date.toDateString();
     });
   }
-
-  getDays(): Date[] {
-    const dates: Date[] = [];
-    if (this.dateFrom > this.dateTo) {
-      console.warn('dateFrom is greater than dateTo. Returning an empty array.');
-      return dates;
+  
+  generateWeekDates() {
+    this.weekDates = [];
+  
+    if (!this.dateFrom || !this.dateTo) return;
+  
+    const current = new Date(this.dateFrom);
+    while (current <= this.dateTo) {
+      this.weekDates.push(new Date(current));
+      current.setDate(current.getDate() + 1);
     }
-
-    const currentDate = new Date(this.dateFrom);
-
-    while (currentDate <= this.dateTo) {
-      dates.push(new Date(currentDate.getTime())); // Ensure a new Date instance is created
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-
-    return dates;
   }
 
   clickHabit(habitId: string, date: Date) {

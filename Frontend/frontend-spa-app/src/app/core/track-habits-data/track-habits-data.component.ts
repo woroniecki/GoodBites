@@ -92,7 +92,7 @@ export class TrackHabitsDataComponent implements OnInit {
           if (item) {
             item.lastCheckedDate = dto.lastCheckedDate;
             item.streak = dto.streak;
-            item.dailyDatas = [...dto.dailyDatas.filter(d => {
+            item.dailyDatas = [...item.dailyDatas, ...dto.dailyDatas.filter(d => {
               const dDate = new Date(d.date);
               return dDate.toDateString() === date.toDateString();
             })];
@@ -108,9 +108,9 @@ export class TrackHabitsDataComponent implements OnInit {
           if (item) {
             item.lastCheckedDate = dto.lastCheckedDate;
             item.streak = dto.streak;
-            item.dailyDatas = [...dto.dailyDatas.filter(d => {
+            item.dailyDatas = [...item.dailyDatas.filter(d => {
               const dDate = new Date(d.date);
-              return dDate.toDateString() === date.toDateString();
+              return dDate.toDateString() !== date.toDateString();
             })];
           }
         });

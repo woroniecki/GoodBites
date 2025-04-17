@@ -1,0 +1,78 @@
+.calendar-container {
+  width: 100%;
+  max-width: 800px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr); /* 1 for item name + 7 days */
+  margin: 1px;
+  gap: 2px;
+}
+
+.calendar-cell {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Makes cells square */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.day-cell {
+  background-color: var(--color-neutral-transparent);
+  font-size: 10px;
+  border-radius: 50px;
+}
+
+.day-cell:hover {
+  transform: scale(1.1);
+}
+
+.day-cell:active {
+  transform: translateY(3px);
+}
+
+.day-cell.positive {
+  color: var(--color-primary-transparent);
+}
+
+.day-cell.negative {
+  color: var(--color-negative-transparent);
+}
+
+.day-cell.positive-clicked {
+  color: var(--color-neutral);
+  background-color: var(--color-primary);
+}
+
+.day-cell.negative-clicked {
+  color: var(--color-neutral);
+  background-color: var(--color-negative);
+}
+
+.header-cell {
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.item-cell {
+  font-weight: bold;
+  border-radius: 13px;
+}
+
+.empty-cell {
+  background-color: transparent;
+  border: none;
+}
+
+.icon-positive {
+  background-color: var(--color-primary);
+  color: var(--color-neutral);
+}
+
+.icon-negative {
+  background-color: var(--color-negative);
+  color: var(--color-neutral);
+}

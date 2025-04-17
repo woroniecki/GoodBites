@@ -21,7 +21,10 @@ html, body { height: 100%; }
 
   --color-primary: #5FD074;
   --color-primary-light: #a8c9ae;
+  --color-primary-transparent: #5fd0747a;
   --color-neutral: #FCFBF9;
   --color-negative: #FD6B44;
   --color-negative-light: #ff9578;
+  --color-negative-transparent: #fd6c446f;
+  --color-neutral-transparent: #fcfbf986;
 }

@@ -1,4 +1,39 @@
-<div *ngFor="let date of getDays()"
+<!-- Grid Container -->
+<div class="calendar-container">
+  <!-- Header Row -->
+  <div class="calendar-grid header-row">
+    <div class="calendar-cell empty-cell"></div>
+    <div class="calendar-cell header-cell" *ngFor="let day of weekDays">
+      {{ day }}
+    </div>
+  </div>
+
+  <!-- Item Rows -->
+  <div class="calendar-grid" *ngFor="let item of items">
+    <div class="calendar-cell item-cell" [ngClass]="item.positive ? 'icon-positive' : 'icon-negative'">
+      <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '32px', height: '32px' }"
+        [src]="'/icons/' + item.icon"></svg-icon>
+    </div>
+    <ng-container *ngFor="let day of weekDates">
+      <ng-container *ngIf="isDateInDailyData(item, day) else fallback">
+        <button class="calendar-cell day-cell" [ngClass]="{
+        'positive-clicked': item.positive,
+        'negative-clicked': !item.positive}" (click)="clickHabit(item.id, day)">
+          {{ day | date: 'dd.MM' }}
+        </button>
+      </ng-container>
+      <ng-template #fallback>
+        <button class="calendar-cell day-cell" [ngClass]="{
+               'positive': item.positive,
+               'negative': !item.positive}" (click)="clickHabit(item.id, day)">
+          {{ day | date: 'dd.MM' }}
+        </button>
+      </ng-template>
+    </ng-container>
+  </div>
+</div>
+
+<!-- <div *ngFor="let date of getDays()"
   [ngClass]="(date | date:'yyyy-MM-dd') === (today | date:'yyyy-MM-dd') ? 'rounded-xl bg-lime-200' : ''"
   class="mb-2 p-2 border border-gray-200 rounded-lg shadow-sm">
 
@@ -31,4 +66,4 @@
       </button>
     </ng-container>
   </div>
-</div>
+</div> -->
