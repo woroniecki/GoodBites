@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Modules.Core.Domain.Aggregates.Habit;
 using Modules.Core.Infrastructure.DataAccessLayer.UoT;
 using SharedUtils.Jwt.CurrentUser;
@@ -17,8 +18,11 @@ internal sealed class AddHabitCommandHandler : IRequestHandler<AddHabitCommand, 
 
     public async Task<Unit> Handle(AddHabitCommand request, CancellationToken cancellationToken)
     {
+        var habitsAmoount = await _unitOfWork.DbContext
+            .Habits.Where(x => x.UserId == _userService.UserId).CountAsync();
+
         var newHabit = new Habit(
-            _userService.UserId, request.Positive, request.Name, request.Description, request.Icon
+            _userService.UserId, request.Positive, request.Name, request.Description, request.Icon, habitsAmoount * 2
         );
 
         await _unitOfWork.Habits.AddAsync(newHabit, cancellationToken);

@@ -11,11 +11,12 @@ public class Habit : AggregateRoot
     public string Description { get; private set; }
     public string Icon { get; private set; } = "default.svg";
     public int StrikeCounter { get; private set; } = 0;
+    public int Order { get; private set; }
     public DateOnly? LastClickedDate { get; private set; } = null;
 
     public List<DailyHabitData> DailyHabitDatas { get; private set; } = new List<DailyHabitData>();
 
-    public Habit(Guid userId, bool positive, string name, string description, string icon)
+    public Habit(Guid userId, bool positive, string name, string description, string icon, int order)
     {
         UserId = userId;
         Positive = positive;
@@ -23,6 +24,7 @@ public class Habit : AggregateRoot
         Active = true;
         Description = description;
         Icon = icon;
+        Order = order;
     }
 
     public void AddDailyHabitData(DateOnly date, int count)
@@ -95,6 +97,11 @@ public class Habit : AggregateRoot
         Positive = positive;
         Description = description;
         Icon = icon;
+    }
+
+    public void SetOrder(int order)
+    {
+        Order = order;
     }
 
     public void Deactivate()

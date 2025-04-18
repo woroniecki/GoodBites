@@ -5,6 +5,7 @@ using Modules.Core.API.Dtos.Mappers;
 using Modules.Core.App.Commands.AddHabit;
 using Modules.Core.App.Commands.DeactivateHabit;
 using Modules.Core.App.Commands.EditHabit;
+using Modules.Core.App.Commands.SetOrderHabits;
 using Modules.Core.App.Queries.GetHabit;
 
 namespace Modules.Core.API.Controllers;
@@ -38,6 +39,13 @@ public class HabitController(IMediator mediator)
     [HttpDelete]
     [Route("remove-habit")]
     public async Task<IActionResult> RemoveHabit([FromBody] DeactivateHabitCommand cmd)
+    {
+        return Ok(await mediator.Send(cmd));
+    }
+
+    [HttpPost]
+    [Route("set-habits-order")]
+    public async Task<IActionResult> SetHabitsOrder([FromBody] SetOrderHabitsCommand cmd)
     {
         return Ok(await mediator.Send(cmd));
     }

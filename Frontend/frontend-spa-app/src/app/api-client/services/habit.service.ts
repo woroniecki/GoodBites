@@ -21,6 +21,8 @@ import { apiCoreHabitGetHabitGet$Plain } from '../fn/habit/api-core-habit-get-ha
 import { ApiCoreHabitGetHabitGet$Plain$Params } from '../fn/habit/api-core-habit-get-habit-get-plain';
 import { apiCoreHabitRemoveHabitDelete } from '../fn/habit/api-core-habit-remove-habit-delete';
 import { ApiCoreHabitRemoveHabitDelete$Params } from '../fn/habit/api-core-habit-remove-habit-delete';
+import { apiCoreHabitSetHabitsOrderPost } from '../fn/habit/api-core-habit-set-habits-order-post';
+import { ApiCoreHabitSetHabitsOrderPost$Params } from '../fn/habit/api-core-habit-set-habits-order-post';
 import { HabitDto } from '../models/habit-dto';
 
 @Injectable({ providedIn: 'root' })
@@ -147,6 +149,31 @@ export class HabitService extends BaseService {
    */
   apiCoreHabitRemoveHabitDelete(params: ApiCoreHabitRemoveHabitDelete$Params, context?: HttpContext): Observable<void> {
     return this.apiCoreHabitRemoveHabitDelete$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
+    );
+  }
+
+  /** Path part for operation `apiCoreHabitSetHabitsOrderPost()` */
+  static readonly ApiCoreHabitSetHabitsOrderPostPath = '/api/core/Habit/set-habits-order';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiCoreHabitSetHabitsOrderPost()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiCoreHabitSetHabitsOrderPost$Response(params: ApiCoreHabitSetHabitsOrderPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiCoreHabitSetHabitsOrderPost(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiCoreHabitSetHabitsOrderPost$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiCoreHabitSetHabitsOrderPost(params: ApiCoreHabitSetHabitsOrderPost$Params, context?: HttpContext): Observable<void> {
+    return this.apiCoreHabitSetHabitsOrderPost$Response(params, context).pipe(
       map((r: StrictHttpResponse<void>): void => r.body)
     );
   }

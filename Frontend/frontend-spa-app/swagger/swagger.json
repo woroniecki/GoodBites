@@ -145,6 +145,38 @@
         }
       }
     },
+    "/api/core/Habit/set-habits-order": {
+      "post": {
+        "tags": [
+          "Habit"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderHabitsCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderHabitsCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetOrderHabitsCommand"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/core/HabitData/add-habit-data": {
       "post": {
         "tags": [
@@ -607,6 +639,21 @@
           "date": {
             "type": "string",
             "format": "date"
+          }
+        }
+      },
+      "SetOrderHabitsCommand": {
+        "required": [
+          "habitsOrder"
+        ],
+        "type": "object",
+        "properties": {
+          "habitsOrder": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
           }
         }
       }

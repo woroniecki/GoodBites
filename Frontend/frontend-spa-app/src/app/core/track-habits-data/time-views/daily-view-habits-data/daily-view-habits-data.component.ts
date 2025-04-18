@@ -13,6 +13,7 @@ import { DialogResult } from '../../../../shared/dialog-result.enum';
 import { EditHabitComponent } from '../../../edit-habit/edit-habit.component';
 import { DeleteHabitComponent } from '../../../delete-habit/delete-habit.component';
 import { HabitDto } from '../../../../api-client/models/habit-dto';
+import { HabitDataService, HabitService } from '../../../../api-client/services';
 
 interface HabitViewData {
   showMenu?: boolean;
@@ -34,6 +35,9 @@ type HabitData = HabitDto & HabitViewData;
 export class DailyViewHabitsDataComponent {
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    this.habitsApi.apiCoreHabitSetHabitsOrderPost({
+      body: { habitsOrder: this.items.map(x => x.id) }
+    }).subscribe();
   }
 
   @Input() items: Array<HabitData> = [];
@@ -44,6 +48,7 @@ export class DailyViewHabitsDataComponent {
   constructor(
     private router: Router,
     private dialog: MatDialog,
+    private habitsApi: HabitService
   ) {}
 
   clickHabit(habitId: string) {

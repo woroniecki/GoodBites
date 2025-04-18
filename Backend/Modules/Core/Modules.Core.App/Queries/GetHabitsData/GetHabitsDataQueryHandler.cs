@@ -20,6 +20,7 @@ internal sealed class GetHabitsDataQueryHandler : IRequestHandler<GetHabitsDataQ
     {
         return (await _unitOfWork.DbContext.Habits
             .Where(x => x.UserId == _userService.UserId && x.Active)
+            .OrderBy(x => x.Order)
             .Include(x => x.DailyHabitDatas.Where(d => request.DateFrom <= d.Date && d.Date <= request.DateTo))
             .ToListAsync(ct));
     }

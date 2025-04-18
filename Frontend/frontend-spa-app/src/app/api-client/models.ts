@@ -11,3 +11,4 @@ export { HabitDto } from './models/habit-dto';
 export { LoginCommand } from './models/login-command';
 export { RegisterCommand } from './models/register-command';
 export { RemoveDailyHabitDataCommand } from './models/remove-daily-habit-data-command';
+export { SetOrderHabitsCommand } from './models/set-order-habits-command';
