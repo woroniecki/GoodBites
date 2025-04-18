@@ -1,10 +1,22 @@
 <div class="icon-grid max-h-32 overflow-y-auto border rounded">
-  <div
-    *ngFor="let icon of icons"
-    (click)="selectIcon(icon)"
+  <div *ngFor="let item of currentItems" (click)="selectItem(item)"
     class="icon-item flex flex-col items-center justify-center cursor-pointer rounded hover:bg-gray-100 border"
-    [class.selected]="icon === selectedIcon"
-  >
-  <svg-icon [src]="'/icons/'+ icon" [svgStyle]="{ width: '32px', height: '32px' }"></svg-icon>
+    [class.selected]="isSelected(item)">
+    <!-- Folder or ... -->
+    <ng-container *ngIf="item.type === 'folder'">
+      <span class="text-xs">{{ item.name }}</span>
+    </ng-container>
+
+    <!-- SVG Icon -->
+    <ng-container *ngIf="item.type === 'icon' && item.path.endsWith('.svg')">
+      <svg-icon [src]="'/icons/' + item.path" [svgStyle]="{ width: '32px', height: '32px' }">
+      </svg-icon>
+    </ng-container>
+
+    <!-- PNG Icon -->
+    <ng-container *ngIf="item.type === 'icon' && item.path.endsWith('.png')">
+      <img [src]="'/icons/' + item.path" width="32" height="32" alt="icon">
+    </ng-container>
+
   </div>
 </div>

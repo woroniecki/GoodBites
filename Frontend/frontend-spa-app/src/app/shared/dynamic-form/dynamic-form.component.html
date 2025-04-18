@@ -13,8 +13,7 @@
     <!-- Checkbox -->
     <input *ngIf="field.type === 'checkbox'" type="checkbox"
       class="checkbox checkbox-xl mb-3 px-2 py-1.5 mt-1 block px-2 py-1.5" [formControlName]="field.name" />
-    <app-icon-picker *ngIf="field.type === 'icon-picker'" [icons]="allIcons"
-      [selectedIcon]="form.get(field.name)?.value"
+    <app-icon-picker *ngIf="field.type === 'icon-picker'" [selectedIcon]="form.get(field.name)?.value"
       (iconChange)="form.get(field.name)?.setValue($event)"></app-icon-picker>
   </ng-container>
   <button

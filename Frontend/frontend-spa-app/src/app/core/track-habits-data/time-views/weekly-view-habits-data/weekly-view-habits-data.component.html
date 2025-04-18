@@ -11,16 +11,22 @@
   <!-- Item Rows -->
   <div class="calendar-grid" *ngFor="let item of items">
     <div class="calendar-cell item-cell" [ngClass]="item.positive ? 'icon-positive' : 'icon-negative'">
-      <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '32px', height: '32px' }"
-        [src]="'/icons/' + item.icon"></svg-icon>
+      <ng-container *ngIf="item.icon.endsWith('.svg')">
+        <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '32px', height: '32px' }"
+          [src]="'/icons/' + item.icon"></svg-icon>
+      </ng-container>
+
+      <ng-container *ngIf="item.icon.endsWith('.png')">
+        <img [src]="'/icons/' + item.icon" width="32" height="32" alt="icon">
+      </ng-container>
     </div>
     <ng-container *ngFor="let day of weekDates">
-        <button class="calendar-cell day-cell" [ngClass]="{
+      <button class="calendar-cell day-cell" [ngClass]="{
         'day-cell-positive': item.positive,
         'day-cell-negative': !item.positive,
         'clicked': isDateInDailyData(item, day)}" (click)="clickHabit(item.id, day)">
-          {{ day | date: 'dd.MM' }}
-        </button>
+        {{ day | date: 'dd.MM' }}
+      </button>
     </ng-container>
   </div>
 </div>

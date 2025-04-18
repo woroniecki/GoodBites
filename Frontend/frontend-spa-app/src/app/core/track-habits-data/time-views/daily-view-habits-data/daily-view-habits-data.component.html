@@ -6,8 +6,15 @@
     'box-top-negative': !item.positive,
     'clicked': item.dailyDatas.length !== 0
   }">
-      <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '48px', height: '48px' }"
-        [src]="'/icons/' + item.icon"></svg-icon>
+      <ng-container *ngIf="item.icon.endsWith('.svg')">
+        <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '48px', height: '48px' }"
+          [src]="'/icons/' + item.icon"></svg-icon>
+      </ng-container>
+
+      <ng-container *ngIf="item.icon.endsWith('.png')">
+        <img [src]="'/icons/' + item.icon" width="48" height="48" alt="icon">
+      </ng-container>
+
       <div class="streak-row">
         <ng-container *ngIf="item.positive; else notPositive">
           <span>{{ item.streak }} {{ item.streak === 1 ? 'day' : 'days' }}</span>
