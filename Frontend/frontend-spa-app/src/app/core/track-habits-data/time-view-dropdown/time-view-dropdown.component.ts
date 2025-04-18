@@ -12,7 +12,7 @@ import { TimeViewOption } from '../enums/time-view-option.enum';
   standalone: true
 })
 export class TimeViewDropdownComponent {
-  dropdownOptions: TimeViewOption[] = Object.values(TimeViewOption).filter(option => option !== TimeViewOption.Yearly);
+  dropdownOptions: TimeViewOption[] = Object.values(TimeViewOption);
   
   @Input() selectedOption: TimeViewOption = TimeViewOption.Daily;
   @Output() optionChanged = new EventEmitter<TimeViewOption>();

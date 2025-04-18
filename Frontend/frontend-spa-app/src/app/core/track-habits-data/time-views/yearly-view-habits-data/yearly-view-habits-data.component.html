@@ -1,1 +1,27 @@
-<p>yearly-view-habits-data works!</p>
+<div class="calendar-wrapper" [ngClass]="{
+    'positive': item.positive,
+    'negative': !item.positive,
+    }" *ngFor="let item of items">
+    <div class="month-rows">
+        <div *ngFor="let month of calendarGrid; let i = index" class="month-row">
+            <div class="month-label">{{ romanMonths[i] }}</div>
+            <button *ngFor="let day of month" class="day-cell"
+                [ngClass]="{
+                    'today': isToday(day),
+                    'day-cell-positive': item.positive,
+                    'day-cell-negative': !item.positive,
+                    'clicked': isDateInDailyData(item, day)}"
+                    (click)="clickHabit(item.id, day)">
+                {{ day.getDate() }}
+                </button>
+        </div>
+    </div>
+
+    <div class="calendar-footer">
+        <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '32px', height: '32px' }"
+            [src]="'/icons/' + item.icon"></svg-icon>
+        <span class="calendar-footer-text">
+            {{ item.dailyDatas.length }} {{ item.dailyDatas.length === 1 ? 'day' : 'days' }}
+        </span>
+    </div>
+</div>

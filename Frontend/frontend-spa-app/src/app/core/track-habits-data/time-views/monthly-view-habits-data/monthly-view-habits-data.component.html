@@ -21,10 +21,7 @@
                 </button>
             </div>
 
-            <div class="calendar-footer" [ngClass]="{
-                'positive': item.positive,
-                'negative': !item.positive,
-                }">
+            <div class="calendar-footer">
                 <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '32px', height: '32px' }"
                     [src]="'/icons/' + item.icon"></svg-icon>
                     <span class="calendar-footer-text">

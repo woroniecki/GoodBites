@@ -55,7 +55,6 @@ export class MonthlyViewHabitsDataComponent {
     }
   }
   
-
   isDateInDailyData(item: HabitDto, date: Date): boolean {
     return item.dailyDatas?.some((d) => {
       const dDate = new Date(d.date);

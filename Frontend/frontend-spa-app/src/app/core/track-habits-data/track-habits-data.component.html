@@ -32,7 +32,7 @@
       (onClickHabit)="clickHabit($event)"></app-monthly-view-habits-data>
     </ng-container>
     <ng-container *ngSwitchCase="TimeViewOption.Yearly">
-      <app-yearly-view-habits-data></app-yearly-view-habits-data>
+      <app-yearly-view-habits-data [items]="items" [dateFrom]="dateFrom" (onClickHabit)="clickHabit($event)"></app-yearly-view-habits-data>
     </ng-container>
   </ng-container>
 </div>
