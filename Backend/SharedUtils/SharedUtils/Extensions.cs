@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,7 +25,10 @@ public static class Extensions
     public static void AddSharedFrameworkApi(this IServiceCollection services, IHostBuilder host, IConfiguration configuration)
     {
         services.AddSharedFramework(configuration);
-        services.AddControllers();
+        services.AddControllers().AddJsonOptions(opts =>
+        {
+            opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
         services.AddOpenApi();
         services.AddAuth(configuration);
         services.AddHostedService<DbContextAppInitializer>();//migrations run only from api start

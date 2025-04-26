@@ -22,8 +22,13 @@ internal sealed class AddHabitCommandHandler : IRequestHandler<AddHabitCommand, 
             .Habits.Where(x => x.UserId == _userService.UserId).CountAsync();
 
         var newHabit = new Habit(
-            _userService.UserId, request.Positive, request.Name, request.Description, request.Icon, habitsAmoount * 2
-        );
+            _userService.UserId,
+            request.Positive,
+            request.Name,
+            request.Description,
+            request.Icon,
+            habitsAmoount * 2,
+            request.colour);
 
         await _unitOfWork.Habits.AddAsync(newHabit, cancellationToken);
         await _unitOfWork.SaveAsync(cancellationToken);

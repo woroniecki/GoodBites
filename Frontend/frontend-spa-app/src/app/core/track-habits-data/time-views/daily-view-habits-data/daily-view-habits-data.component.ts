@@ -13,7 +13,7 @@ import { DialogResult } from '../../../../shared/dialog-result.enum';
 import { EditHabitComponent } from '../../../edit-habit/edit-habit.component';
 import { DeleteHabitComponent } from '../../../delete-habit/delete-habit.component';
 import { HabitDto } from '../../../../api-client/models/habit-dto';
-import { HabitDataService, HabitService } from '../../../../api-client/services';
+import { HabitService } from '../../../../api-client/services';
 
 interface HabitViewData {
   showMenu?: boolean;
@@ -23,11 +23,7 @@ type HabitData = HabitDto & HabitViewData;
 
 @Component({
   selector: 'app-daily-view-habits-data',
-  imports: [
-    CommonModule,
-    AngularSvgIconModule,
-    DragDropModule
-  ],
+  imports: [CommonModule, AngularSvgIconModule, DragDropModule],
   templateUrl: './daily-view-habits-data.component.html',
   styleUrl: './daily-view-habits-data.component.css',
   standalone: true,
@@ -35,9 +31,11 @@ type HabitData = HabitDto & HabitViewData;
 export class DailyViewHabitsDataComponent {
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
-    this.habitsApi.apiCoreHabitSetHabitsOrderPost({
-      body: { habitsOrder: this.items.map(x => x.id) }
-    }).subscribe();
+    this.habitsApi
+      .apiCoreHabitSetHabitsOrderPost({
+        body: { habitsOrder: this.items.map((x) => x.id) },
+      })
+      .subscribe();
   }
 
   @Input() items: Array<HabitData> = [];
@@ -48,7 +46,7 @@ export class DailyViewHabitsDataComponent {
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private habitsApi: HabitService
+    private habitsApi: HabitService,
   ) {}
 
   clickHabit(habitId: string) {
@@ -80,34 +78,34 @@ export class DailyViewHabitsDataComponent {
   }
 
   edit(habitId: string) {
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur();
-      }
-      const dialogRef = this.dialog.open(EditHabitComponent, {
-        width: '350px',
-        data: { habitId: habitId }
-      });
-  
-      dialogRef.afterClosed().subscribe((result) => {
-        if(result === DialogResult.SUCCESS){
-          this.onHabitsChange.emit();
-        }
-      });
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
     }
-    
-    remove(habitId: string, habitName: string) {
-      if (document.activeElement instanceof HTMLElement) {
-        document.activeElement.blur();
+    const dialogRef = this.dialog.open(EditHabitComponent, {
+      width: '350px',
+      data: { habitId: habitId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === DialogResult.SUCCESS) {
+        this.onHabitsChange.emit();
       }
-      const dialogRef = this.dialog.open(DeleteHabitComponent, {
-        width: '350px',
-        data: { habitId: habitId, habitName: habitName }
-      });
-  
-      dialogRef.afterClosed().subscribe((result) => {
-        if(result === DialogResult.SUCCESS){
-          this.onHabitsChange.emit();
-        }
-      });
+    });
+  }
+
+  remove(habitId: string, habitName: string) {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
     }
+    const dialogRef = this.dialog.open(DeleteHabitComponent, {
+      width: '350px',
+      data: { habitId: habitId, habitName: habitName },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === DialogResult.SUCCESS) {
+        this.onHabitsChange.emit();
+      }
+    });
+  }
 }

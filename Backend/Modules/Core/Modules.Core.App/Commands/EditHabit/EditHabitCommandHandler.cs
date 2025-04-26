@@ -24,7 +24,8 @@ internal sealed class EditHabitCommandHandler : IRequestHandler<EditHabitCommand
             request.Name,
             request.Positive,
             request.Description,
-            request.Icon
+            request.Icon,
+            request.colour
         );
 
         await _unitOfWork.SaveAsync(ct);

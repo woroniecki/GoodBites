@@ -1,9 +1,6 @@
 <div class="calendar-grid-wrapper">
     <ng-container *ngFor="let item of items">
-        <div class="calendar-container" [ngClass]="{
-                'positive': item.positive,
-                'negative': !item.positive,
-                }">
+        <div class="calendar-container" [ngClass]="item.colour.toLowerCase() + '-text'">
             <div class="calendar-grid">
                 <div class="calendar-cell header-cell" *ngFor="let day of weekDays">
                     {{ day }}
@@ -12,10 +9,9 @@
 
             <div class="calendar-grid">
                 <div class="calendar-cell empty" *ngFor="let _ of blankDays"></div>
-                <button class="calendar-cell day-cell" [ngClass]="{
-                    'day-cell-positive': item.positive,
-                    'day-cell-negative': !item.positive,
-                    'clicked': isDateInDailyData(item, day)}" *ngFor="let day of daysInMonth"
+                <button class="calendar-cell day-cell" [ngClass]="[
+                item.colour.toLowerCase() + '-btn',
+                isDateInDailyData(item, day) ? 'clicked' : '']" *ngFor="let day of daysInMonth"
                     (click)="clickHabit(item.id, day)">
                     <div class="date-number">{{ day.getDate() }}</div>
                 </button>

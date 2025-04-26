@@ -21,7 +21,8 @@ internal static class HabitToDtoMapper
                         d.Date,
                         d.Count
                     ))
-                    .ToList()
+                    .ToList(),
+                habit.Colour
             );
     }
 }

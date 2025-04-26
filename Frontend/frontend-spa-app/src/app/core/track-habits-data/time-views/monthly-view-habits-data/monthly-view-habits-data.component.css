@@ -1,3 +1,5 @@
+@import '../../../../../styles/color-trans-classes.css';
+
 .calendar-grid-wrapper {
   display: grid;
   gap: 10px;
@@ -53,28 +55,6 @@
   transform: translateY(3px);
 }
 
-.day-cell-positive {
-  color: var(--color-primary-transparent);
-  background-color: var(--color-neutral-transparent);
-  transition: background-color 0.6s ease, color 0.6s ease;
-}
-
-.day-cell-negative {
-  color: var(--color-negative-transparent);
-  background-color: var(--color-neutral-transparent);
-  transition: background-color 0.6s ease, color 0.6s ease;
-}
-
-.day-cell-positive.clicked {
-  color: var(--color-neutral);
-  background-color: var(--color-primary);
-}
-
-.day-cell-negative.clicked {
-  color: var(--color-neutral);
-  background-color: var(--color-negative);
-}
-
 .header-cell {
   font-weight: bold;
 }
@@ -102,12 +82,4 @@
 
 .calendar-footer svg-icon {
   display: inline-block;
-}
-
-.positive {
-  color: var(--color-primary);
-}
-
-.negative {
-  color: var(--color-negative);
 }

@@ -10,7 +10,9 @@
 
   <!-- Item Rows -->
   <div class="calendar-grid" *ngFor="let item of items">
-    <div class="calendar-cell item-cell" [ngClass]="item.positive ? 'icon-positive' : 'icon-negative'">
+    <div class="calendar-cell item-cell" [ngClass]="[
+      'clicked', item.colour.toLowerCase() + '-btn'
+      ]">
       <ng-container *ngIf="item.icon.endsWith('.svg')">
         <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '32px', height: '32px' }"
           [src]="'/icons/' + item.icon"></svg-icon>
@@ -21,47 +23,11 @@
       </ng-container>
     </div>
     <ng-container *ngFor="let day of weekDates">
-      <button class="calendar-cell day-cell" [ngClass]="{
-        'day-cell-positive': item.positive,
-        'day-cell-negative': !item.positive,
-        'clicked': isDateInDailyData(item, day)}" (click)="clickHabit(item.id, day)">
+      <button class="calendar-cell day-cell" [ngClass]="[
+        item.colour.toLowerCase() + '-btn',
+        isDateInDailyData(item, day) ? 'clicked' : '']" (click)="clickHabit(item.id, day)">
         {{ day | date: 'dd.MM' }}
       </button>
     </ng-container>
   </div>
 </div>
-
-<!-- <div *ngFor="let date of getDays()"
-  [ngClass]="(date | date:'yyyy-MM-dd') === (today | date:'yyyy-MM-dd') ? 'rounded-xl bg-lime-200' : ''"
-  class="mb-2 p-2 border border-gray-200 rounded-lg shadow-sm">
-
-  <div class="text-sm font-medium mb-2 text-center sm:text-left">
-    {{ date | date:'EEEE' }} {{ date | date:'yyyy-MM-dd' }}
-  </div>
-
-  <div class="flex flex-wrap justify-center sm:justify-start gap-1 sm:gap-2">
-    <ng-container *ngFor="let item of items">
-      <button
-        (click)="clickHabit(item.id, date)"
-        [ngClass]="!isDateInDailyData(item, date)
-          ? 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-500 hover:to-gray-300 hover:text-gray-700'
-          : (item.positive
-              ? 'bg-gradient-to-r from-emerald-100 to-lime-200 text-lime-600 hover:to-lime-300 hover:text-lime-800'
-              : 'bg-gradient-to-r from-orange-100 to-red-200 text-red-600 hover:to-red-300 hover:text-red-900')"
-        class="w-[42px] h-[42px] sm:w-[50px] sm:h-[50px] rounded-xl flex flex-col items-center justify-center p-1 transition duration-150 ease-in-out">
-        
-        <svg-icon
-          *ngIf="item.icon"
-          [src]="'/icons/' + item.icon"
-          [svgStyle]="{ width: '16px', height: '16px' }"
-          class="mb-0.5">
-        </svg-icon>
-
-        <span
-          class="block text-[10px] sm:text-[11px] leading-tight text-center truncate w-full">
-          {{ item.name }}
-        </span>
-      </button>
-    </ng-container>
-  </div>
-</div> -->

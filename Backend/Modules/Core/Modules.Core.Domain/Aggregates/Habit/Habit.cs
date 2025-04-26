@@ -13,10 +13,11 @@ public class Habit : AggregateRoot
     public int StrikeCounter { get; private set; } = 0;
     public int Order { get; private set; }
     public DateOnly? LastClickedDate { get; private set; } = null;
+    public HabitColourEnum Colour { get; private set; } = HabitColourEnum.Green;
 
     public List<DailyHabitData> DailyHabitDatas { get; private set; } = new List<DailyHabitData>();
 
-    public Habit(Guid userId, bool positive, string name, string description, string icon, int order)
+    public Habit(Guid userId, bool positive, string name, string description, string icon, int order, HabitColourEnum colour)
     {
         UserId = userId;
         Positive = positive;
@@ -25,6 +26,7 @@ public class Habit : AggregateRoot
         Description = description;
         Icon = icon;
         Order = order;
+        Colour = colour;
     }
 
     public void AddDailyHabitData(DateOnly date, int count)
@@ -91,12 +93,13 @@ public class Habit : AggregateRoot
         }
     }
 
-    public void Update(string name, bool positive, string description, string icon)
+    public void Update(string name, bool positive, string description, string icon, HabitColourEnum colour)
     {
         Name = name;
         Positive = positive;
         Description = description;
         Icon = icon;
+        Colour = colour;
     }
 
     public void SetOrder(int order)

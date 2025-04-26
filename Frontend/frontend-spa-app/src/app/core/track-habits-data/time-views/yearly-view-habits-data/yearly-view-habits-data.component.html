@@ -1,15 +1,11 @@
-<div class="calendar-wrapper" [ngClass]="{
-    'positive': item.positive,
-    'negative': !item.positive,
-    }" *ngFor="let item of items">
+<div class="calendar-wrapper" [ngClass]="item.colour.toLowerCase() + '-text'" *ngFor="let item of items">
     <div class="month-rows">
         <div *ngFor="let month of calendarGrid; let i = index" class="month-row">
             <div class="month-label">{{ romanMonths[i] }}</div>
-            <button *ngFor="let day of month" class="day-cell" [ngClass]="{
-                    'today': isToday(day),
-                    'day-cell-positive': item.positive,
-                    'day-cell-negative': !item.positive,
-                    'clicked': isDateInDailyData(item, day)}" (click)="clickHabit(item.id, day)">
+            <button *ngFor="let day of month" class="day-cell" [ngClass]="[
+            item.colour.toLowerCase() + '-btn',
+            isDateInDailyData(item, day) ? 'clicked' : '',
+            isToday(day) ? 'today' : '']" (click)="clickHabit(item.id, day)">
                 {{ day.getDate() }}
             </button>
         </div>

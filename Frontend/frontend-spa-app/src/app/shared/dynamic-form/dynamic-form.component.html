@@ -15,6 +15,16 @@
       class="checkbox checkbox-xl mb-3 px-2 py-1.5 mt-1 block px-2 py-1.5" [formControlName]="field.name" />
     <app-icon-picker *ngIf="field.type === 'icon-picker'" [selectedIcon]="form.get(field.name)?.value"
       (iconChange)="form.get(field.name)?.setValue($event)"></app-icon-picker>
+    <!-- Dropdown -->
+    <!-- Dropdown -->
+    <select *ngIf="field.type === 'select'"
+      class="mb-3 px-2 py-1.5 mt-1 block w-full border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+      [formControlName]="field.name" [required]="field.required">
+      <option *ngFor="let option of field.options" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+
   </ng-container>
   <button
     class="w-full px-4 py-1.5 rounded-md shadow-lg bg-gradient-to-r from-emerald-600 to-lime-600 font-medium text-gray-100 block transition duration-300"

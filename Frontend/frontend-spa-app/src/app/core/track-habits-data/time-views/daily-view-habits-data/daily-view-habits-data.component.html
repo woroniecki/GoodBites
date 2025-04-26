@@ -1,11 +1,10 @@
 <div cdkDropList cdkDropListOrientation="mixed" class="example-list" (cdkDropListDropped)="drop($event)">
   @for (item of items; track item) {
   <div cdkDrag [ngClass]="item.positive ? 'text-positive' : 'text-negative'" class="habit-item">
-    <div class="box-top" (click)="clickHabit(item.id)" [ngClass]="{
-    'box-top-positive': item.positive,
-    'box-top-negative': !item.positive,
-    'clicked': item.dailyDatas.length !== 0
-  }">
+    <div class="box-top" (click)="clickHabit(item.id)" [ngClass]="[
+    item.dailyDatas.length !== 0 ? 'clicked' : '',
+    item.colour.toLowerCase() + '-btn'
+  ]">
       <ng-container *ngIf="item.icon.endsWith('.svg')">
         <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '48px', height: '48px' }"
           [src]="'/icons/' + item.icon"></svg-icon>
@@ -29,7 +28,8 @@
         </ng-template>
       </div>
     </div>
-    <div class="dropdown dropdown-top dropdown-end settings-wrapper settings-btn">
+    <div class="dropdown dropdown-top dropdown-end settings-wrapper settings-btn"
+      [ngClass]="item.colour.toLowerCase() + '-text'">
       <div tabindex="0" role="button" class="">
         <div class="item-name">{{ item.name }}</div>
       </div>

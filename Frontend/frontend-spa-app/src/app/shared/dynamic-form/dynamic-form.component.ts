@@ -1,4 +1,11 @@
-import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,20 +20,17 @@ import { Icons } from '../icons.enum';
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    IconPickerComponent
-  ],
+  imports: [ReactiveFormsModule, CommonModule, IconPickerComponent],
 })
 export class DynamicFormComponent implements OnChanges {
   allIcons = Object.values(Icons);
   @Input() formConfig: {
     label: string;
     name: string;
-    type: string;
+    type: string; // e.g., 'text', 'checkbox', 'select', etc.
     required: boolean;
-    defaultValue?: any; // Add defaultValue property
+    defaultValue?: any;
+    options?: { label: string; value: any }[]; // for dropdowns
   }[] = [];
   @Input() initialData: Record<string, any> = {};
   @Input() submitButtonLabel: string = 'Submit';

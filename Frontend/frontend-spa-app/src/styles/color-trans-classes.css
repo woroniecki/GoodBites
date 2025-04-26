@@ -1,0 +1,241 @@
+/* === Auto-Generated Button and Text Classes === */
+
+.green-btn {
+  background-color: var(--color-neutral-transparent);
+  color: #5fd074;
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.green-btn.clicked {
+  background-color: #5fd074;
+  color: var(--color-neutral);
+}
+.green-text {
+  color: #5fd074;
+}
+
+.lime-btn {
+  background-color: var(--color-neutral-transparent);
+  color: #26dd4a;
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.lime-btn.clicked {
+  background-color: #26dd4a;
+  color: var(--color-neutral);
+}
+.lime-text {
+  color: #26dd4a;
+}
+
+.red-btn {
+  background-color: var(--color-neutral-transparent);
+  color: #ba4120;
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.red-btn.clicked {
+  background-color: #fd6b44;
+  color: var(--color-neutral);
+}
+.red-text {
+  color: #fd6b44;
+}
+
+.maroon-btn {
+  background-color: var(--color-neutral-transparent);
+  color: #d24c27;
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.maroon-btn.clicked {
+  background-color: #d24c27;
+  color: var(--color-neutral);
+}
+.maroon-text {
+  color: #d24c27;
+}
+
+.blue-btn {
+  background-color: var(--color-neutral-transparent);
+  color: rgb(68, 91, 218);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.blue-btn.clicked {
+  background-color: rgb(68, 91, 218);
+  color: var(--color-neutral);
+}
+.blue-text {
+  color: rgb(68, 91, 218);
+}
+
+.navy-btn {
+  background-color: var(--color-neutral-transparent);
+  color: rgb(39, 53, 211);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.navy-btn.clicked {
+  background-color: rgb(39, 53, 211);
+  color: var(--color-neutral);
+}
+.navy-text {
+  color: rgb(39, 53, 211);
+}
+
+.cyan-btn {
+  background-color: var(--color-neutral-transparent);
+  color: rgb(80, 182, 182);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.cyan-btn.clicked {
+  background-color: rgb(80, 182, 182);
+  color: var(--color-neutral);
+}
+.cyan-text {
+  color: rgb(80, 182, 182);
+}
+
+.teal-btn {
+  background-color: var(--color-neutral-transparent);
+  color: rgb(35, 146, 161);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.teal-btn.clicked {
+  background-color: rgb(35, 146, 161);
+  color: var(--color-neutral);
+}
+.teal-text {
+  color: rgb(35, 146, 161);
+}
+
+.pink-btn {
+  background-color: var(--color-neutral-transparent);
+  color: pink;
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.pink-btn.clicked {
+  background-color: pink;
+  color: var(--color-neutral);
+}
+.pink-text {
+  color: pink;
+}
+
+.purple-btn {
+  background-color: var(--color-neutral-transparent);
+  color: rgb(196, 124, 172);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.purple-btn.clicked {
+  background-color: rgb(196, 124, 172);
+  color: var(--color-neutral);
+}
+.purple-text {
+  color: rgb(196, 124, 172);
+}
+
+.orange-btn {
+  background-color: var(--color-neutral-transparent);
+  color: rgb(255, 201, 100);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.orange-btn.clicked {
+  background-color: rgb(255, 201, 100);
+  color: var(--color-neutral);
+}
+.orange-text {
+  color: rgb(255, 201, 100);
+}
+
+.brown-btn {
+  background-color: var(--color-neutral-transparent);
+  color: rgb(188, 139, 76);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.brown-btn.clicked {
+  background-color: rgb(188, 139, 76);
+  color: var(--color-neutral);
+}
+.brown-text {
+  color: rgb(188, 139, 76);
+}
+
+.yellow-btn {
+  background-color: var(--color-neutral-transparent);
+  color: rgb(223, 223, 130);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.yellow-btn.clicked {
+  background-color: rgb(223, 223, 130);
+  color: var(--color-neutral);
+}
+.yellow-text {
+  color: rgb(223, 223, 130);
+}
+
+.olive-btn {
+  background-color: var(--color-neutral-transparent);
+  color: rgb(154, 169, 70);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.olive-btn.clicked {
+  background-color: rgb(154, 169, 70);
+  color: var(--color-neutral);
+}
+.olive-text {
+  color: rgb(154, 169, 70);
+}
+
+.grey-btn {
+  background-color: var(--color-neutral-transparent);
+  color: rgb(178, 178, 178);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.grey-btn.clicked {
+  background-color: rgb(178, 178, 178);
+  color: var(--color-neutral);
+}
+.grey-text {
+  color: rgb(178, 178, 178);
+}
+
+.black-btn {
+  background-color: var(--color-neutral-transparent);
+  color: rgb(69, 68, 68);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}
+.black-btn.clicked {
+  background-color: rgb(69, 68, 68);
+  color: var(--color-neutral);
+}
+.black-text {
+  color: rgb(69, 68, 68);
+}
