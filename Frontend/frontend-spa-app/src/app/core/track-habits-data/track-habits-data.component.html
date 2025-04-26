@@ -2,37 +2,36 @@
   <div class="flex items-center justify-between w-full">
     <!-- Left Side -->
     <div class="flex items-center gap-2">
-      <app-time-date-selection
-        (dateChanged)="onDateChanged($event)"
-        [selectedOption]="selectedViewType">
+      <app-time-date-selection (dateChanged)="onDateChanged($event)" [selectedOption]="selectedViewType">
       </app-time-date-selection>
-  
-      <app-time-view-dropdown
-        (optionChanged)="onViewOptionChanged($event)">
+
+      <app-time-view-dropdown (optionChanged)="onViewOptionChanged($event)">
       </app-time-view-dropdown>
     </div>
-  
+
     <!-- Right Side (User Dropdown) -->
     <app-user-dropdown></app-user-dropdown>
   </div>
-  
+
 
   <ng-container [ngSwitch]="selectedViewType">
     <ng-container *ngSwitchCase="TimeViewOption.Daily">
-      <app-daily-view-habits-data [items]="items" [date]="dateFrom" (onHabitsChange)="refreshDate()" (onClickHabit)="clickHabit($event)">
+      <app-daily-view-habits-data [items]="items" [date]="dateFrom" (onHabitsChange)="refreshDate()"
+        (onClickHabit)="clickHabit($event)">
       </app-daily-view-habits-data>
     </ng-container>
     <ng-container *ngSwitchCase="TimeViewOption.Weekly">
       <app-weekly-view-habits-data [items]="items" [dateFrom]="dateFrom" [dateTo]="dateTo"
-      (onClickHabit)="clickHabit($event)">
-    </app-weekly-view-habits-data>
+        (onHabitsChange)="refreshDate()" (onClickHabit)="clickHabit($event)">
+      </app-weekly-view-habits-data>
     </ng-container>
     <ng-container *ngSwitchCase="TimeViewOption.Monthly">
-      <app-monthly-view-habits-data [items]="items" [dateFrom]="dateFrom"
-      (onClickHabit)="clickHabit($event)"></app-monthly-view-habits-data>
+      <app-monthly-view-habits-data [items]="items" [dateFrom]="dateFrom" (onHabitsChange)="refreshDate()"
+        (onClickHabit)="clickHabit($event)"></app-monthly-view-habits-data>
     </ng-container>
     <ng-container *ngSwitchCase="TimeViewOption.Yearly">
-      <app-yearly-view-habits-data [items]="items" [dateFrom]="dateFrom" (onClickHabit)="clickHabit($event)"></app-yearly-view-habits-data>
+      <app-yearly-view-habits-data [items]="items" [dateFrom]="dateFrom" (onHabitsChange)="refreshDate()"
+        (onClickHabit)="clickHabit($event)"></app-yearly-view-habits-data>
     </ng-container>
   </ng-container>
 </div>

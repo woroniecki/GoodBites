@@ -28,20 +28,9 @@
         </ng-template>
       </div>
     </div>
-    <div class="dropdown dropdown-top dropdown-end settings-wrapper settings-btn"
-      [ngClass]="item.colour.toLowerCase() + '-text'">
-      <div tabindex="0" role="button" class="">
-        <div class="item-name">{{ item.name }}</div>
-      </div>
-      <ul tabindex="0" class="text-gray-400 dropdown-content menu bg-base-100 rounded-box z-1 p-1 shadow-sm">
-        <li>
-          <div (click)="edit(item.id)">Edit</div>
-        </li>
-        <li>
-          <div (click)="remove(item.id, item.name)">Remove</div>
-        </li>
-      </ul>
-    </div>
+    <app-habit-actions-dropdown [item]="item" (onHabitsChange)="onHabitsChange.emit()">
+      <div class="item-name">{{ item.name }}</div>
+    </app-habit-actions-dropdown>
   </div>
   }
   <div class="habit-item">

@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { HabitDto } from '../../../../api-client/models/habit-dto';
 import { isToday } from '../../common/is-today';
+import { HabitActionsDropdownComponent } from '../habit-actions-dropdown/habit-actions-dropdown.component';
 
 @Component({
   selector: 'app-weekly-view-habits-data',
-  imports: [CommonModule, AngularSvgIconModule],
+  imports: [CommonModule, AngularSvgIconModule, HabitActionsDropdownComponent],
   templateUrl: './weekly-view-habits-data.component.html',
   styleUrl: './weekly-view-habits-data.component.css',
   standalone: true,
@@ -30,6 +31,7 @@ export class WeeklyViewHabitsDataComponent {
   }
   @Input() dateFrom: Date = new Date();
   @Output() onClickHabit = new EventEmitter<{ habitId: string; date: Date }>();
+  @Output() onHabitsChange = new EventEmitter<void>();
 
   isDateInDailyData(item: HabitDto, date: Date): boolean {
     return item.dailyDatas?.some((d) => {

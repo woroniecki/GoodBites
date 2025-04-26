@@ -3,10 +3,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HabitDto } from '../../../../api-client/models/habit-dto';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { isToday } from '../../common/is-today';
+import { HabitActionsDropdownComponent } from '../habit-actions-dropdown/habit-actions-dropdown.component';
 
 @Component({
   selector: 'app-yearly-view-habits-data',
-  imports: [CommonModule, AngularSvgIconModule],
+  imports: [CommonModule, AngularSvgIconModule, HabitActionsDropdownComponent],
   templateUrl: './yearly-view-habits-data.component.html',
   styleUrl: './yearly-view-habits-data.component.css',
   standalone: true,
@@ -16,6 +17,7 @@ export class YearlyViewHabitsDataComponent {
 
   @Input() items: Array<HabitDto> = [];
   @Output() onClickHabit = new EventEmitter<{ habitId: string; date: Date }>();
+  @Output() onHabitsChange = new EventEmitter<void>();
 
   year: number = 0;
   @Input()

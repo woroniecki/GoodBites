@@ -13,14 +13,18 @@
     <div class="calendar-cell item-cell" [ngClass]="[
       'clicked', item.colour.toLowerCase() + '-btn'
       ]">
-      <ng-container *ngIf="item.icon.endsWith('.svg')">
-        <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '32px', height: '32px' }"
-          [src]="'/icons/' + item.icon"></svg-icon>
-      </ng-container>
+      <app-habit-actions-dropdown [item]="item" (onHabitsChange)="onHabitsChange.emit()">
+        <ng-container *ngIf="item.icon.endsWith('.svg')">
+          <svg-icon *ngIf="item.icon" [svgStyle]="{ width: '32px', height: '32px' }" [src]="'/icons/' + item.icon"
+            [ngClass]="[
+            'clicked', item.colour.toLowerCase() + '-btn'
+            ]"></svg-icon>
+        </ng-container>
 
-      <ng-container *ngIf="item.icon.endsWith('.png')">
-        <img [src]="'/icons/' + item.icon" width="32" height="32" alt="icon">
-      </ng-container>
+        <ng-container *ngIf="item.icon.endsWith('.png')">
+          <img [src]="'/icons/' + item.icon" width="32" height="32" alt="icon">
+        </ng-container>
+      </app-habit-actions-dropdown>
     </div>
     <ng-container *ngFor="let day of weekDates">
       <button class="calendar-cell day-cell" [ngClass]="[

@@ -21,12 +21,12 @@ import { HabitDto } from '../../api-client/models/habit-dto';
     WeeklyViewHabitsDataComponent,
     MonthlyViewHabitsDataComponent,
     YearlyViewHabitsDataComponent,
-    UserDropdownComponent
+    UserDropdownComponent,
   ],
   templateUrl: './track-habits-data.component.html',
   styleUrl: './track-habits-data.component.css',
   standalone: true,
-  providers: [DatePipe]
+  providers: [DatePipe],
 })
 export class TrackHabitsDataComponent implements OnInit {
   TimeViewOption = TimeViewOption;
@@ -36,7 +36,10 @@ export class TrackHabitsDataComponent implements OnInit {
   dateTo: Date = new Date();
   selectedViewType: TimeViewOption = TimeViewOption.Daily;
 
-  constructor(private habitsDataApi: HabitDataService, private datePipe: DatePipe) {}
+  constructor(
+    private habitsDataApi: HabitDataService,
+    private datePipe: DatePipe,
+  ) {}
 
   ngOnInit(): void {
     this.getHabitData();
@@ -70,6 +73,7 @@ export class TrackHabitsDataComponent implements OnInit {
   }
 
   refreshDate() {
+    console.log('refreshDate');
     this.getHabitData();
   }
 
@@ -93,10 +97,13 @@ export class TrackHabitsDataComponent implements OnInit {
           if (item) {
             item.lastCheckedDate = dto.lastCheckedDate;
             item.streak = dto.streak;
-            item.dailyDatas = [...item.dailyDatas, ...dto.dailyDatas.filter(d => {
-              const dDate = new Date(d.date);
-              return dDate.toDateString() === date.toDateString();
-            })];
+            item.dailyDatas = [
+              ...item.dailyDatas,
+              ...dto.dailyDatas.filter((d) => {
+                const dDate = new Date(d.date);
+                return dDate.toDateString() === date.toDateString();
+              }),
+            ];
           }
         });
     } else {
@@ -109,10 +116,12 @@ export class TrackHabitsDataComponent implements OnInit {
           if (item) {
             item.lastCheckedDate = dto.lastCheckedDate;
             item.streak = dto.streak;
-            item.dailyDatas = [...item.dailyDatas.filter(d => {
-              const dDate = new Date(d.date);
-              return dDate.toDateString() !== date.toDateString();
-            })];
+            item.dailyDatas = [
+              ...item.dailyDatas.filter((d) => {
+                const dDate = new Date(d.date);
+                return dDate.toDateString() !== date.toDateString();
+              }),
+            ];
           }
         });
     }

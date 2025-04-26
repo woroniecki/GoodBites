@@ -48,10 +48,6 @@
   font-weight: 500;
 }
 
-.settings-btn:hover {
-  transform: scale(1.1);
-}
-
 .item-name {
   width: 90px;
   margin: 2px;

@@ -67,3 +67,9 @@
 .calendar-footer svg-icon {
   display: inline-block;
 }
+
+.item-name {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}

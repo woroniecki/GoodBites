@@ -1,0 +1,6 @@
+@import '../../../../../styles/color-trans-classes.css';
+
+.settings-btn:hover {
+  transform: scale(1.1);
+  font-weight: normal;
+}

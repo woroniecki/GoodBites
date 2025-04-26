@@ -14,16 +14,16 @@ import { EditHabitComponent } from '../../../edit-habit/edit-habit.component';
 import { DeleteHabitComponent } from '../../../delete-habit/delete-habit.component';
 import { HabitDto } from '../../../../api-client/models/habit-dto';
 import { HabitService } from '../../../../api-client/services';
-
-interface HabitViewData {
-  showMenu?: boolean;
-}
-
-type HabitData = HabitDto & HabitViewData;
+import { HabitActionsDropdownComponent } from '../habit-actions-dropdown/habit-actions-dropdown.component';
 
 @Component({
   selector: 'app-daily-view-habits-data',
-  imports: [CommonModule, AngularSvgIconModule, DragDropModule],
+  imports: [
+    CommonModule,
+    AngularSvgIconModule,
+    DragDropModule,
+    HabitActionsDropdownComponent,
+  ],
   templateUrl: './daily-view-habits-data.component.html',
   styleUrl: './daily-view-habits-data.component.css',
   standalone: true,
@@ -38,7 +38,7 @@ export class DailyViewHabitsDataComponent {
       .subscribe();
   }
 
-  @Input() items: Array<HabitData> = [];
+  @Input() items: Array<HabitDto> = [];
   @Input() date: Date = new Date();
   @Output() onClickHabit = new EventEmitter<{ habitId: string; date: Date }>();
   @Output() onHabitsChange = new EventEmitter<void>();

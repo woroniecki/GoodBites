@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { HabitDto } from '../../../../api-client/models/habit-dto';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { isToday } from '../../common/is-today';
+import { HabitActionsDropdownComponent } from '../habit-actions-dropdown/habit-actions-dropdown.component';
 
 @Component({
   selector: 'app-monthly-view-habits-data',
-  imports: [CommonModule, AngularSvgIconModule],
+  imports: [CommonModule, AngularSvgIconModule, HabitActionsDropdownComponent],
   templateUrl: './monthly-view-habits-data.component.html',
   styleUrls: ['./monthly-view-habits-data.component.css'],
   standalone: true,
@@ -31,6 +32,7 @@ export class MonthlyViewHabitsDataComponent {
   }
 
   @Output() onClickHabit = new EventEmitter<{ habitId: string; date: Date }>();
+  @Output() onHabitsChange = new EventEmitter<void>();
 
   ngOnInit() {
     this.generateMonthDates();
