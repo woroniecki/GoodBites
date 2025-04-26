@@ -1,4 +1,5 @@
-@import '../../../../../styles/color-classes.css';
+@import '../../../../../styles/color-trans-classes.css';
+
 .example-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -72,7 +73,7 @@
 }
 
 .bg-neutral {
-  background-color: var(--color-neutral);
+  background-color: var(--color-neutral-transparent);
 }
 
 .text-neutral {
