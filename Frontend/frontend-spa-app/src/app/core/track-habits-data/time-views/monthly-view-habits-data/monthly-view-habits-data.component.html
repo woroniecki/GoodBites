@@ -11,8 +11,8 @@
                 <div class="calendar-cell empty" *ngFor="let _ of blankDays"></div>
                 <button class="calendar-cell day-cell" [ngClass]="[
                 item.colour.toLowerCase() + '-btn',
-                isDateInDailyData(item, day) ? 'clicked' : '']" *ngFor="let day of daysInMonth"
-                    (click)="clickHabit(item.id, day)">
+                isDateInDailyData(item, day) ? 'clicked' : '',
+                isToday(day) ? 'today' : '']" *ngFor="let day of daysInMonth" (click)="clickHabit(item.id, day)">
                     <div class="date-number">{{ day.getDate() }}</div>
                 </button>
             </div>

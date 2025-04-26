@@ -25,7 +25,8 @@
     <ng-container *ngFor="let day of weekDates">
       <button class="calendar-cell day-cell" [ngClass]="[
         item.colour.toLowerCase() + '-btn',
-        isDateInDailyData(item, day) ? 'clicked' : '']" (click)="clickHabit(item.id, day)">
+        isDateInDailyData(item, day) ? 'clicked' : '',
+        isToday(day) ? 'today' : '']" (click)="clickHabit(item.id, day)">
         {{ day | date: 'dd.MM' }}
       </button>
     </ng-container>

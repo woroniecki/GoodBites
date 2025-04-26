@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HabitDto } from '../../../../api-client/models/habit-dto';
 import { AngularSvgIconModule } from 'angular-svg-icon';
+import { isToday } from '../../common/is-today';
 
 @Component({
   selector: 'app-yearly-view-habits-data',
@@ -11,22 +12,36 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
   standalone: true,
 })
 export class YearlyViewHabitsDataComponent {
+  isToday = isToday;
+
   @Input() items: Array<HabitDto> = [];
   @Output() onClickHabit = new EventEmitter<{ habitId: string; date: Date }>();
 
   year: number = 0;
   @Input()
   set dateFrom(value: Date) {
-    console.log(value.getFullYear())
+    console.log(value.getFullYear());
     this.year = value.getFullYear();
     this.generateCalendar();
   }
 
-  romanMonths = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+  romanMonths = [
+    'I',
+    'II',
+    'III',
+    'IV',
+    'V',
+    'VI',
+    'VII',
+    'VIII',
+    'IX',
+    'X',
+    'XI',
+    'XII',
+  ];
   calendarGrid: Date[][] = [];
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   generateCalendar() {
     const calendar: Date[][] = [];
@@ -46,12 +61,6 @@ export class YearlyViewHabitsDataComponent {
     this.calendarGrid = calendar;
   }
 
-  isToday(day: Date | null): boolean {
-    if (!day) return false;
-    const today = new Date();
-    return day.toDateString() === today.toDateString();
-  }
-
   isDateInDailyData(item: HabitDto, date: Date): boolean {
     return item.dailyDatas?.some((d) => {
       const dDate = new Date(d.date);
@@ -60,6 +69,6 @@ export class YearlyViewHabitsDataComponent {
   }
 
   clickHabit(habitId: string, date: Date) {
-    this.onClickHabit.emit({habitId: habitId, date: date});
+    this.onClickHabit.emit({ habitId: habitId, date: date });
   }
 }
