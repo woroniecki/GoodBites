@@ -1,0 +1,11 @@
+/* Optional: Fine-tune dropdown */
+.dropdown-content {
+  min-width: 10rem;
+}
+
+/* Optional: Make hover a little smoother */
+.dropdown-content li a {
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
