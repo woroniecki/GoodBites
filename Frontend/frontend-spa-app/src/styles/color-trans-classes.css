@@ -32,7 +32,7 @@
 
 .red-btn {
   background-color: var(--color-neutral-transparent);
-  color: #ba4120;
+  color: #fd6b44;
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
