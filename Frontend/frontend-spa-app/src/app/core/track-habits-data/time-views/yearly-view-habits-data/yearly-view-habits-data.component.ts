@@ -22,7 +22,6 @@ export class YearlyViewHabitsDataComponent {
   year: number = 0;
   @Input()
   set dateFrom(value: Date) {
-    console.log(value.getFullYear());
     this.year = value.getFullYear();
     this.generateCalendar();
   }

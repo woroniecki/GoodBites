@@ -45,8 +45,6 @@ export class IconPickerComponent implements OnInit {
         this.currentItems.push({ name: key, type: 'folder', path: '' });
       }
     }
-
-    console.log(this.currentItems);
   }
 
   selectItem(item: { name: string; type: 'folder' | 'icon'; path: string }) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HabitDataService } from '../../api-client/services';
 import { CommonModule, DatePipe } from '@angular/common';
 import { TimeViewDropdownComponent } from './time-view-dropdown/time-view-dropdown.component';
@@ -10,6 +10,7 @@ import { TimeDateSelectionComponent } from './time-date-selection/time-date-sele
 import { TimeViewOption } from './enums/time-view-option.enum';
 import { UserDropdownComponent } from '../../user-dropdown/user-dropdown.component';
 import { HabitDto } from '../../api-client/models/habit-dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-track-habits-data',
@@ -28,7 +29,7 @@ import { HabitDto } from '../../api-client/models/habit-dto';
   standalone: true,
   providers: [DatePipe],
 })
-export class TrackHabitsDataComponent implements OnInit {
+export class TrackHabitsDataComponent {
   TimeViewOption = TimeViewOption;
 
   items: Array<HabitDto> = [];
@@ -39,11 +40,8 @@ export class TrackHabitsDataComponent implements OnInit {
   constructor(
     private habitsDataApi: HabitDataService,
     private datePipe: DatePipe,
+    private router: Router,
   ) {}
-
-  ngOnInit(): void {
-    this.getHabitData();
-  }
 
   private getHabitData() {
     this.habitsDataApi
@@ -63,6 +61,7 @@ export class TrackHabitsDataComponent implements OnInit {
 
   onViewOptionChanged(event: TimeViewOption): void {
     this.selectedViewType = event;
+    this.router.navigate(['/'], { queryParams: { view: event.toLowerCase() } });
   }
 
   onDateChanged({ from, to }: { from: Date; to: Date }): void {
@@ -73,7 +72,6 @@ export class TrackHabitsDataComponent implements OnInit {
   }
 
   refreshDate() {
-    console.log('refreshDate');
     this.getHabitData();
   }
 
