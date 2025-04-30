@@ -1,9 +1,15 @@
 .icon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-  gap: 0.2rem;
+  grid-template-columns: repeat(auto-fill, minmax(28px, 1fr));
+  gap: 0.15rem;
+  background-color: var(--color-neutral);
 }
+
+.icon-item {
+  background-color: var(--color-gray-100);
+}
+
 .icon-item.selected {
-  border: 2px solid #10b981;
+  border: 2px solid var(--color-green);
   background-color: #ecfdf5;
 }
