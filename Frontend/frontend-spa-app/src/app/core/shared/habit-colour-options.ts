@@ -24,7 +24,7 @@ const habitColourOptions = (
 export const habitColourOptionForm = {
   label: 'Colour',
   name: 'colour',
-  type: 'select',
+  type: 'colour',
   required: true,
   defaultValue: 'Green', // optional
   options: habitColourOptions,

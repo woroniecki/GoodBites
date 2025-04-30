@@ -29,6 +29,16 @@
         {{ option.label }}
       </option>
     </select>
+    <!-- Color Picker UI -->
+    <div *ngIf="field.type === 'colour'" class="grid grid-cols-8 gap-2 mb-3 mt-1">
+      <label *ngFor="let option of field.options"
+        class="cursor-pointer w-6 h-6 rounded-full border-2 border-transparent transition-all duration-150"
+        [style.backgroundColor]="form.get(field.name)?.value === option.value ? 'var(--color-neutral)' : 'var(--color-' + option.value.toLowerCase() + ')'"
+        [class.ring-4]="form.get(field.name)?.value === option.value"
+        [style.boxShadow]="form.get(field.name)?.value === option.value ? '0 0 0 4px var(--color-' + option.value.toLowerCase() + ')' : ''">
+        <input type="radio" [formControlName]="field.name" [value]="option.value" class="sr-only" />
+      </label>
+    </div>
 
   </ng-container>
   <button class="w-full font-medium mt-3 submit-btn text-white px-4 py-2 rounded transition" type="submit">
