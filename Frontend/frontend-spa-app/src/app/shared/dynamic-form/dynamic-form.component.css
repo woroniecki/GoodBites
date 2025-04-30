@@ -1,0 +1,36 @@
+.toggle-track {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background-color: var(--color-red);
+  border-radius: 9999px;
+  transition: background-color 0.4s;
+}
+
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  height: 20px;
+  width: 20px;
+  background-color: var(--color-neutral);
+  border-radius: 9999px;
+  transition: transform 0.4s;
+}
+
+input.peer:checked + .toggle-track {
+  background-color: var(--color-green);
+}
+
+input.peer:checked + .toggle-track::after {
+  transform: translateX(20px);
+}
+
+.submit-btn {
+  background-color: var(--color-green);
+  color: var(--color-neutral);
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
+}

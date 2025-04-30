@@ -4,13 +4,12 @@ namespace Modules.Core.API.Dtos;
 
 public record HabitDto
 {
-    public HabitDto(Guid id, bool positive, string name, bool active, string description, string icon, DateOnly? lastCheckedDate, int streak, IEnumerable<DailyHabitsDataDto> dailyDatas, HabitColourEnum colour)
+    public HabitDto(Guid id, bool positive, string name, bool active, string icon, DateOnly? lastCheckedDate, int streak, IEnumerable<DailyHabitsDataDto> dailyDatas, HabitColourEnum colour)
     {
         this.id = id;
         this.positive = positive;
         this.name = name;
         this.active = active;
-        this.description = description;
         this.icon = icon;
         this.lastCheckedDate = lastCheckedDate;
         this.streak = streak;

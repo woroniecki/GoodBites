@@ -19,6 +19,7 @@ import { Icons } from '../icons.enum';
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
+  styleUrls: ['./dynamic-form.component.css'],
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, IconPickerComponent],
 })

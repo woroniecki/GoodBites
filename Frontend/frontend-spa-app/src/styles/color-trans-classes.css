@@ -1,240 +1,258 @@
-/* === Auto-Generated Button and Text Classes === */
+:root {
+  --color-green: #5fd074;
+  --color-lime: #26dd4a;
+  --color-red: #fd6b44;
+  --color-maroon: #d24c27;
+  --color-blue: rgb(68, 91, 218);
+  --color-navy: rgb(39, 53, 211);
+  --color-cyan: rgb(80, 182, 182);
+  --color-teal: rgb(35, 146, 161);
+  --color-pink: pink;
+  --color-purple: rgb(196, 124, 172);
+  --color-orange: rgb(255, 201, 100);
+  --color-brown: rgb(188, 139, 76);
+  --color-yellow: rgb(223, 223, 130);
+  --color-olive: rgb(154, 169, 70);
+  --color-grey: rgb(178, 178, 178);
+  --color-black: rgb(69, 68, 68);
+}
+
 .green-btn {
   background-color: var(--color-neutral-transparent);
-  color: #5fd074;
+  color: var(--color-green);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .green-btn.clicked {
-  background-color: #5fd074;
+  background-color: var(--color-green);
   color: var(--color-neutral);
 }
 .green-text {
-  color: #5fd074;
+  color: var(--color-green);
 }
 
 .lime-btn {
   background-color: var(--color-neutral-transparent);
-  color: #26dd4a;
+  color: var(--color-lime);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .lime-btn.clicked {
-  background-color: #26dd4a;
+  background-color: var(--color-lime);
   color: var(--color-neutral);
 }
 .lime-text {
-  color: #26dd4a;
+  color: var(--color-lime);
 }
 
 .red-btn {
   background-color: var(--color-neutral-transparent);
-  color: #fd6b44;
+  color: var(--color-red);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .red-btn.clicked {
-  background-color: #fd6b44;
+  background-color: var(--color-red);
   color: var(--color-neutral);
 }
 .red-text {
-  color: #fd6b44;
+  color: var(--color-red);
 }
 
 .maroon-btn {
   background-color: var(--color-neutral-transparent);
-  color: #d24c27;
+  color: var(--color-maroon);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .maroon-btn.clicked {
-  background-color: #d24c27;
+  background-color: var(--color-maroon);
   color: var(--color-neutral);
 }
 .maroon-text {
-  color: #d24c27;
+  color: var(--color-maroon);
 }
 
 .blue-btn {
   background-color: var(--color-neutral-transparent);
-  color: rgb(68, 91, 218);
+  color: var(--color-blue);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .blue-btn.clicked {
-  background-color: rgb(68, 91, 218);
+  background-color: var(--color-blue);
   color: var(--color-neutral);
 }
 .blue-text {
-  color: rgb(68, 91, 218);
+  color: var(--color-blue);
 }
 
 .navy-btn {
   background-color: var(--color-neutral-transparent);
-  color: rgb(39, 53, 211);
+  color: var(--color-navy);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .navy-btn.clicked {
-  background-color: rgb(39, 53, 211);
+  background-color: var(--color-navy);
   color: var(--color-neutral);
 }
 .navy-text {
-  color: rgb(39, 53, 211);
+  color: var(--color-navy);
 }
 
 .cyan-btn {
   background-color: var(--color-neutral-transparent);
-  color: rgb(80, 182, 182);
+  color: var(--color-cyan);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .cyan-btn.clicked {
-  background-color: rgb(80, 182, 182);
+  background-color: var(--color-cyan);
   color: var(--color-neutral);
 }
 .cyan-text {
-  color: rgb(80, 182, 182);
+  color: var(--color-cyan);
 }
 
 .teal-btn {
   background-color: var(--color-neutral-transparent);
-  color: rgb(35, 146, 161);
+  color: var(--color-teal);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .teal-btn.clicked {
-  background-color: rgb(35, 146, 161);
+  background-color: var(--color-teal);
   color: var(--color-neutral);
 }
 .teal-text {
-  color: rgb(35, 146, 161);
+  color: var(--color-teal);
 }
 
 .pink-btn {
   background-color: var(--color-neutral-transparent);
-  color: pink;
+  color: var(--color-pink);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .pink-btn.clicked {
-  background-color: pink;
+  background-color: var(--color-pink);
   color: var(--color-neutral);
 }
 .pink-text {
-  color: pink;
+  color: var(--color-pink);
 }
 
 .purple-btn {
   background-color: var(--color-neutral-transparent);
-  color: rgb(196, 124, 172);
+  color: var(--color-purple);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .purple-btn.clicked {
-  background-color: rgb(196, 124, 172);
+  background-color: var(--color-purple);
   color: var(--color-neutral);
 }
 .purple-text {
-  color: rgb(196, 124, 172);
+  color: var(--color-purple);
 }
 
 .orange-btn {
   background-color: var(--color-neutral-transparent);
-  color: rgb(255, 201, 100);
+  color: var(--color-orange);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .orange-btn.clicked {
-  background-color: rgb(255, 201, 100);
+  background-color: var(--color-orange);
   color: var(--color-neutral);
 }
 .orange-text {
-  color: rgb(255, 201, 100);
+  color: var(--color-orange);
 }
 
 .brown-btn {
   background-color: var(--color-neutral-transparent);
-  color: rgb(188, 139, 76);
+  color: var(--color-brown);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .brown-btn.clicked {
-  background-color: rgb(188, 139, 76);
+  background-color: var(--color-brown);
   color: var(--color-neutral);
 }
 .brown-text {
-  color: rgb(188, 139, 76);
+  color: var(--color-brown);
 }
 
 .yellow-btn {
   background-color: var(--color-neutral-transparent);
-  color: rgb(223, 223, 130);
+  color: var(--color-yellow);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .yellow-btn.clicked {
-  background-color: rgb(223, 223, 130);
+  background-color: var(--color-yellow);
   color: var(--color-neutral);
 }
 .yellow-text {
-  color: rgb(223, 223, 130);
+  color: var(--color-yellow);
 }
 
 .olive-btn {
   background-color: var(--color-neutral-transparent);
-  color: rgb(154, 169, 70);
+  color: var(--color-olive);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .olive-btn.clicked {
-  background-color: rgb(154, 169, 70);
+  background-color: var(--color-olive);
   color: var(--color-neutral);
 }
 .olive-text {
-  color: rgb(154, 169, 70);
+  color: var(--color-olive);
 }
 
 .grey-btn {
   background-color: var(--color-neutral-transparent);
-  color: rgb(178, 178, 178);
+  color: var(--color-grey);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .grey-btn.clicked {
-  background-color: rgb(178, 178, 178);
+  background-color: var(--color-grey);
   color: var(--color-neutral);
 }
 .grey-text {
-  color: rgb(178, 178, 178);
+  color: var(--color-grey);
 }
 
 .black-btn {
   background-color: var(--color-neutral-transparent);
-  color: rgb(69, 68, 68);
+  color: var(--color-black);
   transition:
     background-color 0.6s ease,
     color 0.6s ease;
 }
 .black-btn.clicked {
-  background-color: rgb(69, 68, 68);
+  background-color: var(--color-black);
   color: var(--color-neutral);
 }
 .black-text {
-  color: rgb(69, 68, 68);
+  color: var(--color-black);
 }

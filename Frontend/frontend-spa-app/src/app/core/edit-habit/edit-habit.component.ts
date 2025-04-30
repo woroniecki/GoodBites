@@ -24,13 +24,12 @@ export class EditHabitComponent implements OnInit {
     {
       label: 'Positive',
       name: 'positive',
-      type: 'checkbox',
+      type: 'toggle',
       required: true,
       defaultValue: true,
     },
     habitColourOptionForm,
     { label: 'Icon', name: 'icon', type: 'icon-picker', required: true },
-    { label: 'Description', name: 'description', type: 'text', required: true },
   ];
 
   habitId: string = '';

@@ -8,7 +8,6 @@ public class Habit : AggregateRoot
     public bool Positive { get; private set; }
     public string Name { get; private set; }
     public bool Active { get; private set; }
-    public string Description { get; private set; }
     public string Icon { get; private set; } = "default.svg";
     public int StrikeCounter { get; private set; } = 0;
     public int Order { get; private set; }
@@ -17,13 +16,12 @@ public class Habit : AggregateRoot
 
     public List<DailyHabitData> DailyHabitDatas { get; private set; } = new List<DailyHabitData>();
 
-    public Habit(Guid userId, bool positive, string name, string description, string icon, int order, HabitColourEnum colour)
+    public Habit(Guid userId, bool positive, string name, string icon, int order, HabitColourEnum colour)
     {
         UserId = userId;
         Positive = positive;
         Name = name;
         Active = true;
-        Description = description;
         Icon = icon;
         Order = order;
         Colour = colour;
@@ -93,11 +91,10 @@ public class Habit : AggregateRoot
         }
     }
 
-    public void Update(string name, bool positive, string description, string icon, HabitColourEnum colour)
+    public void Update(string name, bool positive, string icon, HabitColourEnum colour)
     {
         Name = name;
         Positive = positive;
-        Description = description;
         Icon = icon;
         Colour = colour;
     }

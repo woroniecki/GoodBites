@@ -11,7 +11,6 @@ internal static class HabitToDtoMapper
                 habit.Positive,
                 habit.Name,
                 habit.Active,
-                habit.Description,
                 habit.Icon,
                 habit.LastClickedDate,
                 habit.StrikeCounter,

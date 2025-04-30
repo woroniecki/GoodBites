@@ -25,7 +25,6 @@ internal sealed class AddHabitCommandHandler : IRequestHandler<AddHabitCommand, 
             _userService.UserId,
             request.Positive,
             request.Name,
-            request.Description,
             request.Icon,
             habitsAmoount * 2,
             request.colour);

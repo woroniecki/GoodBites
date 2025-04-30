@@ -25,13 +25,12 @@ export class AddHabitComponent {
     {
       label: 'Positive',
       name: 'Positive',
-      type: 'checkbox',
+      type: 'toggle',
       required: true,
       defaultValue: true,
     },
     habitColourOptionForm,
     { label: 'Icon', name: 'Icon', type: 'icon-picker', required: true },
-    { label: 'Description', name: 'Description', type: 'text', required: true },
   ];
 
   constructor(
