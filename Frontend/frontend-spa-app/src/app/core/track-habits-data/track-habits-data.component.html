@@ -13,7 +13,6 @@
     <app-user-dropdown></app-user-dropdown>
   </div>
 
-
   <ng-container [ngSwitch]="selectedViewType">
     <ng-container *ngSwitchCase="TimeViewOption.Daily">
       <app-daily-view-habits-data [items]="items" [date]="dateFrom" (onHabitsChange)="refreshDate()"

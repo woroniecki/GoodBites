@@ -3,7 +3,7 @@
 namespace Modules.Core.API.Dtos.Mappers;
 internal static class HabitToDtoMapper
 {
-    internal static HabitDto Map(this Habit habit)
+    internal static HabitDto Map(this Habit habit, int? streak)
     {
         return new HabitDto
             (
@@ -12,8 +12,7 @@ internal static class HabitToDtoMapper
                 habit.Name,
                 habit.Active,
                 habit.Icon,
-                habit.LastClickedDate,
-                habit.StrikeCounter,
+                streak ?? -1,
                 habit.DailyHabitDatas
                     .Select(d => new DailyHabitsDataDto
                     (

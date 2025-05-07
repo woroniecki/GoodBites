@@ -9,9 +9,7 @@ public class Habit : AggregateRoot
     public string Name { get; private set; }
     public bool Active { get; private set; }
     public string Icon { get; private set; } = "default.svg";
-    public int StrikeCounter { get; private set; } = 0;
     public int Order { get; private set; }
-    public DateOnly? LastClickedDate { get; private set; } = null;
     public HabitColourEnum Colour { get; private set; } = HabitColourEnum.Green;
 
     public List<DailyHabitData> DailyHabitDatas { get; private set; } = new List<DailyHabitData>();
@@ -30,7 +28,6 @@ public class Habit : AggregateRoot
     public void AddDailyHabitData(DateOnly date, int count)
     {
         DailyHabitDatas.Add(new DailyHabitData(date, count));
-        UpdateLastUsedDailyData();
     }
 
     public void RemoveDailyHabitData(DateOnly date)
@@ -39,55 +36,6 @@ public class Habit : AggregateRoot
         if (dailyHabitData != null)
         {
             DailyHabitDatas.Remove(dailyHabitData);
-        }
-
-        UpdateLastUsedDailyData();
-    }
-
-    private void UpdateLastUsedDailyData()
-    {
-        var sortedDailyHabitsByDate = DailyHabitDatas
-            .OrderByDescending(x => x.Date)
-            .Select(x => x.Date)
-            .ToList();
-
-        if (!sortedDailyHabitsByDate.Any())
-        {
-            LastClickedDate = null;
-            StrikeCounter = 0;
-            return;
-        }
-
-        LastClickedDate = sortedDailyHabitsByDate.FirstOrDefault();
-
-        var today = DateOnly.FromDateTime(DateTime.Today);
-        var firstStrikeDateIndex = 0;
-
-        if (sortedDailyHabitsByDate[firstStrikeDateIndex] == today ||
-            sortedDailyHabitsByDate[firstStrikeDateIndex] == today.AddDays(-1))
-        {
-            var strikeCount = 1;
-            var currentDate = sortedDailyHabitsByDate[firstStrikeDateIndex];
-
-            for (int i = 1; i < sortedDailyHabitsByDate.Count; i++)
-            {
-                var expectedPreviousDate = currentDate.AddDays(-1);
-                if (sortedDailyHabitsByDate[i] == expectedPreviousDate)
-                {
-                    strikeCount++;
-                    currentDate = expectedPreviousDate;
-                }
-                else
-                {
-                    break;
-                }
-            }
-
-            StrikeCounter = strikeCount;
-        }
-        else
-        {
-            StrikeCounter = 0;
         }
     }
 

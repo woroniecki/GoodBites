@@ -5,7 +5,6 @@
 import { HabitColourEnum } from '../models/habit-colour-enum';
 export interface AddHabitCommand {
   colour: HabitColourEnum;
-  description: string;
   icon: string;
   name: string;
   positive: boolean;

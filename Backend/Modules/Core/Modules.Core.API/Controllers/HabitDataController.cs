@@ -17,14 +17,16 @@ public class HabitDataController(IMediator mediator)
     [Route("add-habit-data")]
     public async Task<ActionResult<HabitDto>> AddHabitData([FromBody] AddDailyHabitDataCommand cmd)
     {
-        return Ok((await mediator.Send(cmd)).Map());
+        var result = await mediator.Send(cmd);
+        return Ok(result.habit.Map(result.streak));
     }
 
     [HttpPost]
     [Route("clear-habit-data")]
     public async Task<ActionResult<HabitDto>> ClearHabitData([FromBody] RemoveDailyHabitDataCommand cmd)
     {
-        return Ok((await mediator.Send(cmd)).Map());
+        var result = await mediator.Send(cmd);
+        return Ok(result.habit.Map(result.streak));
     }
 
     [HttpGet]
@@ -32,7 +34,7 @@ public class HabitDataController(IMediator mediator)
     public async Task<ActionResult<IEnumerable<HabitDto>>> GetHabitsList([FromQuery] DateOnly dateFrom, [FromQuery] DateOnly dateTo)
     {
         return Ok(
-            (await mediator.Send(new GetHabitsDataQuery(dateFrom, dateTo))).Select(x => x.Map())
+            (await mediator.Send(new GetHabitsDataQuery(dateFrom, dateTo))).Select(x => x.habit.Map(x.streak))
             );
     }
 }

@@ -39,6 +39,7 @@ public static class Extensions
             loggerConfiguration.ReadFrom.Configuration(context.Configuration);
         });
         services.AddHttpContextAccessor();
+        services.AddMemoryCache();
     }
 
     public static void AddSharedFrameworkBgTasks(this IServiceCollection services, IConfiguration configuration)

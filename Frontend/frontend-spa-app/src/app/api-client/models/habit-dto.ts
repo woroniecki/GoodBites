@@ -8,10 +8,9 @@ export interface HabitDto {
   active: boolean;
   colour: HabitColourEnum;
   dailyDatas: Array<DailyHabitsDataDto>;
-  description: string;
+  description?: string;
   icon: string;
   id: string;
-  lastCheckedDate: string | null;
   name: string;
   positive: boolean;
   streak: number;

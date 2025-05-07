@@ -93,7 +93,6 @@ export class TrackHabitsDataComponent {
         .subscribe((dto) => {
           const item = this.items.find((item) => item.id === habitId);
           if (item) {
-            item.lastCheckedDate = dto.lastCheckedDate;
             item.streak = dto.streak;
             item.dailyDatas = [
               ...item.dailyDatas,
@@ -112,7 +111,6 @@ export class TrackHabitsDataComponent {
         .subscribe((dto) => {
           const item = this.items.find((item) => item.id === habitId);
           if (item) {
-            item.lastCheckedDate = dto.lastCheckedDate;
             item.streak = dto.streak;
             item.dailyDatas = [
               ...item.dailyDatas.filter((d) => {

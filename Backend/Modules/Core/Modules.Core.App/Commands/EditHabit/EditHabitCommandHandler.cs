@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Modules.Core.App.Services.StreakService;
 using Modules.Core.Infrastructure.DataAccessLayer.UoT;
 using SharedUtils.Jwt.CurrentUser;
 
@@ -8,19 +9,24 @@ internal sealed class EditHabitCommandHandler : IRequestHandler<EditHabitCommand
 {
     private IUnitOfWork _unitOfWork;
     private ICurrentUserService _userService;
+    private IStreakCacheService _streakCacheService;
 
-    public EditHabitCommandHandler(IUnitOfWork unitOfWork, ICurrentUserService userService)
+    public EditHabitCommandHandler(IUnitOfWork unitOfWork, ICurrentUserService userService, IStreakCacheService streakCacheService)
     {
         _unitOfWork = unitOfWork;
         _userService = userService;
+        _streakCacheService = streakCacheService;
     }
 
     public async Task<Unit> Handle(EditHabitCommand request, CancellationToken ct)
     {
         var habit = await _unitOfWork.DbContext.Habits
-            .Where(x => x.Id == request.Id && x.UserId == _userService.UserId).ToListAsync(ct);
+            .Include(x => x.DailyHabitDatas)
+            .Where(x => x.Id == request.Id && x.UserId == _userService.UserId).FirstAsync();
 
-        habit.First().Update(
+        bool isPositiveDifferent = habit.Positive != request.Positive;
+
+        habit.Update(
             request.Name,
             request.Positive,
             request.Icon,
@@ -28,6 +34,11 @@ internal sealed class EditHabitCommandHandler : IRequestHandler<EditHabitCommand
         );
 
         await _unitOfWork.SaveAsync(ct);
+
+        if (isPositiveDifferent)
+        {
+            _streakCacheService.SetAndCalculateStreak(habit);
+        }
 
         return Unit.Value;
     }

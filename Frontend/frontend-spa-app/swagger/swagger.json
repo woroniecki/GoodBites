@@ -437,7 +437,7 @@
         }
       },
       "AddHabitCommand": {
-        "required": ["name", "positive", "description", "icon", "colour"],
+        "required": ["name", "positive", "icon", "colour"],
         "type": "object",
         "properties": {
           "name": {
@@ -445,9 +445,6 @@
           },
           "positive": {
             "type": "boolean"
-          },
-          "description": {
-            "type": "string"
           },
           "icon": {
             "type": "string"
@@ -482,7 +479,7 @@
         }
       },
       "EditHabitCommand": {
-        "required": ["id", "name", "positive", "description", "icon", "colour"],
+        "required": ["id", "name", "positive", "icon", "colour"],
         "type": "object",
         "properties": {
           "id": {
@@ -494,9 +491,6 @@
           },
           "positive": {
             "type": "boolean"
-          },
-          "description": {
-            "type": "string"
           },
           "icon": {
             "type": "string"
@@ -532,9 +526,7 @@
           "positive",
           "name",
           "active",
-          "description",
           "icon",
-          "lastCheckedDate",
           "streak",
           "dailyDatas",
           "colour"
@@ -559,11 +551,6 @@
           },
           "icon": {
             "type": "string"
-          },
-          "lastCheckedDate": {
-            "type": "string",
-            "format": "date",
-            "nullable": true
           },
           "streak": {
             "type": "integer",

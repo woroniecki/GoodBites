@@ -19,7 +19,7 @@ public class HabitController(IMediator mediator)
     [Route("get-habit")]
     public async Task<ActionResult<HabitDto>> GetHabit([FromQuery] Guid habitId)
     {
-        return Ok((await mediator.Send(new GetHabitQuery(habitId))).Map());
+        return Ok((await mediator.Send(new GetHabitQuery(habitId))).Map(-1));
     }
 
     [HttpPost]
