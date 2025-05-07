@@ -4,7 +4,9 @@
     [class.selected]="isSelected(item)">
     <!-- Folder or ... -->
     <ng-container *ngIf="item.type === 'folder'">
-      <span class="text-xs">{{ item.name }}</span>
+      <span *ngIf="item.name === '...'" class="text-xs">{{ item.name }}</span>
+      <img *ngIf="item.name !== '...'" [src]="'/icons/folder_icons/' + item.name + '.png'" width="40" height="40"
+        alt="icon">
     </ng-container>
 
     <!-- SVG Icon -->

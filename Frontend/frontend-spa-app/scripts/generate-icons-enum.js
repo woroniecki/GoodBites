@@ -19,6 +19,7 @@ function getIconsMap(dir, relativePath = '') {
 
   for (const entry of entries) {
     if (entry.isDirectory()) {
+      if(entry.name === 'folder_icons') continue; // Skip the root icons directory
       map[entry.name] = getIconsMap(dir, path.join(relativePath, entry.name));
     } else if (entry.isFile() && (entry.name.endsWith('.svg') || entry.name.endsWith('.png'))) {
       const key = toPascalCase(entry.name);

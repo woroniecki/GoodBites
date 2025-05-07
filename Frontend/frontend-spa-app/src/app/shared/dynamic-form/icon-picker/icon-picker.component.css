@@ -1,6 +1,6 @@
 .icon-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(28px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
   gap: 0.15rem;
   background-color: var(--color-neutral);
 }
