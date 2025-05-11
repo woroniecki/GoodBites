@@ -4,8 +4,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '../login/login.component';
+import { AuthGoogleService } from '../services/auth-google.service';
 import { RegisterComponent } from '../register/register.component';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -15,22 +16,29 @@ import { RegisterComponent } from '../register/register.component';
   styleUrl: './landing-page.component.css',
 })
 export class LandingPageComponent {
-  title = 'frontend-spa-app';
-
   constructor(
     private dialog: MatDialog,
     public auth: AuthService,
+    public authGoogle: AuthGoogleService,
   ) {}
 
   onRegister() {
     this.dialog.open(RegisterComponent, {
-      width: '350px'
+      width: '350px',
     });
   }
 
   onLogin() {
     this.dialog.open(LoginComponent, {
-      width: '350px'
+      width: '350px',
     });
+  }
+
+  async onSignIn() {
+    await this.triggerGoogleSignIn();
+  }
+
+  private async triggerGoogleSignIn(): Promise<void> {
+    await this.authGoogle.triggerGoogleSignIn();
   }
 }

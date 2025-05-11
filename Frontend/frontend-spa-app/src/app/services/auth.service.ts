@@ -12,7 +12,6 @@ export class AuthService {
 
   constructor(private apiAccountService: AccountService) {}
 
-  // Returns and saves access token
   loginWithCredentials(credentials: {
     username: string;
     password: string;
@@ -30,15 +29,17 @@ export class AuthService {
 
   tryToLoginWithRefreshToken(): Promise<void> {
     return new Promise((resolve) => {
-      this.apiAccountService.apiUsermanagementAccountRefreshLoginPost$Json().subscribe({
-        next: (token) => {
-          this.setUser(token);
-          resolve();
-        },
-        error: () => {
-          resolve();
-        }
-      });
+      this.apiAccountService
+        .apiUsermanagementAccountRefreshLoginPost$Json()
+        .subscribe({
+          next: (token) => {
+            this.setUser(token);
+            resolve();
+          },
+          error: () => {
+            resolve();
+          },
+        });
     });
   }
 
@@ -47,7 +48,7 @@ export class AuthService {
     this.username = null;
   }
 
-  private setUser(accessToken: string) {
+  public setUser(accessToken: string) {
     document.cookie = `${this.ACCESS_TOKEN_KEY}=${accessToken}; path=/;`;
     const payload = JSON.parse(atob(accessToken.split('.')[1]));
     this.username = payload.username;

@@ -1,4 +1,6 @@
 {
   "apiBaseUrl": "http://localhost:5244",
+  "appBaseUrl": "http://localhost:4200",
+  "googleClientId": "googleClientId",
   "appName": "Fe app"
 }

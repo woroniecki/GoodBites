@@ -1,13 +1,28 @@
 <div class="dropdown dropdown-end mt-1">
-  <div tabindex="0" role="button" class="black-btn btn-circle flex items-center justify-center p-1">
+  <div
+    tabindex="0"
+    role="button"
+    class="black-btn btn-circle flex items-center justify-center p-1"
+  >
     <!-- Centered SVG directly, no extra div needed -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-      <path fill="currentColor"
-        d="M12 3.75a3.75 3.75 0 1 0 0 7.5a3.75 3.75 0 0 0 0-7.5m-4 9.5A3.75 3.75 0 0 0 4.25 17v1.188c0 .754.546 1.396 1.29 1.517c4.278.699 8.642.699 12.92 0a1.54 1.54 0 0 0 1.29-1.517V17A3.75 3.75 0 0 0 16 13.25h-.34q-.28.001-.544.086l-.866.283a7.25 7.25 0 0 1-4.5 0l-.866-.283a1.8 1.8 0 0 0-.543-.086z" />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="32"
+      height="32"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="currentColor"
+        d="M12 3.75a3.75 3.75 0 1 0 0 7.5a3.75 3.75 0 0 0 0-7.5m-4 9.5A3.75 3.75 0 0 0 4.25 17v1.188c0 .754.546 1.396 1.29 1.517c4.278.699 8.642.699 12.92 0a1.54 1.54 0 0 0 1.29-1.517V17A3.75 3.75 0 0 0 16 13.25h-.34q-.28.001-.544.086l-.866.283a7.25 7.25 0 0 1-4.5 0l-.866-.283a1.8 1.8 0 0 0-.543-.086z"
+      />
     </svg>
   </div>
 
-  <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm text-gray-600">
+  <ul
+    tabindex="0"
+    class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm text-gray-600"
+  >
+    <span class="pl-3 font-bold text-gray-800">{{ authService.username }}</span>
     <li>
       <button (click)="onLogout()">Logout</button>
     </li>

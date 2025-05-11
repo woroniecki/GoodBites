@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Modules.UserManagement.App.Commands.GoogleSignIn;
 using Modules.UserManagement.App.Commands.Login;
 using Modules.UserManagement.App.Commands.RefreshLogin;
 using Modules.UserManagement.App.Commands.Register;
@@ -30,17 +31,18 @@ public class AccountController(IMediator mediator, ILogger<AccountController> lo
     {
         var response = await mediator.Send(cmd);
 
-        // Determine if the application is running locally
-        var isLocal = HttpContext.Request.Host.Host == "localhost";
+        AddRefreshTokenCookie(response.RefreshToken);
 
-        // Store the new refresh token in an HTTP-Only Secure Cookie
-        Response.Cookies.Append(REFRESH_TOKEN_KEY, response.RefreshToken, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = !isLocal,
-            SameSite = SameSiteMode.Strict,
-            Expires = DateTime.UtcNow.AddDays(7)
-        });
+        return Ok(response.AccessToken);
+    }
+
+    [HttpPost]
+    [Route("google-sign-in")]
+    public async Task<ActionResult<string>> GoogleSignIn([FromBody] GoogleSignInCommand cmd)
+    {
+        var response = await mediator.Send(cmd);
+
+        AddRefreshTokenCookie(response.RefreshToken);
 
         return Ok(response.AccessToken);
     }
@@ -55,18 +57,23 @@ public class AccountController(IMediator mediator, ILogger<AccountController> lo
         var command = new RefreshLoginCommand(refreshToken);
         var response = await mediator.Send(command);
 
+        AddRefreshTokenCookie(response.NewRefreshToken);
+
+        return Ok(response.AccessToken);
+    }
+
+    private void AddRefreshTokenCookie(string refreshToken)
+    {
         // Determine if the application is running locally
         var isLocal = HttpContext.Request.Host.Host == "localhost";
 
         // Store the new refresh token in an HTTP-Only Secure Cookie
-        Response.Cookies.Append(REFRESH_TOKEN_KEY, response.NewRefreshToken, new CookieOptions
+        Response.Cookies.Append(REFRESH_TOKEN_KEY, refreshToken, new CookieOptions
         {
             HttpOnly = true,
             Secure = !isLocal,
             SameSite = SameSiteMode.Strict,
             Expires = DateTime.UtcNow.AddDays(7)
         });
-
-        return Ok(response.AccessToken);
     }
 }

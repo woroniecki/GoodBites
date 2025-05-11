@@ -11,6 +11,10 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
+import { apiUsermanagementAccountGoogleSignInPost$Json } from '../fn/account/api-usermanagement-account-google-sign-in-post-json';
+import { ApiUsermanagementAccountGoogleSignInPost$Json$Params } from '../fn/account/api-usermanagement-account-google-sign-in-post-json';
+import { apiUsermanagementAccountGoogleSignInPost$Plain } from '../fn/account/api-usermanagement-account-google-sign-in-post-plain';
+import { ApiUsermanagementAccountGoogleSignInPost$Plain$Params } from '../fn/account/api-usermanagement-account-google-sign-in-post-plain';
 import { apiUsermanagementAccountLoginPost$Json } from '../fn/account/api-usermanagement-account-login-post-json';
 import { ApiUsermanagementAccountLoginPost$Json$Params } from '../fn/account/api-usermanagement-account-login-post-json';
 import { apiUsermanagementAccountLoginPost$Plain } from '../fn/account/api-usermanagement-account-login-post-plain';
@@ -96,6 +100,53 @@ export class AccountService extends BaseService {
    */
   apiUsermanagementAccountLoginPost$Json(params: ApiUsermanagementAccountLoginPost$Json$Params, context?: HttpContext): Observable<string> {
     return this.apiUsermanagementAccountLoginPost$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<string>): string => r.body)
+    );
+  }
+
+  /** Path part for operation `apiUsermanagementAccountGoogleSignInPost()` */
+  static readonly ApiUsermanagementAccountGoogleSignInPostPath = '/api/usermanagement/Account/google-sign-in';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiUsermanagementAccountGoogleSignInPost$Plain()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiUsermanagementAccountGoogleSignInPost$Plain$Response(params: ApiUsermanagementAccountGoogleSignInPost$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+    return apiUsermanagementAccountGoogleSignInPost$Plain(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiUsermanagementAccountGoogleSignInPost$Plain$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiUsermanagementAccountGoogleSignInPost$Plain(params: ApiUsermanagementAccountGoogleSignInPost$Plain$Params, context?: HttpContext): Observable<string> {
+    return this.apiUsermanagementAccountGoogleSignInPost$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<string>): string => r.body)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiUsermanagementAccountGoogleSignInPost$Json()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiUsermanagementAccountGoogleSignInPost$Json$Response(params: ApiUsermanagementAccountGoogleSignInPost$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<string>> {
+    return apiUsermanagementAccountGoogleSignInPost$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiUsermanagementAccountGoogleSignInPost$Json$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  apiUsermanagementAccountGoogleSignInPost$Json(params: ApiUsermanagementAccountGoogleSignInPost$Json$Params, context?: HttpContext): Observable<string> {
+    return this.apiUsermanagementAccountGoogleSignInPost$Json$Response(params, context).pipe(
       map((r: StrictHttpResponse<string>): string => r.body)
     );
   }

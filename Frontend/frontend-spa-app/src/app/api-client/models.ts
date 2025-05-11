@@ -7,6 +7,7 @@ export type { AddHabitCommand } from './models/add-habit-command';
 export type { DailyHabitsDataDto } from './models/daily-habits-data-dto';
 export type { DeactivateHabitCommand } from './models/deactivate-habit-command';
 export type { EditHabitCommand } from './models/edit-habit-command';
+export type { GoogleSignInCommand } from './models/google-sign-in-command';
 export type { HabitColourEnum } from './models/habit-colour-enum';
 export type { HabitDto } from './models/habit-dto';
 export type { LoginCommand } from './models/login-command';

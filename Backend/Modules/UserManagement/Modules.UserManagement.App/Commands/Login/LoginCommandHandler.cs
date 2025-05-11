@@ -22,7 +22,8 @@ public sealed class LoginCommandHandler(
         var account = await _uot.DbContext.Accounts.Include(a => a.RefreshTokens).AsTracking()
             .FirstOrDefaultAsync(a => a.Username == request.Username);
 
-        if (account != null && hashedPassword == account.Password)
+        // Accounts from external services doesn't have passowrd, so login should be blocked
+        if (account != null && hashedPassword == account.Password && !string.IsNullOrEmpty(account.Password))
         {
             var newRefreshToken = _tokenService.GenerateToken();
 

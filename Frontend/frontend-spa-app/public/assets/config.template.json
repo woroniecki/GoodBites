@@ -1,4 +1,6 @@
 {
   "apiBaseUrl": "${APP_BASE_URL}",
+  "appBaseUrl": "${APP_APPLICATION_BASE_URL}",
+  "googleClientId": "${APP_GOOGLE_CLIENT_ID}",
   "appName": "${APP_NAME}"
 }

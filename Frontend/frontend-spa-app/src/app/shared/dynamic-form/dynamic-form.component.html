@@ -1,49 +1,93 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="max-w-4xl mx-auto mt-3 p-6 rounded-lg shadow-md">
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="max-w-4xl mx-auto pt-3 pb-6 px-6 rounded-lg shadow-md"
+>
   <ng-container *ngFor="let field of formConfig">
-    <label class="text-sm font-medium ">{{ field.label }}</label>
+    <label class="text-sm font-medium">{{ field.label }}</label>
     <!-- Text -->
-    <input *ngIf="field.type === 'text' || field.type === 'password' || field.type === 'email'" class="mb-3 px-2 py-1.5
-          mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
-          focus:outline-none
-          focus:border-sky-500
-          focus:ring-1
-          focus:ring-sky-500
-          focus:invalid:border-red-500 focus:invalid:ring-red-500" [type]="field.type" [formControlName]="field.name"
-      [required]="field.required" placeholder="{{ field.label }}">
+    <input
+      *ngIf="
+        field.type === 'text' ||
+        field.type === 'password' ||
+        field.type === 'email'
+      "
+      class="mb-3 px-2 py-1.5 mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 focus:invalid:border-red-500 focus:invalid:ring-red-500"
+      [type]="field.type"
+      [formControlName]="field.name"
+      [required]="field.required"
+      placeholder="{{ field.label }}"
+    />
     <!-- Checkbox -->
-    <input *ngIf="field.type === 'checkbox'" type="checkbox"
-      class="checkbox checkbox-xl mb-3 px-2 py-1.5 mt-1 block px-2 py-1.5" [formControlName]="field.name" />
+    <input
+      *ngIf="field.type === 'checkbox'"
+      type="checkbox"
+      class="checkbox checkbox-xl mb-3 px-2 py-1.5 mt-1 block px-2 py-1.5"
+      [formControlName]="field.name"
+    />
     <!-- Icons -->
-    <app-icon-picker *ngIf="field.type === 'icon-picker'" [selectedIcon]="form.get(field.name)?.value"
-      (iconChange)="form.get(field.name)?.setValue($event)"></app-icon-picker>
+    <app-icon-picker
+      *ngIf="field.type === 'icon-picker'"
+      [selectedIcon]="form.get(field.name)?.value"
+      (iconChange)="form.get(field.name)?.setValue($event)"
+    ></app-icon-picker>
     <!-- Toggle -->
     <label *ngIf="field.type === 'toggle'">
-      <input type="checkbox" class="sr-only peer" [formControlName]="field.name" />
+      <input
+        type="checkbox"
+        class="sr-only peer"
+        [formControlName]="field.name"
+      />
       <div class="toggle-track peer-checked:toggle-track-checked"></div>
     </label>
     <!-- Dropdown -->
-    <select *ngIf="field.type === 'select'"
+    <select
+      *ngIf="field.type === 'select'"
       class="mb-3 px-2 py-1.5 mt-1 block w-full border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
-      [formControlName]="field.name" [required]="field.required">
+      [formControlName]="field.name"
+      [required]="field.required"
+    >
       <option *ngFor="let option of field.options" [value]="option.value">
         {{ option.label }}
       </option>
     </select>
     <!-- Color Picker UI -->
-    <div *ngIf="field.type === 'colour'" class="grid grid-cols-8 gap-2 mb-3 mt-1">
-      <label *ngFor="let option of field.options"
+    <div
+      *ngIf="field.type === 'colour'"
+      class="grid grid-cols-8 gap-2 mb-3 mt-1"
+    >
+      <label
+        *ngFor="let option of field.options"
         class="cursor-pointer w-6 h-6 rounded-full border-2 border-transparent transition-all duration-150"
-        [style.backgroundColor]="form.get(field.name)?.value === option.value ? 'var(--color-neutral)' : 'var(--color-' + option.value.toLowerCase() + ')'"
+        [style.backgroundColor]="
+          form.get(field.name)?.value === option.value
+            ? 'var(--color-neutral)'
+            : 'var(--color-' + option.value.toLowerCase() + ')'
+        "
         [class.ring-4]="form.get(field.name)?.value === option.value"
-        [style.boxShadow]="form.get(field.name)?.value === option.value ? '0 0 0 4px var(--color-' + option.value.toLowerCase() + ')' : ''">
-        <input type="radio" [formControlName]="field.name" [value]="option.value" class="sr-only" />
+        [style.boxShadow]="
+          form.get(field.name)?.value === option.value
+            ? '0 0 0 4px var(--color-' + option.value.toLowerCase() + ')'
+            : ''
+        "
+      >
+        <input
+          type="radio"
+          [formControlName]="field.name"
+          [value]="option.value"
+          class="sr-only"
+        />
       </label>
     </div>
-
   </ng-container>
-  <button class="w-full font-medium mt-3 submit-btn text-white px-4 py-2 rounded transition" type="submit">
+  <button
+    class="w-full font-medium mt-3 submit-btn text-white px-4 py-2 rounded transition"
+    type="submit"
+  >
     <span id="login_process_state" class="hidden">Sending :)</span>
-    <span id="login_default_state">{{ submitButtonLabel }}<span id="subtotal"></span></span>
+    <span id="login_default_state"
+      >{{ submitButtonLabel }}<span id="subtotal"></span
+    ></span>
   </button>
 
   <ng-content></ng-content>

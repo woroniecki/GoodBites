@@ -51,6 +51,7 @@ public static class Extensions
     {
         services.AddJwt();
         services.AddNpgsql(configuration);
+        services.AddHttpClient();
         services.AddCqrs();
         services.AddSingleton<IClock, UtcClock>();
         services.AddIntegrationEvents();

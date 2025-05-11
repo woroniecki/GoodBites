@@ -1,0 +1,8 @@
+<ng-container *ngIf="authService.username; else landingPage">
+  <div class="flex-grow flex flex-col items-center justify-start">
+    <app-track-habits-data></app-track-habits-data>
+  </div>
+</ng-container>
+<ng-template #landingPage>
+  <app-landing-page></app-landing-page>
+</ng-template>
