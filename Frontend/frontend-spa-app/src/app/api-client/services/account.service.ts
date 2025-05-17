@@ -19,6 +19,8 @@ import { apiUsermanagementAccountLoginPost$Json } from '../fn/account/api-userma
 import { ApiUsermanagementAccountLoginPost$Json$Params } from '../fn/account/api-usermanagement-account-login-post-json';
 import { apiUsermanagementAccountLoginPost$Plain } from '../fn/account/api-usermanagement-account-login-post-plain';
 import { ApiUsermanagementAccountLoginPost$Plain$Params } from '../fn/account/api-usermanagement-account-login-post-plain';
+import { apiUsermanagementAccountLogoutPost } from '../fn/account/api-usermanagement-account-logout-post';
+import { ApiUsermanagementAccountLogoutPost$Params } from '../fn/account/api-usermanagement-account-logout-post';
 import { apiUsermanagementAccountRefreshLoginPost$Json } from '../fn/account/api-usermanagement-account-refresh-login-post-json';
 import { ApiUsermanagementAccountRefreshLoginPost$Json$Params } from '../fn/account/api-usermanagement-account-refresh-login-post-json';
 import { apiUsermanagementAccountRefreshLoginPost$Plain } from '../fn/account/api-usermanagement-account-refresh-login-post-plain';
@@ -195,6 +197,31 @@ export class AccountService extends BaseService {
   apiUsermanagementAccountRefreshLoginPost$Json(params?: ApiUsermanagementAccountRefreshLoginPost$Json$Params, context?: HttpContext): Observable<string> {
     return this.apiUsermanagementAccountRefreshLoginPost$Json$Response(params, context).pipe(
       map((r: StrictHttpResponse<string>): string => r.body)
+    );
+  }
+
+  /** Path part for operation `apiUsermanagementAccountLogoutPost()` */
+  static readonly ApiUsermanagementAccountLogoutPostPath = '/api/usermanagement/Account/logout';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiUsermanagementAccountLogoutPost()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiUsermanagementAccountLogoutPost$Response(params?: ApiUsermanagementAccountLogoutPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return apiUsermanagementAccountLogoutPost(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `apiUsermanagementAccountLogoutPost$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiUsermanagementAccountLogoutPost(params?: ApiUsermanagementAccountLogoutPost$Params, context?: HttpContext): Observable<void> {
+    return this.apiUsermanagementAccountLogoutPost$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 

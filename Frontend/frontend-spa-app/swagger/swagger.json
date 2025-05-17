@@ -465,6 +465,16 @@
           }
         }
       }
+    },
+    "/api/usermanagement/Account/logout": {
+      "post": {
+        "tags": ["Account"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {

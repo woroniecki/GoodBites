@@ -62,6 +62,21 @@ public class AccountController(IMediator mediator, ILogger<AccountController> lo
         return Ok(response.AccessToken);
     }
 
+    [HttpPost]
+    [Route("logout")]
+    public async Task<ActionResult> Logout()
+    {
+        if (!Request.Cookies.TryGetValue(REFRESH_TOKEN_KEY, out var refreshToken))
+            return Unauthorized("Missing token");
+
+        var command = new RefreshLoginCommand(refreshToken);
+        var response = await mediator.Send(command);
+
+        Response.Cookies.Delete(REFRESH_TOKEN_KEY);
+
+        return Ok();
+    }
+
     private void AddRefreshTokenCookie(string refreshToken)
     {
         // Determine if the application is running locally

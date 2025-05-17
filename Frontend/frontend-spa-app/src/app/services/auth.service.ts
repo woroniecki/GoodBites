@@ -44,8 +44,12 @@ export class AuthService {
   }
 
   logout(): void {
-    document.cookie = `${this.ACCESS_TOKEN_KEY}=; path=/;`;
-    this.username = null;
+    this.apiAccountService.apiUsermanagementAccountLogoutPost().subscribe({
+      next: () => {
+        this.username = null;
+      },
+      error: () => {},
+    });
   }
 
   public setUser(accessToken: string) {
