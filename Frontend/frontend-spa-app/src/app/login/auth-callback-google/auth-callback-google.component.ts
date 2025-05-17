@@ -26,9 +26,6 @@ export class AuthCallbackGoogleComponent {
     const storedState = sessionStorage.getItem(CODE_STATE_KEY);
     sessionStorage.removeItem(CODE_STATE_KEY);
 
-    console.log('State received:', state);
-    console.log('Stored state:', storedState);
-
     if (state !== storedState) {
       console.error('Invalid state');
       return;
@@ -41,9 +38,6 @@ export class AuthCallbackGoogleComponent {
       console.error('Missing code or verifier');
       return;
     }
-
-    console.log('Code received:', code);
-    console.log('Code verifier:', codeVerifier);
 
     this.auth.exchangeCodeForTokens(code, codeVerifier).subscribe(() => {
       this.router.navigateByUrl('/');
