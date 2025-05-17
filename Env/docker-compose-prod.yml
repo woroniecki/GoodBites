@@ -54,6 +54,8 @@ services:
     environment:
       APP_BASE_URL: ${APP_BASE_URL}
       APP_NAME: ${APP_NAME}
+      APP_GOOGLE_CLIENT_ID: ${APP_GOOGLE_CLIENT_ID}
+      APP_APPLICATION_BASE_URL: ${APP_APPLICATION_BASE_URL}
     ports:
       - "80:80"
       - "443:443"
