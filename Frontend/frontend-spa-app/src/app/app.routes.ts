@@ -7,5 +7,5 @@ export const routes: Routes = [
     path: 'auth/callback',
     component: AuthCallbackGoogleComponent,
   },
-  { path: '**', component: MainComponent },
+  { path: '', component: MainComponent },
 ];
