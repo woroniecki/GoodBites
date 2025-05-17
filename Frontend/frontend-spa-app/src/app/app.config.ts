@@ -1,4 +1,9 @@
-import { ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  inject,
+  provideAppInitializer,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import {
@@ -24,6 +29,18 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([credentialsInterceptor])),
     provideAngularSvgIcon(),
     provideAppInitializer(() => {
+      const initBaseUrlSetting = ((
+        config: ConfigService,
+        apiConfig: ApiConfiguration,
+      ) => {
+        return () => {
+          apiConfig.rootUrl = config.apiUrl;
+          return Promise.resolve();
+        };
+      })(inject(ConfigService), inject(ApiConfiguration));
+      return initBaseUrlSetting();
+    }),
+    provideAppInitializer(() => {
       const initAuth = ((authService: AuthService) => {
         return () => {
           return authService.tryToLoginWithRefreshToken();
@@ -31,13 +48,5 @@ export const appConfig: ApplicationConfig = {
       })(inject(AuthService));
       return initAuth();
     }),
-    provideAppInitializer(() => {
-      const initBaseUrlSetting = ((config: ConfigService, apiConfig: ApiConfiguration) => {
-        return () => {
-          apiConfig.rootUrl = config.apiUrl;
-          return Promise.resolve();
-        };
-      })(inject(ConfigService), inject(ApiConfiguration));
-      return initBaseUrlSetting();
-    })],
+  ],
 };
