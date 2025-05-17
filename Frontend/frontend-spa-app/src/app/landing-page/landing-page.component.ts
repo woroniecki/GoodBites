@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../services/auth.service';
@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthGoogleService } from '../services/auth-google.service';
 import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-landing-page',
@@ -15,12 +16,18 @@ import { LoginComponent } from '../login/login.component';
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.css',
 })
-export class LandingPageComponent {
+export class LandingPageComponent implements OnInit {
+  isProduction: boolean = false;
+
   constructor(
     private dialog: MatDialog,
     public auth: AuthService,
     public authGoogle: AuthGoogleService,
   ) {}
+
+  ngOnInit(): void {
+    this.isProduction = environment.production;
+  }
 
   onRegister() {
     this.dialog.open(RegisterComponent, {
