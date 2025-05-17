@@ -29,6 +29,11 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - Npqsql__ConnectionString=Host=postgresql-db;Port=5432;Username=user;Password=password;
       - Cors__Origin=*
+      - JwtSettings__SecretKey=JwtSettings__SecretKey
+      - JwtSettings__ExpirationInMinutes=180
+      - Authentication__Google__ClientId=google_client_id
+      - Authentication__Google__ClientSecret=google_client_secret
+      - Authentication__Google__RedirectUri=http://localhost:4200/auth/callback
     networks:
       - backend-network
       - proxy-network

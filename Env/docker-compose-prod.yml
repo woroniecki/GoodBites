@@ -27,6 +27,11 @@ services:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
       - Npqsql__ConnectionString=${Npqsql__ConnectionString}
       - Cors__Origin=${Cors__Origin}
+      - JwtSettings__SecretKey=${JwtSettings__SecretKey}
+      - JwtSettings__ExpirationInMinutes=${JwtSettings__ExpirationInMinutes}
+      - Authentication__Google__ClientId=${Authentication__Google__ClientId}
+      - Authentication__Google__ClientSecret=${Authentication__Google__ClientSecret}
+      - Authentication__Google__RedirectUri=${Authentication__Google__RedirectUri}
     networks:
       - backend-network
       - proxy-network

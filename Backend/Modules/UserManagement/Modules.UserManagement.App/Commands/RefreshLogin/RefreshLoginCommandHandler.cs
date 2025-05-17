@@ -34,7 +34,7 @@ public sealed class RefreshLoginCommandHandler(
         account.RevokeRefreshToken(refreshToken);
         account.AddRefreshToken(
             _tokenService.HashToken(newRefreshToken),
-            _clock.Now.AddDays(7),
+            _clock.Now.AddDays(21),
             "device-info",
             "ip-address");
         account.RemoveExpiredOrUsedTokens();
