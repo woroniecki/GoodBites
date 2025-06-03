@@ -29,6 +29,12 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([credentialsInterceptor])),
     provideAngularSvgIcon(),
     provideAppInitializer(() => {
+      const initAuth = ((authService: AuthService) => {
+        return () => {
+          return authService.tryToLoginWithRefreshToken();
+        };
+      })(inject(AuthService));
+
       const initBaseUrlSetting = ((
         config: ConfigService,
         apiConfig: ApiConfiguration,
@@ -38,15 +44,8 @@ export const appConfig: ApplicationConfig = {
           return Promise.resolve();
         };
       })(inject(ConfigService), inject(ApiConfiguration));
-      return initBaseUrlSetting();
-    }),
-    provideAppInitializer(() => {
-      const initAuth = ((authService: AuthService) => {
-        return () => {
-          return authService.tryToLoginWithRefreshToken();
-        };
-      })(inject(AuthService));
-      return initAuth();
+
+      return Promise.all([initAuth(), initBaseUrlSetting()]);
     }),
   ],
 };
