@@ -45,7 +45,7 @@ export const appConfig: ApplicationConfig = {
         };
       })(inject(ConfigService), inject(ApiConfiguration));
 
-      return Promise.all([initAuth(), initBaseUrlSetting()]);
+      return initBaseUrlSetting().then(() => initAuth());
     }),
   ],
 };
